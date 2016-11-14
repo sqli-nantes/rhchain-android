@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/txt_userId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_userId"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="37dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/txt_name"
+        android:ems="10"
+        android:id="@+id/etxt_userId"
+        android:layout_below="@+id/txt_userId"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="92dp" />
+
+    <TextView
+        android:text="@string/txt_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_pwd"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/etxt_userId"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/etxt_psd"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/txt_pwd"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_valid"
+        android:layout_below="@+id/etxt_psd"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="56dp"
+        android:text="@string/btn_submit" />
+
+    <TextView
+        android:text="@string/ttl_add_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/txt_userId"
+        android:layout_marginStart="89dp"
+        android:id="@+id/ttl_add_user" />
+</RelativeLayout >

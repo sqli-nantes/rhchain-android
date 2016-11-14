@@ -7,13 +7,13 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class Main2Activity extends AppCompatActivity implements View.OnClickListener{
+public class SurveyActivity extends AppCompatActivity implements View.OnClickListener{
     Button btn_soum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_survey);
 
         btn_soum = (Button) findViewById(R.id.btn_soum);
         btn_soum.setOnClickListener(this);
@@ -21,7 +21,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, Main3Activity.class);
+        Intent intent = new Intent(this, ResultsActivity.class);
         startActivity(intent);
     }
 }

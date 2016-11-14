@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="nantes_sqli.rhchain.Main2Activity"
+    tools:context="nantes_sqli.rhchain.SurveyActivity"
     android:background="#ffffff">
 
 
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
-            android:text="Êtes-vous satisfait(e) de l'ambiance de travail au sein de l'agence ?"
+            android:text="@string/txt_qestion1"
             android:textAlignment="center"
             android:id="@+id/textView3" />
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
-            android:text="Êtes-vous satisfait(e) des informations qui vous sont transmises concernant la situation et les perspectives de l'agence et du groupe ?"
+            android:text="@string/txt_question3"
             android:textAlignment="center" />
 
    </LinearLayout>
@@ -79,7 +79,8 @@
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"
         android:clickable="true"
-        android:backgroundTint="#f71414" />
+        android:backgroundTint="#f71414"
+        android:contentDescription="@string/descr_btn_unsatisfied" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -90,7 +91,8 @@
         android:layout_centerHorizontal="true"
         android:layout_alignBottom="@+id/imageButton2"
         android:clickable="true"
-        android:backgroundTint="#f4e916" />
+        android:backgroundTint="#f4e916"
+        android:contentDescription="@string/descr_btn_neutral" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -101,7 +103,8 @@
         android:layout_toEndOf="@+id/imageView"
         android:layout_marginStart="26dp"
         android:clickable="true"
-        android:backgroundTint="#2af614" />
+        android:backgroundTint="#2af614"
+        android:contentDescription="@string/descr_btn_satisfied" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -111,7 +114,8 @@
         android:clickable="true"
         android:backgroundTint="#f71414"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/imageButton2" />
+        android:layout_alignStart="@+id/imageButton2"
+        android:contentDescription="@string/descr_btn_unsatisfied" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -121,12 +125,13 @@
         android:clickable="true"
         android:backgroundTint="#f4e916"
         android:layout_alignTop="@+id/imageButton3"
-        android:layout_toStartOf="@+id/imageButton" />
+        android:layout_toStartOf="@+id/imageButton"
+        android:contentDescription="@string/descr_btn_neutral" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Êtes-vous satisfait(e) de votre mission actuelle ?"
+        android:text="@string/txt_question2"
         android:textAlignment="center"
         android:layout_below="@+id/imageButton4"
         android:layout_alignParentStart="true"
@@ -140,7 +145,8 @@
         android:clickable="true"
         android:backgroundTint="#2af614"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/imageButton" />
+        android:layout_alignStart="@+id/imageButton"
+        android:contentDescription="@string/descr_btn_satisfied" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -151,7 +157,8 @@
         android:backgroundTint="#f71414"
         android:layout_below="@+id/textView4"
         android:layout_alignStart="@+id/imageButton3"
-        android:layout_marginTop="28dp" />
+        android:layout_marginTop="28dp"
+        android:contentDescription="@string/descr_btn_unsatisfied" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -161,7 +168,8 @@
         android:clickable="true"
         android:backgroundTint="#f4e916"
         android:layout_alignTop="@+id/imageButton6"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/descr_btn_neutral" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -171,15 +179,17 @@
         android:clickable="true"
         android:backgroundTint="#2af614"
         android:layout_alignTop="@+id/imageButton7"
-        android:layout_alignStart="@+id/imageButton5" />
+        android:layout_alignStart="@+id/imageButton5"
+        android:contentDescription="@string/descr_btn_satisfied" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Soumettre"
+        android:text="@string/btn_submit"
         android:id="@+id/btn_soum"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/btn_submit" />
 
 
 </RelativeLayout>
