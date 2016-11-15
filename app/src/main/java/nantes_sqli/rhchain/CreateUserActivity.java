@@ -14,10 +14,11 @@ import android.widget.EditText;
  * User's account creation
  * Use for demo mode
  */
+
 public class CreateUserActivity extends AppCompatActivity implements View.OnClickListener{
     Button btn_valid;
     EditText userId;
-    User user;
+    User user = new User();
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
@@ -31,13 +32,16 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         SetUser();
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SurveyActivity.class);
+        intent.putExtra("User", user);
         startActivity(intent);
     }
 
     public void SetUser() {
-        user.setIdentity(String.valueOf(Log.v(String.valueOf(R.string.txt_userId), userId.getText().toString())));
+//        user.setIdentity(String.valueOf(Log.v(String.valueOf(R.string.txt_userId), userId.getText().toString())));
+        user.setIdentity(String.valueOf(userId.getText().toString()));
         user.setPassword(String.valueOf(Log.v(String.valueOf(R.string.txt_pwd), userId.getText().toString())));
     }
 
 }
+

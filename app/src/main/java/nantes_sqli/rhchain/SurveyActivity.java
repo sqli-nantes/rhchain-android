@@ -24,4 +24,8 @@ public class SurveyActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = new Intent(this, ResultsActivity.class);
         startActivity(intent);
     }
+
+//    TODO Gestion des réponses. Icônes : Au départ : grisée, quand sélectionné mise en couleurs + Results renseigné par la valeurs answer
+//    TODO 
+//    TODO Fil d'ariane
 }

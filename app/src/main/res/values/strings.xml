@@ -16,4 +16,5 @@
     <string name="txt_err_pwd">Pas de mot de passe?</string>
     <string name="ttl_api">RHChain</string>
     <string name="txt_qestion_pwd">Saisir le mot de passe</string>
+    <string name="txt_ttl_survey">Satisfaction travail</string>
 </resources>
