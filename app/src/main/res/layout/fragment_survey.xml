@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="12dp"
+    android:paddingEnd="12dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingStart="12dp"
+    android:paddingTop="12dp">
+
+
+    <TextView
+        android:text="@string/txt_question1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtQ1"
+        style="@style/txt_question" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnDsQ1"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:visibility="visible"
+            android:onClick="onClick (MainActivity)"
+            android:contentDescription="@string/descr_btn_unsatisfied"
+            android:textAlignment="center"
+            android:src="@drawable/ic_dissatisfied_neutral" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnNeQ1"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:visibility="visible"
+            android:onClick="onClick (MainActivity)"
+            android:contentDescription="@string/descr_btn_neutral"
+            android:textAlignment="center"
+            android:src="@drawable/ic_neutral_neutral" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSaQ1"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:visibility="visible"
+            android:onClick="onClick (MainActivity)"
+            android:contentDescription="@string/descr_btn_satisfied"
+            android:textAlignment="center"
+            android:src="@drawable/ic_satified_neutral"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/txt_question2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtQ2"
+        style="@style/txt_question" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_dissatisfied_neutral"
+            android:id="@+id/btnDsQ2"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:visibility="visible"
+            android:onClick="onClick (MainActivity)"
+            android:contentDescription="@string/descr_btn_unsatisfied"
+            android:textAlignment="center"
+            android:src="@drawable/ic_dissatisfied_neutral"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnNeQ2"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:visibility="visible"
+            android:onClick="onClick (MainActivity)"
+            android:contentDescription="@string/descr_btn_neutral"
+            android:textAlignment="center"
+            android:src="@drawable/ic_neutral_neutral" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSaQ2"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:visibility="visible"
+            android:onClick="onClick (MainActivity)"
+            android:contentDescription="@string/descr_btn_satisfied"
+            android:textAlignment="center"
+            android:src="@drawable/ic_satified_neutral"/>
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/txt_question2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtQ3"
+        style="@style/txt_question"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_dissatisfied_neutral"
+            android:id="@+id/btnDsQ3"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:visibility="visible"
+            android:onClick="onClick (MainActivity)"
+            android:contentDescription="@string/descr_btn_unsatisfied"
+            android:textAlignment="center"
+            android:src="@drawable/ic_dissatisfied_neutral"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnNeQ3"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:visibility="visible"
+            android:onClick="onClick (MainActivity)"
+            android:contentDescription="@string/descr_btn_neutral"
+            android:textAlignment="center"
+            android:src="@drawable/ic_neutral_neutral" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSaQ3"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:visibility="visible"
+            android:onClick="onClick (MainActivity)"
+            android:contentDescription="@string/descr_btn_satisfied"
+            android:textAlignment="center"
+            android:src="@drawable/ic_satified_neutral"/>
+    </LinearLayout>
+
+    <Button
+        android:text="@string/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_submit"
+        style="@style/btn"
+        tools:text="@string/btn_submit"
+        android:contentDescription="@string/dscr_btn_submit"/>
+
+</LinearLayout>

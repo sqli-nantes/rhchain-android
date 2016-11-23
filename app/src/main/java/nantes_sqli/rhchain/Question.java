@@ -1,5 +1,6 @@
 package nantes_sqli.rhchain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +8,12 @@ import java.util.List;
  * Created by alb on 15/11/16.
  */
 
-public class Question {
+public class Question implements Serializable {
     String id;
     String textQuestion;
-    List<Answer> answers;
+    ArrayList<Answer> answers;
 
-    public Question(List<Answer> answers) {
+    public Question(ArrayList<Answer> answers) {
         this.answers = answers;
     }
 
@@ -38,7 +39,7 @@ public class Question {
         this.textQuestion = textQuestion;
     }
 
-    public List<Answer> getAnswers() {
+    public ArrayList<Answer> getAnswers() {
         return this.answers;
     }
 
@@ -47,7 +48,7 @@ public class Question {
 
     }
 
-    public void setAnswers(List<Answer> answers){
+    public void setAnswers(ArrayList<Answer> answers){
         this.answers = answers;
     }
 

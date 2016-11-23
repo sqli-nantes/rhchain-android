@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.view.ViewPager
+    android:id="@+id/viewsurvey"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SurveyActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <fragment
+        android:id="@+id/surveyFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class ="nantes_sqli.rhchain.SurveysFragment"
+        />
+
+
+    <!--android:name ="nantes_sqli.rhchain.SurveysFragment"-->
+
+    <fragment
+        android:id="@+id/resultFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="nantes_sqli.rhchain.ResultsFragment"
+        />
+
+    <!--android:name ="nantes_sqli.rhchain.ResultsFragment"-->
+</android.support.v4.view.ViewPager>

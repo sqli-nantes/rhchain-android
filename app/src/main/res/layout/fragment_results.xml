@@ -1,0 +1,174 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".ButtonAdapter$ResultsFragment">
+
+    <!--<html android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<head android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--&lt;!&ndash;Load the AJAX API&ndash;&gt;-->
+            <!--<script android:type="text/javascript" android:src="https://www.gstatic.com/charts/loader.js"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"></script>-->
+            <!--<script android:type="text/javascript"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--// Load the Visualization API and the corechart package.-->
+                <!--google.charts.load('current', {'packages':['corechart']});-->
+
+                <!--// Set a callback to run when the Google Visualization API is loaded.-->
+                <!--google.charts.setOnLoadCallback(drawChart);-->
+
+                <!--// Callback that creates and populates a data table,-->
+                <!--// instantiates the pie chart, passes in the data and-->
+                <!--// draws it.-->
+                <!--function drawChart() {-->
+
+                <!--// Create the data table.-->
+                <!--var data = new google.visualization.DataTable();-->
+                <!--data.addColumn('string', 'Topping');-->
+                <!--data.addColumn('number', 'Slices');-->
+                <!--data.addRows([-->
+                <!--['Mushrooms', 3],-->
+                <!--['Onions', 1],-->
+                <!--['Olives', 1],-->
+                <!--['Zucchini', 1],-->
+                <!--['Pepperoni', 2]-->
+                <!--]);-->
+
+                <!--// Set chart options-->
+                <!--var options = {'title':'How Much Pizza I Ate Last Night',-->
+                <!--'width':400,-->
+                <!--'height':300};-->
+
+                <!--// Instantiate and draw our chart, passing in some options.-->
+                <!--var chart = new google.visualization.PieChart(document.getElementById('chart_div'));-->
+                <!--chart.draw(data, options);-->
+                <!--}-->
+            <!--</script>-->
+        <!--</head>-->
+
+        <!--<body android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--&lt;!&ndash;Div that will hold the pie chart&ndash;&gt;-->
+            <!--<div android:id="chart_div"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"></div>-->
+        <!--</body>-->
+    <!--</html>-->
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="4dp">
+
+        <TextView
+            android:text="@string/txt_question1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtQ1"
+            tools:text="@string/txt_question1"
+            android:contentDescription="@string/txt_question1"
+            style="@style/txt_question" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_dissatisfied_clicked"
+                android:id="@+id/ResultQ1"
+                android:layout_weight="1"
+                tools:ignore="ContentDescription"
+                android:contentDescription="@string/descr_btn_unsatisfied" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_action_pie_chart"
+                android:id="@+id/pie1"
+                android:contentDescription="@string/descr_pie_chart" />
+        </LinearLayout>
+
+        <TextView
+            android:text="@string/txt_question2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtQ2"
+            tools:text="@string/txt_question2"
+            android:contentDescription="@string/txt_question2"
+            style="@style/txt_question" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_neutral_clicked"
+                android:id="@+id/ResultQ2"
+                android:layout_weight="1"
+                tools:ignore="ContentDescription"
+                android:contentDescription="@string/descr_btn_neutral" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_action_pie_chart"
+                android:id="@+id/pie2"
+                android:contentDescription="@string/descr_pie_chart"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:text="@string/txt_question3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtQ3"
+            tools:text="@string/txt_question3"
+            android:contentDescription="@string/txt_question3"
+            style="@style/txt_question" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_satisfied_clicked"
+                android:id="@+id/ResultQ3"
+                android:layout_weight="1"
+                tools:ignore="ContentDescription"
+                android:contentDescription="@string/descr_btn_satisfied" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_action_pie_chart"
+                android:id="@+id/pie3"
+                android:contentDescription="@string/descr_pie_chart"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

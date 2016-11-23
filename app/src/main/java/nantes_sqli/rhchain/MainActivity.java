@@ -12,10 +12,13 @@ import java.util.List;
 /**
  * Display 2 possibilities: answer survey or create a user's account
  * At btn_connect get the survey to be displayed
+ * Use
+ * Survey class
+ * User class
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_connect;
     Button btn_account;
     Survey survey = new Survey();
@@ -33,32 +36,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_account.setOnClickListener(this);
     }
 
+//           todo récupérer les informations users
+//                startActivity(intent);
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case   R.id.btn_connect: {
+            case R.id.btn_connect: {
                 Intent intent = new Intent(this, SurveyActivity.class);
                 intent.putExtra("Survey", survey);
 //                doit récupérer les informations users
                 startActivity(intent);
             }
-            case R.id.btn_creat:{
+            case R.id.btn_creat: {
                 Intent intent = new Intent(this, CreateUserActivity.class);
                 startActivity(intent);
             }
         }
     }
 
-//    public Survey getSurvey{
-//        Survey survey;
-//        String id;
-//        String label;
-//        List<Question> questions;
-//
-//        id = survey.getId();
-//        label = survey.getLabel();
-//        questions = survey.getQuestion();
-//    }
+
+/*    public Survey getSurvey{
+        Survey survey;
+        String id;
+        String label;
+        List<Question> questions;
+
+        id = survey.getId();
+        label = survey.getLabel();
+        questions = survey.getQuestion();
+    }
+*/
 
 
 //    Bouchonnage pour le sondage démo. Déclaration du sondage
@@ -68,13 +76,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Answer verySatisfied = new Answer();
         Answer unsatisfied = new Answer();
 
-        ArrayList<Answer> answers= new ArrayList<Answer>();
+        ArrayList<Answer> answers= new ArrayList<>();
 
         Question question1 = new Question();
         Question question2 = new Question();
         Question question3 = new Question();
 
-        List<Question> questions = new ArrayList<Question>();
+        ArrayList<Question> questions = new ArrayList<>();
 
         unsatisfied.setId("1");
         unsatisfied.setDescription(String.valueOf(R.string.descr_btn_unsatisfied));
@@ -94,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         answers.add(verySatisfied);
 
         question1.setId("1");
-        question1.setTextQuestion(String.valueOf(R.string.txt_qestion1));
+        question1.setTextQuestion(String.valueOf(R.string.txt_question1));
         question1.setAnswers(answers);
 
         question2.setId("2");
@@ -113,8 +121,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         return survey;
     }
-
-
 
 }
 

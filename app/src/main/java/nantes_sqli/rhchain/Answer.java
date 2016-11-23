@@ -1,13 +1,15 @@
 package nantes_sqli.rhchain;
 
+import java.io.Serializable;
+
 /**
  * Created by alb on 15/11/16.
  */
 
-public class Answer {
+public class Answer implements Serializable{
     String id;
     String description;
-    Integer value;
+    int value;
     String nameImage;
 
     public String getId() {
@@ -26,7 +28,7 @@ public class Answer {
         this.description = description;
     }
 
-    public Integer getValue() {
+    public int getValue() {
         return value;
     }
 

@@ -21,10 +21,10 @@ public class Survey implements Serializable{
     Date dateStart;
     Date dateFinish;
     Boolean isCompleted = Boolean.FALSE;
-    List<Question> questions;
+    ArrayList<Question> questions;
 
 
-    public Survey(List<Question> questions) {
+    public Survey(ArrayList<Question> questions) {
         this.questions = questions;
     }
 
@@ -84,7 +84,7 @@ public class Survey implements Serializable{
         return this.questions;
     }
 
-    public void setQuestions(List<Question> questions){
+    public void setQuestions(ArrayList<Question> questions){
         this.questions = questions;
     }
 

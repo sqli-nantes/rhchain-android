@@ -7,5 +7,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="txt_question">
+        <item name="android:textSize">@dimen/txt_question</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_margin">@dimen/space_question</item>
+        <item name="android:padding">@dimen/space_question</item>
+    </style>
+    <style name="btn" parent="Widget.AppCompat.Button">
+        <item name="android:padding">@dimen/space_btn</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/colorSqli</item>
+    </style>
 </resources>
