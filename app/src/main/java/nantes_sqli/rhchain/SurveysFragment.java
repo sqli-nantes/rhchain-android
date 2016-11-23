@@ -29,7 +29,7 @@ public class SurveysFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        inflater.inflate(R.layout.fragment_survey, v,false);
+//        inflater.inflate(R.layout.fragment_survey, v,false);
 //        Intent intent = new Intent(this, ResultsFragment);
 //        startActivity(intent);
     }
