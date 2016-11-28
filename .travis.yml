@@ -1,0 +1,60 @@
+language: android
+
+sudo: false
+
+jdk:
+  - oraclejdk8
+
+android:
+  licenses:
+    - '.+' 
+  #  - android-sdk-preview-license-52d11cd2
+  #  - android-sdk-license-c81a61d9    
+  #  - android-sdk-license-.+
+  #  - google-gdk-license-.+
+  components:
+    - platform-tools
+    - tools # to get the new `repository-11.xml`
+    - tools # see https://github.com/travis-ci/travis-ci/issues/6040#issuecomment-219367943)
+    - build-tools-24.0.3
+    - extra-android-support
+    - android-24
+    - extra-android-m2repository
+    - extra-google-m2repository
+
+    # Additional components
+    #- extra-google-google_play_services
+    #- extra-google-m2repository
+    #- extra-android-m2repository
+    #- addon-google_apis-google-19
+
+    # Specify at least one system image,
+    # if you need to run emulator(s) during your tests
+    - sys-img-armeabi-v7a-android-24
+    #- sys-img-x86-android-24
+
+# Emulator Management: Create, Start and Wait
+#before_script:
+#  - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
+#  - emulator -avd test -no-audio -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
+
+script:
+ # - "./gradlew build connectedCheck --stacktrace"
+  - "./gradlew build --stacktrace"
+
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+notifications:
+  slack:
+      on_success: change
+      on_failure: always
+      rooms:
+        - sqlinantes:8Usex84M6JTsUhBEymvhpm5w#team-blockchain
