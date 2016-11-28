@@ -5,4 +5,5 @@
     <dimen name="txt_question">18dp</dimen>
     <dimen name="space_question">10dp</dimen>
     <dimen name="space_btn">20dp</dimen>
+    <dimen name="marge">10dp</dimen>
 </resources>

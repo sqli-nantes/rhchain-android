@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<ScrollView-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:padding="12dp">-->
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/surveyFragment"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="12dp"
-    android:paddingEnd="12dp"
-    android:paddingLeft="12dp"
-    android:paddingRight="12dp"
-    android:paddingStart="12dp"
-    android:paddingTop="12dp">
+    android:paddingBottom = "12dp"
+    android:paddingLeft= "12dp"
+    android:paddingRight="12dp">
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1">
+    </android.support.v4.view.ViewPager>
 
 
     <TextView
@@ -19,11 +34,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtQ1"
+        android:layout_weight="1"
         style="@style/txt_question" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="wrap_content">
 
         <ImageButton
@@ -69,10 +86,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtQ2"
+        android:layout_weight="1"
         style="@style/txt_question" />
 
     <LinearLayout
         android:orientation="horizontal"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -119,10 +138,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtQ3"
+        android:layout_weight="1"
         style="@style/txt_question"/>
 
     <LinearLayout
         android:orientation="horizontal"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -168,9 +189,17 @@
         android:text="@string/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_submit"
+        android:id="@+id/btn_submit_survey"
         style="@style/btn"
         tools:text="@string/btn_submit"
         android:contentDescription="@string/dscr_btn_submit"/>
 
+    <ProgressBar
+        android:id="@+id/loadingPanel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
+
 </LinearLayout>
+
+<!--</ScrollView>-->

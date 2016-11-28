@@ -16,13 +16,14 @@ import android.widget.EditText;
  */
 
 public class CreateUserActivity extends AppCompatActivity implements View.OnClickListener{
-    Button btn_valid;
+        Button btn_valid;
     EditText userId;
     User user = new User();
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
+        Log.v("étape","entrée activité creation");
         setContentView(R.layout.activity_create_user);
 
         btn_valid = (Button) findViewById(R.id.btn_valid);

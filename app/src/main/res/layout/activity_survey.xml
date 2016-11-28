@@ -1,208 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewsurvey"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="nantes_sqli.rhchain.SurveyActivity"
-    android:background="#ffffff">
+    tools:context=".SurveyActivity"
+    android:orientation="vertical">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/txt_question1"
-        android:textAlignment="center"
-        android:id="@+id/textView3" />
+    <!--<fragment class="nantes_sqli.rhchain.SurveysFragment"-->
+        <!--android:id="@+id/surveyFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+    <!--</fragment>-->
 
-    <GridView
-        android:id="@+id/gridview1"
+    <FrameLayout
+        android:id="@+id/menuSurvey"
+        android:paddingBottom="@dimen/marge"
+        android:paddingTop="@dimen/marge"
+        android:background="@color/background_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnWidth="90dp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"
+        android:layout_height="wrap_content" />
 
-        />
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton2"
-        android:layout_marginStart="32dp"
-        android:src="@drawable/ic_dissatisfied_neutral"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentStart="true"
-        android:clickable="true"
-        android:contentDescription="@string/descr_btn_unsatisfied" />
+    <!--&lt;!&ndash;android:name ="nantes_sqli.rhchain.SurveysFragment"&ndash;&gt;-->
 
-
-    <LinearLayout
-            android:layout_marginTop="120dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-       android:id="@+id/linearLayout">
-
-       <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_centerHorizontal="true"
-            android:text="@string/txt_question3"
-            android:textAlignment="center" />
-
-   </LinearLayout>
-
-    <LinearLayout
-            android:layout_marginTop="240dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2">
-
-        <LinearLayout
-        android:orientation="horizontal"
+    <FrameLayout
+        android:id="@+id/container"
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent" />
 
+    <!--<FrameLayout-->
+        <!--android:id="@+id/resultFragment"-->
+        <!--android:layout_width="match_parent"-->
 
-
-
-    </LinearLayout>
-    </LinearLayout>
-
-        <LinearLayout
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout3">
-
-             <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
-
-        </LinearLayout>
-
-
-
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/ic_sentiment_neutral_black_24dp"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@+id/imageButton2"
-        android:clickable="true"
-        android:backgroundTint="#f4e916"
-        android:contentDescription="@string/descr_btn_neutral" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
-        android:src="@drawable/ic_sentiment_satisfied_black_48dp"
-        android:layout_below="@+id/textView3"
-        android:layout_toEndOf="@+id/imageView"
-        android:layout_marginStart="26dp"
-        android:clickable="true"
-        android:backgroundTint="#2af614"
-        android:contentDescription="@string/descr_btn_satisfied" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton3"
-        android:src="@drawable/ic_sentiment_dissatisfied_black_24dp"
-        android:clickable="true"
-        android:backgroundTint="#f71414"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/imageButton2"
-        android:contentDescription="@string/descr_btn_unsatisfied" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton4"
-        android:src="@drawable/ic_sentiment_neutral_black_24dp"
-        android:clickable="true"
-        android:backgroundTint="#f4e916"
-        android:layout_alignTop="@+id/imageButton3"
-        android:layout_toStartOf="@+id/imageButton"
-        android:contentDescription="@string/descr_btn_neutral" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_question2"
-        android:textAlignment="center"
-        android:layout_below="@+id/imageButton4"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView4" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton5"
-        android:src="@drawable/ic_sentiment_satisfied_black_48dp"
-        android:clickable="true"
-        android:backgroundTint="#2af614"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/imageButton"
-        android:contentDescription="@string/descr_btn_satisfied" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton6"
-        android:src="@drawable/ic_sentiment_dissatisfied_black_24dp"
-        android:clickable="true"
-        android:backgroundTint="#f71414"
-        android:layout_below="@+id/textView4"
-        android:layout_alignStart="@+id/imageButton3"
-        android:layout_marginTop="28dp"
-        android:contentDescription="@string/descr_btn_unsatisfied" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton7"
-        android:src="@drawable/ic_sentiment_neutral_black_24dp"
-        android:clickable="true"
-        android:backgroundTint="#f4e916"
-        android:layout_alignTop="@+id/imageButton6"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/descr_btn_neutral" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton8"
-        android:src="@drawable/ic_sentiment_satisfied_black_48dp"
-        android:clickable="true"
-        android:backgroundTint="#2af614"
-        android:layout_alignTop="@+id/imageButton7"
-        android:layout_alignStart="@+id/imageButton5"
-        android:contentDescription="@string/descr_btn_satisfied" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_submit"
-        android:id="@+id/btn_soum"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/btn_submit" />
-
-
-</RelativeLayout>
+        <!--android:layout_height="wrap_content" />-->
+</LinearLayout>

@@ -1,6 +1,5 @@
 package nantes_sqli.rhchain;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,11 +21,13 @@ import java.util.Vector;
  *
  */
 public class ButtonAdapter extends BaseAdapter{
-    private SurveyActivity mSurveyActivity;
+//
 
-    public ButtonAdapter(SurveyActivity surveyActivity) {
-             mSurveyActivity = surveyActivity;
-    }
+   private SurveyActivity mSurveyActivity;
+//
+//    public ButtonAdapter(SurveyActivity) {
+//             mSurveyActivity = testSurveyActivity;
+//    }
 
     @Override
     public int getCount() {
@@ -92,12 +93,12 @@ public class ButtonAdapter extends BaseAdapter{
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            super.setContentView(R.layout.activity_survey_redone);
+            super.setContentView(R.layout.activity_survey);
 
             List fragments = new Vector();
 
             fragments.add(Fragment.instantiate(this,ResultsFragment.class.getName()));
-            fragments.add(Fragment.instantiate(this,SurveyActivity.class.getName()));
+            fragments.add(Fragment.instantiate(this, SurveyActivity.class.getName()));
         }
 
 //        @Override

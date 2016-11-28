@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resultFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -69,8 +70,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="UselessParent"
-        android:layout_marginEnd="4dp"
-        android:layout_marginTop="4dp">
+        android:paddingBottom = "12dp"
+        android:paddingLeft= "12dp"
+        android:paddingRight="12dp">
 
         <TextView
             android:text="@string/txt_question1"
@@ -89,7 +91,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_dissatisfied_clicked"
+                android:src="@drawable/ic_dissatisfied_clicked"
                 android:id="@+id/ResultQ1"
                 android:layout_weight="1"
                 tools:ignore="ContentDescription"
@@ -99,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_action_pie_chart"
+                android:src="@drawable/ic_action_pie_chart"
                 android:id="@+id/pie1"
                 android:contentDescription="@string/descr_pie_chart" />
         </LinearLayout>
@@ -121,7 +123,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_neutral_clicked"
+                android:src="@drawable/ic_neutral_clicked"
                 android:id="@+id/ResultQ2"
                 android:layout_weight="1"
                 tools:ignore="ContentDescription"
@@ -131,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_action_pie_chart"
+                android:src="@drawable/ic_action_pie_chart"
                 android:id="@+id/pie2"
                 android:contentDescription="@string/descr_pie_chart"/>
 
@@ -154,7 +156,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_satisfied_clicked"
+                android:src="@drawable/ic_satisfied_clicked"
                 android:id="@+id/ResultQ3"
                 android:layout_weight="1"
                 tools:ignore="ContentDescription"
@@ -164,7 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_action_pie_chart"
+                android:src="@drawable/ic_action_pie_chart"
                 android:id="@+id/pie3"
                 android:contentDescription="@string/descr_pie_chart"/>
 

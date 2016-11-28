@@ -1,70 +1,77 @@
 package nantes_sqli.rhchain;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import java.util.zip.Inflater;
+
+/**
+ * Created by alb on 25/11/16.
+ */
 
 
-//public class SurveyActivity extends AppCompatActivity implements View.OnClickListener{
-//    public class SurveyActivity extends FragmentActivity implements View.OnClickListener {
-    public class SurveyActivity extends FragmentActivity {
-//    public class SurveyActivity extends Fragment implements View.OnClickListener {
-    Button btn_sub;
-//    Survey survey;
-//    Results results;
+public class SurveyActivity extends FragmentActivity {
+
+    Button btn_sub, btn_ok ;
+    PopupWindow popupMessage;
+    TextView popupText;
+    LinearLayout layoutOfPopup;
+    Fragment fragment;
+    FragmentTransaction fragmentTransaction;
+    Inflater inflater;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_survey_redone);
+        setContentView(R.layout.activity_survey);
 
+        getSupportFragmentManager().beginTransaction().add(R.id.menuSurvey, new MenuFragment()).commit();
+//        init();
+//        popupInit();
 
-        btn_sub = (Button) findViewById(R.id.btn_soum);
-
-//        btn_sub.setOnClickListener(this);
-
-//        TODO: utiliser GridView pour ajuster l'affichage aux questions.
-/*        GridView gridAnswer = (GridView)findViewById(R.id.gridview1);
-        });
-        survey = (Survey) savedInstanceState.getSerializable("Survey");
-
-
-        TODO faire l'unité minimum de la question voir TextView et TableLayout
-        for (int i = 1; i < survey.getQuestions().size();i++ ) {
-            TableRow globalrow = new TableRow(this);
-            Question question = survey.getQuestion(i);
-            TextView textView = new TextView(this);
-            textView.setText(question.getTextQuestion());
-
-            for (int i = 1 ; i < question.getAnswers().size(); i++){
-                globalrow.;
-                globalrow.addView(question.getAnswer(i));
-            }
-
-
-*/
+    }
+/*
+    public void init() {
+        btn_sub = (Button) btn_sub.findViewById(R.id.btn_submit);
+        btn_sub = (Button) btn_sub.findViewById(R.id.btn_submit);
+        popupText = new TextView(this);
+        btn_ok = new Button(this);
+        layoutOfPopup = new LinearLayout(this);
+        btn_ok.setText("Oui");
+        popupText.setText("Validez-vous vos choix?");
+        popupText.setPadding(0, 0, 0, 20);
+        layoutOfPopup.addView(popupText);
+        layoutOfPopup.addView(btn_ok);
     }
 
-//    public class GridSurvey extends Activity implements AdapterView.OnItemSelectedListener{
-//      Pour la gestion de la gridview
-//    }
+    public void popupInit() {
+        btn_sub.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == R.id.btn_submit) {
+                    popupMessage.showAsDropDown(btn_sub, 0, 0);
+                }
 
-//
-//    @Override
-//    public void onClick(View v) {
-//        Intent intent = new Intent(this, ResultsFragment);
-//        startActivity(intent);
-//    }
-//
-//    public void onSurveySubmit(Results r) {
-//
-//    }
-
-
-//    TODO Gestion des réponses. Icônes : Au départ : grisée, quand sélectionné mise en couleurs + Results renseigné par la valeurs answer
-//    TODO 
-//    TODO Fil d'ariane
+                else {
+                    popupMessage.dismiss();
+                }
+            }
+        });
+        btn_ok.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+               // Mettre ici la transaction fragment
+                //FragmentTransaction
+            }
+        });
+        popupMessage = new PopupWindow(layoutOfPopup, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupMessage.setContentView(layoutOfPopup);
+    }
+    */
 }

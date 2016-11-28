@@ -3,11 +3,11 @@ package nantes_sqli.rhchain;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Display 2 possibilities: answer survey or create a user's account
@@ -22,18 +22,23 @@ import java.util.List;
     Button btn_connect;
     Button btn_account;
     Survey survey = new Survey();
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i("étape","création activité main");
+
 
         btn_connect = (Button) findViewById(R.id.btn_connect);
         setSurvey(survey);
         btn_connect.setOnClickListener(this);
+        Log.v("bouton","initialisation de btn connect");
 
         btn_account = (Button) findViewById(R.id.btn_creat);
         btn_account.setOnClickListener(this);
+        Log.v("bouton","initialisation de btn account");
     }
 
 //           todo récupérer les informations users
@@ -43,15 +48,25 @@ import java.util.List;
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_connect: {
-                Intent intent = new Intent(this, SurveyActivity.class);
-                intent.putExtra("Survey", survey);
+                Log.v("étape","choix de la connection");
+//                Intent intent = new Intent(this, SurveyActivity.class);
+//                intent.putExtra("Survey", survey);
+                Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
+
 //                doit récupérer les informations users
+//                user.setIdentity();
+
                 startActivity(intent);
+                break;
             }
             case R.id.btn_creat: {
+                Log.v("étape","choix de la création");
                 Intent intent = new Intent(this, CreateUserActivity.class);
                 startActivity(intent);
+                break;
             }
+            default: break;
+
         }
     }
 
@@ -72,6 +87,7 @@ import java.util.List;
 //    Bouchonnage pour le sondage démo. Déclaration du sondage
     public Survey setSurvey(Survey survey) {
 
+        Log.v("méthode","importation du survey");
         Answer satisfied = new Answer();
         Answer verySatisfied = new Answer();
         Answer unsatisfied = new Answer();
