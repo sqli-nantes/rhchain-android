@@ -37,11 +37,36 @@
         android:layout_above="@+id/editText"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pas de mot de passe?"
+        android:id="@+id/textView2"
+        android:textSize="22dp"
+        android:textColor="#967d4d"
+        android:clickable="true"
+        android:textAlignment="center"
+        android:layout_alignBaseline="@+id/btn_account"
+        android:layout_alignBottom="@+id/btn_account"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ME CONNECTER"
+        android:id="@+id/btn_connect"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:layout_above="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:onClick="setContentView"
+        android:nestedScrollingEnabled="false" />
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_create_account"
-        android:id="@+id/btn_creat"
+        android:text="CREER UN COMPTE"
+        android:id="@+id/btn_account"
         android:layout_marginBottom="27dp"
         android:clickable="true"
         android:layout_alignParentBottom="true"

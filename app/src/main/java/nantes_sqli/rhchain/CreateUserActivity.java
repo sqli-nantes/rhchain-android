@@ -14,7 +14,7 @@ import android.widget.EditText;
  * User's account creation
  * Use for demo mode
  */
-public class CreateUserActivity extends AppCompatActivity implements View.OnClickListener{
+public class CreateUserActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_valid;
     EditText userId;
     User user;
