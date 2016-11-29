@@ -5,4 +5,5 @@ package nantes_sqli.rhchain;
  */
 
 public class User {
+
 }

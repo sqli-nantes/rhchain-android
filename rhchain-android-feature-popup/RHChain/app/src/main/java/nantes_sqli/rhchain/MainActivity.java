@@ -9,6 +9,8 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btn_connect;
+    //New add
+    //Button btn_account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,12 +19,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btn_connect = (Button) findViewById(R.id.btn_connect);
         btn_connect.setOnClickListener(this);
+
+        //New add
+        //btn_account = (Button) findViewById(R.id.btn_account);
+        //btn_account.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(this, SurveyActivity.class);
         startActivity(intent);
+
+    //public void onClick(View v) {
+        //Intent intent = new Intent(this, SurveyActivity.class);
+        //startActivity(intent);
     }
 }
 
