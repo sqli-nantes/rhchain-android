@@ -1,14 +1,17 @@
 package nantes_sqli.rhchain;
 
+import java.io.Serializable;
+
 /**
  * Created by alb on 14/11/16.
  * User Object
  */
 
-public class User {
+public class User implements Serializable {
     String identity;
     String password;
-    Boolean isAdmin = Boolean.FALSE;
+    boolean isAdmin = false;
+
 
     public String getIdentity() {
         return identity;

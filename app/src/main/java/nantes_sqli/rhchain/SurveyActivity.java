@@ -7,55 +7,30 @@ import android.os.Bundle;
 import android.view.View;
 
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import java.util.zip.Inflater;
 
-public class SurveyActivity extends AppCompatActivity implements View.OnClickListener{
-//    Button btn_soum;
+
+/**
+ * Created by alb on 25/11/16.
+ */
+
+
+public class SurveyActivity extends AppCompatActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
-
-        this.findViewById(R.id.btn_soum).setOnClickListener(this);
-
-/*
-        btn_soum = (Button) findViewById(R.id.btn_soum);
-        btn_soum.setOnClickListener(this);
-        }
-*/
-
+        getSupportFragmentManager().beginTransaction().add(R.id.menuSurvey, new MenuFragment()).commit();
     }
 
-    @Override
-    public void onClick(View v) {
-        //TODO something
-        AlertDialog();
-    }
-
-
-    public void AlertDialog() {
-        AlertDialog.Builder ad = new AlertDialog.Builder(this);
-        ad.setTitle("Etes-vous sur de votre choix?");
-    //    ad.setMessage("DO YOU SEE A MSG?");
-
-
-        ad.setPositiveButton("OUI",
-                new android.content.DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int arg1) {
-                        //TODO redirect to progress bar
-                    }
-                }
-        );
-
-        ad.setNegativeButton("NON",
-                new android.content.DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int arg1) {
-                        //TODO
-                    }
-                }
-        );
-
-        ad.show();
-
-    }
 }

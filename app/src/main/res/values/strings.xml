@@ -3,17 +3,26 @@
     <string name="txt_pwd">mot de passe</string>
     <string name="txt_userId">Nom</string>
     <string name="btn_submit">soumettre</string>
+    <string name="btn_ok">OK</string>
     <string name="ttl_add_user">Creation de votre compte</string>
-    <string name="txt_qestion1"><![CDATA[Êtes-vous satisfait(e) de l\'ambiance de travail au sein de l\'agence ?]]></string>
+    <string name="txt_question1"><![CDATA[Êtes-vous satisfait(e) de l\'ambiance de travail au sein de l\'agence ?]]></string>
     <string name="txt_question2"><![CDATA[Êtes-vous satisfait(e) de votre mission actuelle ?]]></string>
     <string name="txt_question3"><![CDATA[Êtes-vous satisfait(e) des informations qui vous sont transmises concernant la situation et les perspectives de l\'agence et du groupe ?]]></string>
     <string name="descr_btn_unsatisfied">insatisfait</string>
     <string name="descr_btn_satisfied">très satisfait</string>
     <string name="descr_btn_neutral">satisfait</string>
     <string name="txt_name">Name</string>
-    <string name="btn_create_account">CREER UN COMPTE</string>
+    <string name="btn_create_account">créer un compte</string>
     <string name="btn_connection">ME CONNECTER</string>
     <string name="txt_err_pwd">Pas de mot de passe?</string>
     <string name="ttl_api">RHChain</string>
-    <string name="txt_qestion_pwd">Saisir le mot de passe</string>
+    <string name="txt_question_pwd">Saisir le mot de passe</string>
+    <string name="txt_ttl_survey">Satisfaction travail</string>
+    <string name="dscr_btn_submit">bouton soumettre</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="descr_pie_chart">camembert des résultats</string>
+    <string name="btn_survey">sondage</string>
+    <string name="btn_results">Résultats</string>
 </resources>

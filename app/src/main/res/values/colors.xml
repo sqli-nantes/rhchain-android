@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorSqli">#996515</color>
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+    <color name="unsatisfied">#f00</color>
+    <color name="neutral">#ff0</color>
+    <color name="satisfied">#0f0</color>
+    <color name="background_menu">#aaaaaa</color>
 </resources>
