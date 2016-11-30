@@ -48,14 +48,16 @@ import java.util.ArrayList;
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_connect: {
-                Log.v("étape","choix de la connection");
-//                Intent intent = new Intent(this, SurveyActivity.class);
-//                intent.putExtra("Survey", survey);
+
                 Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
 
-//                doit récupérer les informations users
-//                user.setIdentity();
+/*                doit récupérer les informations users
+                user.setIdentity();
+                doit vérifier que le password entré est identique aux password enregistrer par la BC
+                if (R.id.editTextPassword = user.getPassword()){
 
+                }
+*/
                 startActivity(intent);
                 break;
             }

@@ -17,7 +17,8 @@ import java.util.Vector;
 
 /**
  * Created by alb on 21/11/16.
- * Classe pour gérer les changements de bouton lorsque l'utilisateur les sélectionnent
+ * Classe pour gérer les changements de bouton lorsque l'utilisateur les sélectionne
+ * Non utilisé, ni teste!
  *
  */
 public class ButtonAdapter extends BaseAdapter{

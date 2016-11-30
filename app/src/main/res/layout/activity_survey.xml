@@ -8,12 +8,6 @@
     android:orientation="vertical">
 
 
-    <!--<fragment class="nantes_sqli.rhchain.SurveysFragment"-->
-        <!--android:id="@+id/surveyFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-    <!--</fragment>-->
-
     <FrameLayout
         android:id="@+id/menuSurvey"
         android:paddingBottom="@dimen/marge"
@@ -22,17 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!--&lt;!&ndash;android:name ="nantes_sqli.rhchain.SurveysFragment"&ndash;&gt;-->
-
     <FrameLayout
         android:id="@+id/container"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!--<FrameLayout-->
-        <!--android:id="@+id/resultFragment"-->
-        <!--android:layout_width="match_parent"-->
-
-        <!--android:layout_height="wrap_content" />-->
 </LinearLayout>

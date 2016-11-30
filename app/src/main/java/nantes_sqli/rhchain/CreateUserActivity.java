@@ -13,6 +13,7 @@ import android.widget.EditText;
  * Created by alb on 14/11/16.
  * User's account creation
  * Use for demo mode
+ * not use, not tested
  */
 
 public class CreateUserActivity extends AppCompatActivity implements View.OnClickListener{

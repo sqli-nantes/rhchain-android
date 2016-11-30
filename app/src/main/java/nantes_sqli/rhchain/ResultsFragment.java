@@ -16,8 +16,6 @@ public class ResultsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_results, viewGroup,false);
         return view;
-//        return super.onCreateView(inflater, viewGroup, savedInstanceState);
-
     }
 
 //TODO     Import des Results
