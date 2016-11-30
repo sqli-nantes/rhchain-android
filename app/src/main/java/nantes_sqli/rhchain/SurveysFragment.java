@@ -1,46 +1,34 @@
 package nantes_sqli.rhchain;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-//import android.support.v4.widget.PopupWindowCompat;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
-
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.Toast;
-
-import static android.R.attr.duration;
-import static android.R.attr.fragment;
 
 /**
  * Created by alb on 22/11/16.
  * Display the survey
  */
 
-//public class SurveysFragment extends AppCompatActivity implements View.OnClickListener {
-    public class SurveysFragment extends Fragment implements View.OnClickListener{
+public class SurveysFragment extends DialogFragment implements View.OnClickListener{
 
     public SurveysFragment(){}
 
     private Button btn_submButton ;
     private View viewRoot;
+    private Dialog prog;
 
     @Override
-        public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView( LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setCancelable(false);
         viewRoot = inflater.inflate(R.layout.fragment_survey, container,false);
 
         btn_submButton = (Button) viewRoot.findViewById(R.id.btn_submit_survey);
@@ -48,28 +36,28 @@ import static android.R.attr.fragment;
         btn_submButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog();
+                AlertDialog(savedInstanceState);
             }
         });
-
         return viewRoot;
     }
 
     @Override
     public void onClick(View v) {
-        //TODO something
-        AlertDialog();
     }
 
 
-    public void AlertDialog() {
+    public void AlertDialog(final Bundle savedInstanceState) {
         AlertDialog.Builder ad = new AlertDialog.Builder(viewRoot.getContext());
-       ad.setTitle("Etes-vous sur de votre choix?");
+        ad.setTitle("Etes-vous sur de votre choix?");
 
-       ad.setPositiveButton("OUI",
+        ad.setPositiveButton("OUI",
                 new android.content.DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int arg1) {
-                        launchIntent();                                  }
+                        prog = onCreateDialog(savedInstanceState);
+                        prog.show();
+                        launchIntent(prog);
+                    }
                 }
         );
         ad.setNegativeButton("NON",
@@ -82,15 +70,28 @@ import static android.R.attr.fragment;
         ad.show();
     }
 
-    public void launchIntent() {
+    public void launchIntent(final Dialog prog) {
+        Runnable progressRunnable = new Runnable() {
 
-        Fragment fragment;
-        FragmentTransaction fragmentTransaction;
+            @Override
+            public void run() {
+                prog.cancel();
+            }
+        };
 
-        fragment = new ProgressBarFragment();
-        fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container,fragment);
-        fragmentTransaction.commit();
+        Handler pdCanceller = new Handler();
+        pdCanceller.postDelayed(progressRunnable, 5000);
+    }
 
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState)
+    {
+        ProgressDialog dialog = new ProgressDialog(getActivity(), getTheme());
+        dialog.setTitle(getString(R.string.pleaseWait));
+        dialog.setMessage(getString(R.string.writing_BC));
+        dialog.setIndeterminate(true);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        return dialog;
     }
 
 }

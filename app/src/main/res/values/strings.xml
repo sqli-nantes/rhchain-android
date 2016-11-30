@@ -25,4 +25,6 @@
     <string name="descr_pie_chart">camembert des résultats</string>
     <string name="btn_survey">sondage</string>
     <string name="btn_results">Résultats</string>
+    <string name="pleaseWait">Patientez svp</string>
+    <string name="writing_BC">Connecton avec la blockchain</string>
 </resources>

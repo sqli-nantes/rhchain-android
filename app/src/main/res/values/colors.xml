@@ -7,7 +7,7 @@
     <color name="black">#000</color>
     <color name="white">#fff</color>
     <color name="unsatisfied">#f00</color>
-    <color name="neutral">#ff0</color>
+    <color name="neutral">#ffa0</color>
     <color name="satisfied">#0f0</color>
     <color name="background_menu">#aaaaaa</color>
 </resources>
