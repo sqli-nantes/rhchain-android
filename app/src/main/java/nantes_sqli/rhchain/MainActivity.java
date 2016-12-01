@@ -36,9 +36,10 @@ import java.util.ArrayList;
         btn_connect.setOnClickListener(this);
 
 
+/*      Utilisable lors de la mise en prod de la fonction reaction compte
         btn_account = (Button) findViewById(R.id.btn_account);
         btn_account.setOnClickListener(this);
-
+*/
 
     }
 
@@ -62,13 +63,13 @@ import java.util.ArrayList;
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_account: {
+/*            case R.id.btn_account: {
                 Log.v("étape","choix de la création");
                 Intent intent = new Intent(this, CreateUserActivity.class);
                 startActivity(intent);
                 break;
             }
-            default: break;
+ */           default: break;
 
         }
     }

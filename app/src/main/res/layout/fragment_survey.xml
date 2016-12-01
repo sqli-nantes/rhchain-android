@@ -49,10 +49,11 @@
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:visibility="visible"
-            android:onClick="onClick (MainActivity)"
             android:contentDescription="@string/descr_btn_unsatisfied"
             android:textAlignment="center"
             android:src="@drawable/ic_dissatisfied_neutral" />
+
+        <!-- à rajouter la méthode android:onClick="onClick (laméthodeàécrire)"  pour enregistrer la valeur sélectionnés      -->
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -61,7 +62,6 @@
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:visibility="visible"
-            android:onClick="onClick (MainActivity)"
             android:contentDescription="@string/descr_btn_neutral"
             android:textAlignment="center"
             android:src="@drawable/ic_neutral_neutral" />
@@ -73,7 +73,6 @@
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:visibility="visible"
-            android:onClick="onClick (MainActivity)"
             android:contentDescription="@string/descr_btn_satisfied"
             android:textAlignment="center"
             android:src="@drawable/ic_satified_neutral"/>
@@ -102,7 +101,6 @@
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:visibility="visible"
-            android:onClick="onClick (MainActivity)"
             android:contentDescription="@string/descr_btn_unsatisfied"
             android:textAlignment="center"
             android:src="@drawable/ic_dissatisfied_neutral"/>
@@ -114,7 +112,6 @@
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:visibility="visible"
-            android:onClick="onClick (MainActivity)"
             android:contentDescription="@string/descr_btn_neutral"
             android:textAlignment="center"
             android:src="@drawable/ic_neutral_neutral" />
@@ -126,7 +123,6 @@
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:visibility="visible"
-            android:onClick="onClick (MainActivity)"
             android:contentDescription="@string/descr_btn_satisfied"
             android:textAlignment="center"
             android:src="@drawable/ic_satified_neutral"/>
@@ -154,7 +150,6 @@
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:visibility="visible"
-            android:onClick="onClick (MainActivity)"
             android:contentDescription="@string/descr_btn_unsatisfied"
             android:textAlignment="center"
             android:src="@drawable/ic_dissatisfied_neutral"/>
@@ -166,7 +161,6 @@
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:visibility="visible"
-            android:onClick="onClick (MainActivity)"
             android:contentDescription="@string/descr_btn_neutral"
             android:textAlignment="center"
             android:src="@drawable/ic_neutral_neutral" />
@@ -178,7 +172,6 @@
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:visibility="visible"
-            android:onClick="onClick (MainActivity)"
             android:contentDescription="@string/descr_btn_satisfied"
             android:textAlignment="center"
             android:src="@drawable/ic_satified_neutral"/>
