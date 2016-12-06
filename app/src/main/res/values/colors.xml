@@ -12,12 +12,13 @@
     <color name="neutral">#ffa0</color>
     <color name="satisfied">#0f0</color>
     <color name="background_menu">#aaaaaa</color>
-    <color name="darkgrey">#333</color>
+    <color name="darkgrey">#222</color>
     <color name="lessdarkgrey">#444444</color>
     <color name="middlegrey">#888888</color>
     <color name="test1">#13a69f</color>
     <color name="test2">#fd6a21</color>
     <color name="test3">#81fe35</color>
     <color name="text_color">#aaaaaa</color>
-    <color name="text_choice_color">#ddd</color>
+    <color name="text_choice_color">#dddddd</color>
+    <color name="text_hint_color">#999999</color>
 </resources>

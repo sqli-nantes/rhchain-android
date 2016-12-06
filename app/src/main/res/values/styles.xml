@@ -4,16 +4,18 @@
         <item name="actionBarTheme">@style/Sqli.ActionBar</item>
         <item name="android:theme">@style/Sqli.theme</item>
         <item name="android:alertDialogTheme">@style/Sqli.AlertDialogTheme</item>
+        <item name="android:textAppearance">@style/Sqli.TextAppearance</item>
 
         <item name="android:background">@color/darkgrey</item>
         <item name="colorAccent">@color/colorSqli</item>
-
+        <item name="android:colorBackground">@color/darkgrey</item>
+        <item name="android:actionMenuTextColor">@color/goldentext</item>
+        <item name="android:textColor">@color/text_color</item>
     </style>
 
     <style name="Sqli.theme">
         <item name="android:textAppearance">@style/txt_question</item>
         <item name="android:buttonStyle">@style/btn</item>
-
     </style>
 
     <style name="txt_question">
@@ -29,61 +31,30 @@
         <item name="android:backgroundTint">@color/colorSqli</item>
     </style>
 
-
     <style name="Sqli.ActionBar" parent="@android:style/Widget.Holo.ActionBar">
         <item name="android:background">@color/black</item>
         <item name="android:textColorPrimary">@color/goldentext</item>
         <item name="android:textSize">@dimen/txt_title</item>
     </style>
 
-<!-- Format des popup -->
-
-
-    <style name="Theme.Sqli.Base" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlNormal">@color/greencomplementarygold</item>
-        <item name="colorControlActivated">@color/test2</item>
-        <item name="colorControlHighlight">@color/test3</item>
-    </style>
-
+    <!-- Format des popup -->
 
     <style name="Sqli.AlertDialogTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <!--<item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>-->
-        <!--<item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>-->
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
         <item name="android:windowTitleStyle">@style/Sqli.WindowTitleStyle</item>
         <item name="android:textColorPrimary">@color/text_color</item>
         <item name="android:textAppearanceMedium">@style/Sqli.TextAppearance</item>
         <!--<item name="android:textSize">@dimen/txt_question</item>-->
     </style>
-        <!-- Pour changer la couleur des boutons? -->
+    <!-- Pour changer la couleur des boutons? -->
     <!--<item name="android:colorAccent">@color/greencomplementarygold</item>-->
 
-
-
     <style name="Sqli">Sqli</style>
-
-    <style name="Dialog" parent="android:style/Theme.Dialog">
-        <item name="android:windowBackground">@color/test1</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:textSize">@dimen/txt_question</item>
-        <item name="android:textColorPrimary">@color/test2</item>
-        <item name="android:colorAccent">@color/greencomplementarygold</item>
-        <item name="android:textColor">@color/colorAccent</item>
-    </style>
-
-        <style name="DialogText">
-            <item name="android:textColor">@color/test3</item>
-            <item name="android:textSize">10sp</item>
-        </style>
-
-
-    <style name="DialogText.Text">
-        <item name="android:textSize">@dimen/txt_question</item>
-        <item name="android:textStyle">bold</item>
-    </style>
 
     <style name="Sqli.WindowTitleStyle">
         <item name="android:textSize">@dimen/txt_question</item>
@@ -97,32 +68,17 @@
         <item name="android:textColor">@color/text_choice_color</item>
     </style>
 
-
-<!--L'ancienne méthode tres déconseillée-->
-
-    <!--<style name="SQLITheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-    <!--<item name="colorPrimary">@color/black</item>-->
-    <!--<item name="colorPrimaryDark">@color/darkgrey</item>-->
-    <!--<item name="colorAccent">@color/colorSqli</item>-->
-    <!--<item name="elevation">4dp</item>-->
-    <!--<item name="titleTextColor">@color/colorSqli</item>-->
-    <!--<item name="subtitleTextColor">@color/middlegrey</item>-->
-    <!--</style>-->
-
-
-
-
     <style name="ThemeOverlay.Sqli.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-    <item name="android:background">@color/black</item>
-    <!-- title text color -->
-    <item name="android:textColorPrimary">@color/goldentext</item>
-    <!-- subtitle text color -->
-    <item name="android:textColorSecondary">@color/middlegrey</item>
-    <!-- action menu item text color -->
-    <!--<item name="actionMenuTextColor">@color/satisfied</item>-->
-    <!-- action menu item icon color -->
-    <!--<item name="colorControlNormal">@color/colorAccent</item>-->
-    <item name="colorAccent">@color/colorSqli</item>
+        <item name="android:background">@color/black</item>
+        <!-- title text color -->
+        <item name="android:textColorPrimary">@color/goldentext</item>
+        <!-- subtitle text color -->
+        <item name="android:textColorSecondary">@color/middlegrey</item>
+        <!-- action menu item text color -->
+        <!--<item name="actionMenuTextColor">@color/satisfied</item>-->
+        <!-- action menu item icon color -->
+        <!--<item name="colorControlNormal">@color/colorAccent</item>-->
+        <item name="colorAccent">@color/colorSqli</item>
     </style>
 
 </resources>

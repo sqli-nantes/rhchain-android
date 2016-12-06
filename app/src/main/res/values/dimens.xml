@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="txt_question">18sp</dimen>
-    <dimen name="txt_title">24sp</dimen>
+    <dimen name="txt_title">32sp</dimen>
     <dimen name="space_question">10dp</dimen>
     <dimen name="space_btn">20dp</dimen>
     <dimen name="marge">1dp</dimen>

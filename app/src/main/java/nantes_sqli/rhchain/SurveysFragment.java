@@ -21,6 +21,7 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
     private Button btn_submButton;
     private View viewRoot;
     private Dialog prog;
+
     public SurveysFragment() {
     }
 
@@ -89,6 +90,7 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         dialog.setMessage(getString(R.string.writing_BC));
         dialog.setIndeterminate(true);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setCancelable(false);
         return dialog;
     }
 
