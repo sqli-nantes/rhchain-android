@@ -10,16 +10,12 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 /**
- * Display 2 possibilities: answer survey or create a user's account
- * At btn_connect get the survey to be displayed
- * Use
- * Survey class
- * User class
+ * Display 2 possibilities: answer survey or create a user's account At btn_connect get the survey
+ * to be displayed Use Survey class User class
  */
 
 
-
-    public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_connect, btn_account;
     Survey survey = new Survey();
     User user;
@@ -69,7 +65,9 @@ import java.util.ArrayList;
                 startActivity(intent);
                 break;
             }
- */           default: break;
+ */
+            default:
+                break;
 
         }
     }
@@ -88,15 +86,15 @@ import java.util.ArrayList;
 */
 
 
-//    Bouchonnage pour le sondage démo. Déclaration du sondage
+    //    Bouchonnage pour le sondage démo. Déclaration du sondage
     public Survey setSurvey(Survey survey) {
 
-        Log.v("méthode","importation du survey");
+        Log.v("méthode", "importation du survey");
         Answer satisfied = new Answer();
         Answer verySatisfied = new Answer();
         Answer unsatisfied = new Answer();
 
-        ArrayList<Answer> answers= new ArrayList<>();
+        ArrayList<Answer> answers = new ArrayList<>();
 
         Question question1 = new Question();
         Question question2 = new Question();
@@ -133,7 +131,9 @@ import java.util.ArrayList;
         question3.setTextQuestion(String.valueOf(R.string.txt_question3));
         question3.setAnswers(answers);
 
-        questions.add(question1);questions.add(question2);questions.add(question3);
+        questions.add(question1);
+        questions.add(question2);
+        questions.add(question3);
 
         survey.setId("1");
         survey.setLabel(String.valueOf(R.string.txt_ttl_survey));

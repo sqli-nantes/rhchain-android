@@ -16,19 +16,20 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Created by alb on 21/11/16.
- * Classe pour gérer les changements de bouton lorsque l'utilisateur les sélectionne
- * Non utilisé, ni teste!
- *
+ * Created by alb on 21/11/16. Classe pour gérer les changements de bouton lorsque l'utilisateur les
+ * sélectionne Non utilisé, ni teste!
  */
-public class ButtonAdapter extends BaseAdapter{
+public class ButtonAdapter extends BaseAdapter {
 //
 
-   private SurveyActivity mSurveyActivity;
+    private SurveyActivity mSurveyActivity;
 //
 //    public ButtonAdapter(SurveyActivity) {
 //             mSurveyActivity = testSurveyActivity;
 //    }
+    private int[] mButtonNeutral = {
+//            R.drawable.ic_dissatisfied_neutral, R.drawable.ic_neutral_neutral, R.drawable.ic_satified_neutral
+    };
 
     @Override
     public int getCount() {
@@ -50,8 +51,8 @@ public class ButtonAdapter extends BaseAdapter{
         Button button;
         if (convertView == null) {
             button = new Button(mSurveyActivity);
-            button.setLayoutParams(new GridView.LayoutParams(30,30));
-            button.setPadding(8,8,8,8);
+            button.setLayoutParams(new GridView.LayoutParams(30, 30));
+            button.setPadding(8, 8, 8, 8);
         } else {
             button = (Button) convertView;
         }
@@ -60,36 +61,32 @@ public class ButtonAdapter extends BaseAdapter{
         return button;
     }
 
-    private int[] mButtonNeutral = {
-//            R.drawable.ic_dissatisfied_neutral, R.drawable.ic_neutral_neutral, R.drawable.ic_satified_neutral
-    };
-
     public static class ResultsFragment extends FragmentActivity {
         private PagerAdapter mPageAdapter;
 
-           private OnFragmentInteractionListener mListener;
+        private OnFragmentInteractionListener mListener;
 
-    //    public ResultsFragment() {
-    //        // Required empty public constructor
-    //    }
-    //
-    //    /**
-    //     * Use this factory method to create a new instance of
-    //     * this fragment using the provided parameters.
-    //     *
-    //     * @param param1 Parameter 1.
-    //     * @param param2 Parameter 2.
-    //     * @return A new instance of fragment ResultsFragment.
-    //     */
-    //    // TODO: Rename and change types and number of parameters
-    //    public static ResultsFragment newInstance(String param1, String param2) {
-    //        ResultsFragment fragment = new ResultsFragment();
-    //        Bundle args = new Bundle();
-    //        args.putString(ARG_PARAM1, param1);
-    //        args.putString(ARG_PARAM2, param2);
-    //        fragment.setArguments(args);
-    //        return fragment;
-    //    }
+        //    public ResultsFragment() {
+        //        // Required empty public constructor
+        //    }
+        //
+        //    /**
+        //     * Use this factory method to create a new instance of
+        //     * this fragment using the provided parameters.
+        //     *
+        //     * @param param1 Parameter 1.
+        //     * @param param2 Parameter 2.
+        //     * @return A new instance of fragment ResultsFragment.
+        //     */
+        //    // TODO: Rename and change types and number of parameters
+        //    public static ResultsFragment newInstance(String param1, String param2) {
+        //        ResultsFragment fragment = new ResultsFragment();
+        //        Bundle args = new Bundle();
+        //        args.putString(ARG_PARAM1, param1);
+        //        args.putString(ARG_PARAM2, param2);
+        //        fragment.setArguments(args);
+        //        return fragment;
+        //    }
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -98,11 +95,11 @@ public class ButtonAdapter extends BaseAdapter{
 
             List fragments = new Vector();
 
-            fragments.add(Fragment.instantiate(this,ResultsFragment.class.getName()));
+            fragments.add(Fragment.instantiate(this, ResultsFragment.class.getName()));
             fragments.add(Fragment.instantiate(this, SurveyActivity.class.getName()));
         }
 
-//        @Override
+        //        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
@@ -116,7 +113,7 @@ public class ButtonAdapter extends BaseAdapter{
             }
         }
 
-//        @Override
+        //        @Override
 //        public void onAttach(Context context) {
 //            super.onAttach(context);
 //            if (context instanceof OnFragmentInteractionListener) {

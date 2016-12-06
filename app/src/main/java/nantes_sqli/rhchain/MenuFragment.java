@@ -1,10 +1,9 @@
 package nantes_sqli.rhchain;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,17 +28,17 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
         fragment = new SurveysFragment();
-        fragmentTransaction = getFragmentManager().beginTransaction().add(R.id.container,fragment);
+        fragmentTransaction = getFragmentManager().beginTransaction().add(R.id.container, fragment);
         fragmentTransaction.commit();
 
-        Button btnSurvey = (Button)view.findViewById(R.id.btn_survey);
-        Button btnResults = (Button)view.findViewById(R.id.btn_results);
+        Button btnSurvey = (Button) view.findViewById(R.id.btn_survey);
+        Button btnResults = (Button) view.findViewById(R.id.btn_results);
 
         btnSurvey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fragment = new SurveysFragment();
-                fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container,fragment);
+                fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container, fragment);
                 fragmentTransaction.commit();
 
             }
@@ -49,7 +48,7 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 fragment = new ResultsFragment();
-                fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container,fragment);
+                fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container, fragment);
                 fragmentTransaction.commit();
 
             }

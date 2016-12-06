@@ -6,15 +6,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by alb on 15/11/16.
- * Manage survey
+ * Created by alb on 15/11/16. Manage survey
  *
  * Same survey could be replay at different time (format: Date), use timeStamp to differenciate.
- * Survey belong to one user (format: User) -> become the admin
- * Could display has many question as necessary
+ * Survey belong to one user (format: User) -> become the admin Could display has many question as
+ * necessary
  */
 
-public class Survey implements Serializable{
+public class Survey implements Serializable {
     String id;
     String label;
     User userOwner;
@@ -80,11 +79,11 @@ public class Survey implements Serializable{
         this.dateFinish = dateFinish;
     }
 
-    public List<Question> getQuestions(){
+    public List<Question> getQuestions() {
         return this.questions;
     }
 
-    public void setQuestions(ArrayList<Question> questions){
+    public void setQuestions(ArrayList<Question> questions) {
         this.questions = questions;
     }
 

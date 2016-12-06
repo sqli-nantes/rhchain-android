@@ -3,8 +3,7 @@ package nantes_sqli.rhchain;
 import java.io.Serializable;
 
 /**
- * Created by alb on 14/11/16.
- * User Object
+ * Created by alb on 14/11/16. User Object
  */
 
 public class User implements Serializable {

@@ -10,10 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 /**
- * Created by alb on 14/11/16.
- * User's account creation
- * Use for demo mode
- * not use, not tested
+ * Created by alb on 14/11/16. User's account creation Use for demo mode not use, not tested
  */
 
 public class CreateUserActivity extends AppCompatActivity implements View.OnClickListener {
@@ -25,7 +22,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-        Log.v("étape","entrée activité creation");
+        Log.v("étape", "entrée activité creation");
         setContentView(R.layout.activity_create_user);
 
         btn_valid = (Button) findViewById(R.id.btn_valid);

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by alb on 15/11/16.
  */
 
-public class Answer implements Serializable{
+public class Answer implements Serializable {
     String id;
     String description;
     int value;

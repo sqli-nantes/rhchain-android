@@ -13,23 +13,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
- * Created by alb on 22/11/16.
- * Display the survey
+ * Created by alb on 22/11/16. Display the survey
  */
 
-public class SurveysFragment extends DialogFragment implements View.OnClickListener{
+public class SurveysFragment extends DialogFragment implements View.OnClickListener {
 
-    public SurveysFragment(){}
-
-    private Button btn_submButton ;
+    private Button btn_submButton;
     private View viewRoot;
     private Dialog prog;
+    public SurveysFragment() {
+    }
 
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setCancelable(false);
-        viewRoot = inflater.inflate(R.layout.fragment_survey, container,false);
+        viewRoot = inflater.inflate(R.layout.fragment_survey, container, false);
 
         btn_submButton = (Button) viewRoot.findViewById(R.id.btn_submit_survey);
 
@@ -52,20 +51,20 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         ad.setTitle("Etes-vous sur de votre choix?");
 
         ad.setPositiveButton("OUI",
-                new android.content.DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int arg1) {
-                        prog = onCreateDialog(savedInstanceState);
-                        prog.show();
-                        launchIntent(prog);
-                    }
+            new android.content.DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int arg1) {
+                    prog = onCreateDialog(savedInstanceState);
+                    prog.show();
+                    launchIntent(prog);
                 }
+            }
         );
         ad.setNegativeButton("NON",
-                new android.content.DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int arg1) {
-                        //TODO
-                    }
+            new android.content.DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int arg1) {
+                    //TODO
                 }
+            }
         );
         ad.show();
     }
@@ -84,8 +83,7 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
     }
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState)
-    {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         ProgressDialog dialog = new ProgressDialog(getActivity(), getTheme());
         dialog.setTitle(getString(R.string.pleaseWait));
         dialog.setMessage(getString(R.string.writing_BC));
