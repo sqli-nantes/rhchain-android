@@ -6,11 +6,15 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by alb on 15/11/16. Manage survey
+ * Created by alb on 15/11/16.
+ * <p>
+ * Manage survey Composante of a single survey
+ * <p>
+ * Same survey could be replay at different time (format: Date), use timeStamp to differenciate. Survey belong to one
+ * owner (format: User) -> the admin could display has many question as necessary
  *
- * Same survey could be replay at different time (format: Date), use timeStamp to differenciate.
- * Survey belong to one user (format: User) -> become the admin Could display has many question as
- * necessary
+ * parameters : Identifier of survey (String); Label (String); Starting and ending date (Date);
+ * Questions (Question) => specific class to set question's label and available answer
  */
 
 public class Survey implements Serializable {
@@ -19,7 +23,6 @@ public class Survey implements Serializable {
     User userOwner;
     Date dateStart;
     Date dateFinish;
-    Boolean isCompleted = Boolean.FALSE;
     ArrayList<Question> questions;
 
 
@@ -29,14 +32,6 @@ public class Survey implements Serializable {
 
     public Survey() {
         this.questions = new ArrayList<Question>();
-    }
-
-    public Boolean getIsCompleted() {
-        return isCompleted;
-    }
-
-    public void setIsCompleted(Boolean bool) {
-        isCompleted = bool;
     }
 
     public String getId() {
@@ -93,5 +88,14 @@ public class Survey implements Serializable {
 
     public void addQuestion(Question question) {
         this.questions.add(question);
+    }
+
+    /**
+     * compute the number of questions display in the survey
+     * @return nbQuestion (int)
+     */
+    public int nbQuestion() {
+        int nbQuestion = questions.size();
+        return nbQuestion;
     }
 }

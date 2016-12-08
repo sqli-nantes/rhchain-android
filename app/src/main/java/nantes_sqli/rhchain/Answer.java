@@ -3,7 +3,12 @@ package nantes_sqli.rhchain;
 import java.io.Serializable;
 
 /**
- * Created by alb on 15/11/16.
+ * @author Created by alb on 15/11/16.
+ * @version 1.0 Class to manage available answer.
+ *
+ *          An answer is defined by : Identifier of answer (String) description (String) (will be
+ *          pass in the layout to be display) value (int): the value that will be store in the BC
+ *          nameImage(String) : the name af the drawable to be display in layout
  */
 
 public class Answer implements Serializable {

@@ -8,4 +8,5 @@
     <dimen name="space_btn">20dp</dimen>
     <dimen name="marge">1dp</dimen>
     <dimen name="btnWidth">100dip</dimen>
+    <dimen name="bar_chart">24sp</dimen>
 </resources>

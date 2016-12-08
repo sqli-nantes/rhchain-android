@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_connect, btn_account;
     Survey survey = new Survey();
-    User user;
+    User user = new User();
 
 
     @Override
@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_connect = (Button) findViewById(R.id.btn_connect);
         setSurvey(survey);
         btn_connect.setOnClickListener(this);
+
+        user.setIdentity("toto");
 
 
 /*      Utilisable lors de la mise en prod de la fonction reaction compte
@@ -90,17 +92,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public Survey setSurvey(Survey survey) {
 
         Log.v("méthode", "importation du survey");
+        survey.setId("Questionnaire_RH_demo");
+
         Answer satisfied = new Answer();
         Answer verySatisfied = new Answer();
         Answer unsatisfied = new Answer();
 
         ArrayList<Answer> answers = new ArrayList<>();
 
-        Question question1 = new Question();
-        Question question2 = new Question();
-        Question question3 = new Question();
-
-        ArrayList<Question> questions = new ArrayList<>();
 
         unsatisfied.setId("1");
         unsatisfied.setDescription(String.valueOf(R.string.descr_btn_unsatisfied));
@@ -119,6 +118,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         answers.add(satisfied);
         answers.add(verySatisfied);
 
+        Question question1 = new Question();
+        Question question2 = new Question();
+        Question question3 = new Question();
+
+        ArrayList<Question> questions = new ArrayList<>();
         question1.setId("1");
         question1.setTextQuestion(String.valueOf(R.string.txt_question1));
         question1.setAnswers(answers);

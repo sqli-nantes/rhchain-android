@@ -3,11 +3,14 @@ package nantes_sqli.rhchain;
 /**
  * Created by alb on 22/11/16.
  *
- * Class recording the value of the answer's chosen questionId : Id of question  (question.id) value
- * : value for chosen answer (answer.value)
+ * Class recording the value of the answer's chosen, will be store in BC
+ *
+ * parameters: questionId (String) Identifier of question (question.id) value (int) The value of the
+ * chosen answer (answer.value)
  */
 
 public class Vote {
+
     String questionId;
     int value;
 
@@ -26,4 +29,6 @@ public class Vote {
     public void setValue(int value) {
         this.value = value;
     }
+
+
 }

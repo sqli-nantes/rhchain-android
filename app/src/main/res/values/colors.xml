@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorSqli">#996515</color>
-    <color name="goldentext">#ad721a</color>
+    <color name="colorPrimary">#009EE0</color>
+    <color name="colorPrimaryDark">#006288</color>
+    <color name="colorAccent">#DA181A</color>
+    <color name="colorSqli">#A97024</color>
+    <color name="goldentext">#A97024</color>
     <color name="greencomplementarygold">#9ead1a</color>
     <color name="black">#000</color>
     <color name="white">#fff</color>
     <color name="unsatisfied">#f00</color>
     <color name="neutral">#ffa0</color>
     <color name="satisfied">#0f0</color>
-    <color name="background_menu">#aaaaaa</color>
-    <color name="darkgrey">#222</color>
-    <color name="lessdarkgrey">#444444</color>
-    <color name="middlegrey">#888888</color>
-    <color name="test1">#13a69f</color>
-    <color name="test2">#fd6a21</color>
-    <color name="test3">#81fe35</color>
+    <color name="background_menu">#8C918B</color>
+    <color name="darkgrey">#2C2D2B</color>
+    <color name="lessdarkgrey">#454349</color>
+    <color name="middlegrey">#454349</color>
     <color name="text_color">#aaaaaa</color>
     <color name="text_choice_color">#dddddd</color>
-    <color name="text_hint_color">#999999</color>
+    <color name="text_hint_color">#999</color>
+
+    <!-- backup SQLI yellow-->
+    <color name="yellow_ligth">#F7EDB9</color>
+    <color name="yellow">#F7E18D</color>
+
+    <!--colors for test-->
+    <color name="test1">#13a69f</color>
+    <color name="test2">#A61364</color>
+    <color name="test3">#1BA613</color>
 </resources>
