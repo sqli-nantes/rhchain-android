@@ -42,10 +42,7 @@ public class ResultsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         chartQ1 = (BarChart) view.findViewById(R.id.chartQ1);
-        //        chart.setDescription("Q1");
-//        chart.setOnChartValueSelectedListener((OnChartValueSelectedListener) viewGroup);
-//        Log.d("debbug", "onCreateView: chart");
-//        chart.getDescription().setEnabled(false);
+
 
         chartQ2 = (HorizontalBarChart) view.findViewById(R.id.chartQ2);
 
@@ -59,7 +56,8 @@ public class ResultsFragment extends Fragment {
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-//        Résultat pour les 3 questions du sondage.
+//Résultat pour les 3 questions du sondage.
+
         ArrayList<Integer> nbVoteForQuestion1 = new ArrayList<Integer>();
         nbVoteForQuestion1.addAll(Arrays.asList(2, 5, 3));
 
@@ -67,13 +65,12 @@ public class ResultsFragment extends Fragment {
         nbVoteForQuestion2.addAll(Arrays.asList(1, 3, 6));
 
         int[] nbVoteForQuestion3 = {8, 0, 2};
-
         BarData barData = new BarData();
-//        La fonction de récupération des pourcentage est à créer
+
+
+//La fonction de récupération des pourcentage est à créer
 
         List<BarEntry> entries = new ArrayList<BarEntry>();
-
-
         colors.add(R.color.unsatisfied);
         colors.add(R.color.neutral);
         colors.add(R.color.satisfied);
@@ -94,7 +91,9 @@ public class ResultsFragment extends Fragment {
      *               been declare in @color
      * @return objet type bardata setted to be display by BarChart object
      */
-    //    Prepare date for classic BarChart
+
+//Prepare date for classic BarChart
+
     private BarData createBarChartObject(ArrayList<Integer> values, ArrayList<Integer> colors) {
 
         List<BarEntry> entries = new ArrayList<BarEntry>();
@@ -102,10 +101,6 @@ public class ResultsFragment extends Fragment {
         for (int i = 0; i < values.size(); i++) {
             entries.add(new BarEntry(((float) i), (float) values.get(i)));
         }
-
-//        for (int i =0; i<values.size() ; i++) {
-//            entries.add(new BarEntry(values.get(i) ,i+1  ));
-//        }
 
         BarDataSet dataSet = new BarDataSet(entries, "");
 
@@ -126,14 +121,13 @@ public class ResultsFragment extends Fragment {
      *               been declare in @color
      * @return objet type bardata setted to be display by stacked BarChart object
      */
-    //    For Stacked BarChart
+
+//For Stacked BarChart
+
     private BarData createBarChartObjectStacked(ArrayList<Integer> values, ArrayList<Integer> colors) {
 
         List<BarEntry> entries = new ArrayList<BarEntry>();
-//        for (i =0; i<values.size() ; i++) {
-//            entries.add(new BarEntry(i+1 , values.get(i)));
-//
-//  }
+
         float[] valuesFloat = convertIntToFloat(values);
         entries.add(new BarEntry(1f, valuesFloat));
         entries.add(new BarEntry(2f, valuesFloat));
@@ -155,6 +149,7 @@ public class ResultsFragment extends Fragment {
      * @param arr list of Integer
      * @return array of float
      */
+
     public float[] convertIntToFloat(List<Integer> arr) {
         float[] arrResult = new float[arr.size()];
         for (int i = 0; i < arr.size(); i++) {
@@ -162,6 +157,7 @@ public class ResultsFragment extends Fragment {
         }
         return arrResult;
     }
+
 // TODO Import des Results
 // TODO Extraction vote user
 // TODO Calcul pourcentage réponse pour chaque question

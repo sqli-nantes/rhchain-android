@@ -24,6 +24,12 @@ android {
     }
 }
 
+repositories{
+    mavenCentral()
+    maven{
+        url "https://repository-achartengine.forge.cloudbees.com/snapshot"
+    }
+}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -31,4 +37,5 @@ dependencies {
     compile 'com.android.support:support-v4:24.2.1'
     testCompile 'junit:junit:4.12'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+    compile 'org.achartengine:achartengine:1.2.0'
 }
