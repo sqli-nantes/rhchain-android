@@ -1,51 +1,115 @@
 package nantes_sqli.rhchain;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 
 public class ResultsFragment extends Fragment {
 
-    private BarChart chartQ1;
-    private HorizontalBarChart chartQ2;
 
     public ResultsFragment() {
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_results, viewGroup, false);
-        return view;
+
+        GraphView graph1 = (GraphView) view.findViewById(R.id.graph1);
+        BarGraphSeries<DataPoint> series1 = new BarGraphSeries<>(new DataPoint[] {
+
+            new DataPoint(0, 1),
+            new DataPoint(1, 5),
+            new DataPoint(2, 3),
+            new DataPoint(3, 2),
+            new DataPoint(4, 6)
+        });
+        graph1.addSeries(series1);
+
+// styling
+        series1.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+            @Override
+            public int get(DataPoint data) {
+                return Color.rgb((int) data.getX()*255/6, (int) Math.abs(data.getY()*255/6), 650);
+            }
+        });
+
+        series1.setSpacing(10);
+
+// draw values on top
+        series1.setDrawValuesOnTop(true);
+        series1.setValuesOnTopColor(Color.RED);
+//series.setValuesOnTopSize(50);
+
+
+        GraphView graph2 = (GraphView) view.findViewById(R.id.graph2);
+        BarGraphSeries<DataPoint> series2 = new BarGraphSeries<>(new DataPoint[] {
+            new DataPoint(0, 1),
+            new DataPoint(1, 6),
+            new DataPoint(2, 2),
+            new DataPoint(3, 3),
+            new DataPoint(4, 5)
+        });
+        graph2.addSeries(series2);
+
+// styling
+        series2.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+            @Override
+            public int get(DataPoint data) {
+                return Color.rgb((int) data.getX()*255/6, (int) Math.abs(data.getY()*255/6), 200);
+            }
+        });
+
+        series2.setSpacing(10);
+
+// draw values on top
+        series2.setDrawValuesOnTop(true);
+        series2.setValuesOnTopColor(Color.RED);
+//series.setValuesOnTopSize(50);
+
+        GraphView graph3 = (GraphView) view.findViewById(R.id.graph3);
+        BarGraphSeries<DataPoint> series3 = new BarGraphSeries<>(new DataPoint[] {
+            new DataPoint(0, 6),
+            new DataPoint(1, 1),
+            new DataPoint(2, 5),
+            new DataPoint(3, 2),
+            new DataPoint(4, 3)
+        });
+        graph3.addSeries(series3);
+
+// styling
+        series3.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+            @Override
+            public int get(DataPoint data) {
+                return Color.rgb((int) data.getX()*255/6, (int) Math.abs(data.getY()*255/6), 500);
+            }
+        });
+
+        series3.setSpacing(10);
+
+// draw values on top
+        series3.setDrawValuesOnTop(true);
+        series3.setValuesOnTopColor(Color.RED);
+
+//series.setValuesOnTopSize(50);
+
+    return view;
     }
 
 
+/*
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         chartQ1 = (BarChart) view.findViewById(R.id.chartQ1);
-        //        chart.setDescription("Q1");
-//        chart.setOnChartValueSelectedListener((OnChartValueSelectedListener) viewGroup);
-//        Log.d("debbug", "onCreateView: chart");
-//        chart.getDescription().setEnabled(false);
 
         chartQ2 = (HorizontalBarChart) view.findViewById(R.id.chartQ2);
 
@@ -54,12 +118,12 @@ public class ResultsFragment extends Fragment {
 
     /**
      * For demo only
-     */
+
     private void mockResultSurveyDemo() {
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-//        Résultat pour les 3 questions du sondage.
+//Résultat pour les 3 questions du sondage.
         ArrayList<Integer> nbVoteForQuestion1 = new ArrayList<Integer>();
         nbVoteForQuestion1.addAll(Arrays.asList(2, 5, 3));
 
@@ -69,7 +133,7 @@ public class ResultsFragment extends Fragment {
         int[] nbVoteForQuestion3 = {8, 0, 2};
 
         BarData barData = new BarData();
-//        La fonction de récupération des pourcentage est à créer
+//La fonction de récupération des pourcentage est à créer
 
         List<BarEntry> entries = new ArrayList<BarEntry>();
 
@@ -86,15 +150,7 @@ public class ResultsFragment extends Fragment {
 
     }
 
-    /**
-     * creation of the dataset use by barchart
-     *
-     * @param values ArrayList<integer> values to be display on the barchart
-     * @param colors ArrayList<integer> of identifier of the colors to be displayed. The color must
-     *               been declare in @color
-     * @return objet type bardata setted to be display by BarChart object
-     */
-    //    Prepare date for classic BarChart
+//Prepare date for classic BarChart
     private BarData createBarChartObject(ArrayList<Integer> values, ArrayList<Integer> colors) {
 
         List<BarEntry> entries = new ArrayList<BarEntry>();
@@ -102,10 +158,6 @@ public class ResultsFragment extends Fragment {
         for (int i = 0; i < values.size(); i++) {
             entries.add(new BarEntry(((float) i), (float) values.get(i)));
         }
-
-//        for (int i =0; i<values.size() ; i++) {
-//            entries.add(new BarEntry(values.get(i) ,i+1  ));
-//        }
 
         BarDataSet dataSet = new BarDataSet(entries, "");
 
@@ -118,22 +170,11 @@ public class ResultsFragment extends Fragment {
         return barData;
     }
 
-    /**
-     * creation of the dataset use by barchart stacked
-     *
-     * @param values ArrayList<integer> values to be display on the barchart
-     * @param colors ArrayList<integer> of identifier of the colors to be displayed. The color must
-     *               been declare in @color
-     * @return objet type bardata setted to be display by stacked BarChart object
-     */
-    //    For Stacked BarChart
+//For Stacked BarChart
     private BarData createBarChartObjectStacked(ArrayList<Integer> values, ArrayList<Integer> colors) {
 
         List<BarEntry> entries = new ArrayList<BarEntry>();
-//        for (i =0; i<values.size() ; i++) {
-//            entries.add(new BarEntry(i+1 , values.get(i)));
-//
-//  }
+
         float[] valuesFloat = convertIntToFloat(values);
         entries.add(new BarEntry(1f, valuesFloat));
         entries.add(new BarEntry(2f, valuesFloat));
@@ -149,12 +190,6 @@ public class ResultsFragment extends Fragment {
         return barData;
     }
 
-    /**
-     * convert a list of integer to an array of float
-     *
-     * @param arr list of Integer
-     * @return array of float
-     */
     public float[] convertIntToFloat(List<Integer> arr) {
         float[] arrResult = new float[arr.size()];
         for (int i = 0; i < arr.size(); i++) {
@@ -162,6 +197,9 @@ public class ResultsFragment extends Fragment {
         }
         return arrResult;
     }
+*/
+
+
 // TODO Import des Results
 // TODO Extraction vote user
 // TODO Calcul pourcentage réponse pour chaque question
