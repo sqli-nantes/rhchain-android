@@ -1,6 +1,8 @@
 package nantes_sqli.rhchain;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.List;
  * Questions (Question) => specific class to set question's label and available answer
  */
 
-public class Survey implements Serializable {
+public class Survey implements Parcelable {
     String id;
     String label;
     User userOwner;
@@ -98,4 +100,43 @@ public class Survey implements Serializable {
         int nbQuestion = questions.size();
         return nbQuestion;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.label);
+        dest.writeSerializable(this.userOwner);
+        dest.writeLong(this.dateStart != null ? this.dateStart.getTime() : -1);
+        dest.writeLong(this.dateFinish != null ? this.dateFinish.getTime() : -1);
+        dest.writeList(this.questions);
+    }
+
+    protected Survey(Parcel in) {
+        this.id = in.readString();
+        this.label = in.readString();
+        this.userOwner = (User) in.readSerializable();
+        long tmpDateStart = in.readLong();
+        this.dateStart = tmpDateStart == -1 ? null : new Date(tmpDateStart);
+        long tmpDateFinish = in.readLong();
+        this.dateFinish = tmpDateFinish == -1 ? null : new Date(tmpDateFinish);
+        this.questions = new ArrayList<Question>();
+        in.readList(this.questions, Question.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Survey> CREATOR = new Parcelable.Creator<Survey>() {
+        @Override
+        public Survey createFromParcel(Parcel source) {
+            return new Survey(source);
+        }
+
+        @Override
+        public Survey[] newArray(int size) {
+            return new Survey[size];
+        }
+    };
 }

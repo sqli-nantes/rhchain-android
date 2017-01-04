@@ -5,10 +5,11 @@
     <string name="btn_submit">soumettre</string>
     <string name="btn_ok">OK</string>
     <string name="ttl_add_user">Creation de votre compte</string>
+    <string name="txt_questiontest"><![CDATA[ceci est un test !]]></string>
     <string name="txt_question1"><![CDATA[Êtes-vous satisfait(e) de l\'ambiance de travail au sein de l\'agence ?]]></string>
     <string name="txt_question2"><![CDATA[Êtes-vous satisfait(e) de votre mission actuelle ?]]></string>
     <string name="txt_question3"><![CDATA[Êtes-vous satisfait(e) des informations qui vous sont transmises concernant la situation et les perspectives de l\'agence et du groupe ?]]></string>
-    <string name="descr_btn_unsatisfied">insatisfait</string>
+    <string name="descr_btn_unsatisfied">insatisfait?</string>
     <string name="descr_btn_satisfied">très satisfait</string>
     <string name="descr_btn_neutral">satisfait</string>
     <string name="txt_name">Name</string>

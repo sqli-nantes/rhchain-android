@@ -20,10 +20,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Survey survey = new Survey();
     User user = new User();
 
+    Bundle savedInstanceState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.savedInstanceState =savedInstanceState;
         setContentView(R.layout.activity_main);
 
 
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_connect: {
 
                 Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
-
+                intent.putExtra("survey",survey);
 /*                doit récupérer les informations users
                 user.setIdentity();
                 doit vérifier que le password entré est identique aux password enregistrer par la BC
@@ -101,16 +103,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ArrayList<Answer> answers = new ArrayList<>();
 
 
+        Log.d("chaine de caractere", "setSurvey: " + getResources().getString(R.string.descr_btn_unsatisfied) + " ou "+ R.string.txt_questiontest + String.valueOf(R.string.ttl_add_user));
+
         unsatisfied.setId("1");
-        unsatisfied.setDescription(String.valueOf(R.string.descr_btn_unsatisfied));
+        unsatisfied.setDescription(getResources().getString(R.string.descr_btn_unsatisfied));
         unsatisfied.setValue(1);
         unsatisfied.setNameImage(String.valueOf(R.drawable.ic_sentiment_dissatisfied_black_24dp));
         satisfied.setId("2");
-        satisfied.setDescription(String.valueOf(R.string.descr_btn_neutral));
+        satisfied.setDescription(getResources().getString(R.string.descr_btn_neutral));
         satisfied.setValue(2);
         satisfied.setNameImage(String.valueOf(R.drawable.ic_sentiment_neutral_black_24dp));
         verySatisfied.setId("3");
-        verySatisfied.setDescription(String.valueOf(R.string.descr_btn_satisfied));
+        verySatisfied.setDescription(getResources().getString(R.string.descr_btn_satisfied));
         verySatisfied.setValue(1);
         verySatisfied.setNameImage(String.valueOf(R.drawable.ic_sentiment_satisfied_black_48dp));
 
@@ -124,15 +128,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ArrayList<Question> questions = new ArrayList<>();
         question1.setId("1");
-        question1.setTextQuestion(String.valueOf(R.string.txt_question1));
+        question1.setTextQuestion(getResources().getString(R.string.txt_question1));
         question1.setAnswers(answers);
 
         question2.setId("2");
-        question2.setTextQuestion(String.valueOf(R.string.txt_question2));
+        question2.setTextQuestion(getResources().getString(R.string.txt_question2));
         question2.setAnswers(answers);
 
         question3.setId("3");
-        question3.setTextQuestion(String.valueOf(R.string.txt_question3));
+        question3.setTextQuestion(getResources().getString(R.string.txt_question3));
         question3.setAnswers(answers);
 
         questions.add(question1);
@@ -140,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         questions.add(question3);
 
         survey.setId("1");
-        survey.setLabel(String.valueOf(R.string.txt_ttl_survey));
+        survey.setLabel(getResources().getString(R.string.txt_ttl_survey));
         survey.setQuestions(questions);
 
         return survey;

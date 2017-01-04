@@ -1,5 +1,8 @@
 package nantes_sqli.rhchain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
@@ -9,7 +12,7 @@ import java.util.ArrayList;
  * answered Vote, containing array per questions id's question and answer's value
  */
 
-public class Results {
+public class Results implements Parcelable {
     /**
      * the user who have answered
      */
@@ -23,6 +26,7 @@ public class Results {
      */
     Survey survey;
     Question questionId;
+    Boolean isCompleted = Boolean.FALSE;
 
     public Results(ArrayList<Vote> votes) {
         this.votes = votes;
@@ -52,10 +56,52 @@ public class Results {
         this.votes = votes;
     }
 
-//    public int nbUser() {
-//        int number;
-//        number = user.;
-//        return number;
-//    }
 
+    public int nbVote() {
+        int number = votes.size();
+        return number;
+    }
+
+    public Boolean isCompleted(){
+        if (nbVote() == survey.nbQuestion()) {
+            isCompleted = Boolean.TRUE;
+            return isCompleted;
+        }
+        return isCompleted;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeSerializable(this.user);
+        dest.writeList(this.votes);
+        dest.writeParcelable(this.survey, flags);
+        dest.writeParcelable(this.questionId, flags);
+        dest.writeValue(this.isCompleted);
+    }
+
+    protected Results(Parcel in) {
+        this.user = (User) in.readSerializable();
+        this.votes = new ArrayList<Vote>();
+        in.readList(this.votes, Vote.class.getClassLoader());
+        this.survey = in.readParcelable(Survey.class.getClassLoader());
+        this.questionId = in.readParcelable(Question.class.getClassLoader());
+        this.isCompleted = (Boolean) in.readValue(Boolean.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Results> CREATOR = new Parcelable.Creator<Results>() {
+        @Override
+        public Results createFromParcel(Parcel source) {
+            return new Results(source);
+        }
+
+        @Override
+        public Results[] newArray(int size) {
+            return new Results[size];
+        }
+    };
 }

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by alb on 22/11/16. Display the survey
@@ -21,6 +22,10 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
     private Button btn_submButton;
     private View viewRoot;
     private Dialog prog;
+    private int contentView;
+    private Survey survey;
+    private TextView textEssai;
+
 
     public SurveysFragment() {
     }
@@ -31,6 +36,8 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         setCancelable(false);
         viewRoot = inflater.inflate(R.layout.fragment_survey, container, false);
 
+//        setContentView(R.layout.fragment_survey);
+
         btn_submButton = (Button) viewRoot.findViewById(R.id.btn_submit_survey);
 
         btn_submButton.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +46,11 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
                 AlertDialog(savedInstanceState);
             }
         });
+
+        survey = savedInstanceState.getParcelable("survey");
+        textEssai = (TextView) viewRoot.findViewById(R.id.txtQ1);
+        textEssai.setText(survey.getQuestion(1).getTextQuestion());
+
         return viewRoot;
     }
 
@@ -94,5 +106,13 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         return dialog;
     }
 
+//    public void setContentView(int contentView) {
+//        TextView textQuestion = new TextView();
+//        this.contentView = contentView;
+//
+//        textQuestion.findViewById(R.id.txtQ1);
+//        textQuestion.setText(survey.getQuestion(1).getTextQuestion());
+//
+//    }
 }
 

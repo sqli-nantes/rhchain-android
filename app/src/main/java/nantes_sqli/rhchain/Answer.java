@@ -1,6 +1,7 @@
 package nantes_sqli.rhchain;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * @author Created by alb on 15/11/16.
@@ -11,7 +12,7 @@ import java.io.Serializable;
  *          nameImage(String) : the name af the drawable to be display in layout
  */
 
-public class Answer implements Serializable {
+public class Answer implements Parcelable {
     String id;
     String description;
     int value;
@@ -48,4 +49,39 @@ public class Answer implements Serializable {
     public void setNameImage(String nameImage) {
         this.nameImage = nameImage;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.description);
+        dest.writeInt(this.value);
+        dest.writeString(this.nameImage);
+    }
+
+    public Answer() {
+    }
+
+    protected Answer(Parcel in) {
+        this.id = in.readString();
+        this.description = in.readString();
+        this.value = in.readInt();
+        this.nameImage = in.readString();
+    }
+
+    public static final Parcelable.Creator<Answer> CREATOR = new Parcelable.Creator<Answer>() {
+        @Override
+        public Answer createFromParcel(Parcel source) {
+            return new Answer(source);
+        }
+
+        @Override
+        public Answer[] newArray(int size) {
+            return new Answer[size];
+        }
+    };
 }

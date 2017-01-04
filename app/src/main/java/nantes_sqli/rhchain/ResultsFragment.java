@@ -100,7 +100,9 @@ public class ResultsFragment extends Fragment {
         List<BarEntry> entries = new ArrayList<BarEntry>();
 
         for (int i = 0; i < values.size(); i++) {
-            entries.add(new BarEntry(((float) i), (float) values.get(i)));
+            float temp = (float) i+1;
+            Log.d("value", "createBarChartObject:" + temp);
+            entries.add(new BarEntry(temp, (float) values.get(i)));
         }
 
 //        for (int i =0; i<values.size() ; i++) {
@@ -149,6 +151,7 @@ public class ResultsFragment extends Fragment {
         return barData;
     }
 
+// TODO Import des Results
     /**
      * convert a list of integer to an array of float
      *
@@ -162,7 +165,6 @@ public class ResultsFragment extends Fragment {
         }
         return arrResult;
     }
-// TODO Import des Results
 // TODO Extraction vote user
 // TODO Calcul pourcentage réponse pour chaque question
 // TODO Affichage icone choix user et camembert

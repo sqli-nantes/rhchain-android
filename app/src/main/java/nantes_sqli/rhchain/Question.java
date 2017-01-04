@@ -1,6 +1,8 @@
 package nantes_sqli.rhchain;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +14,7 @@ import java.util.ArrayList;
  * available answers (ArrayList<Answer>)
  */
 
-public class Question implements Serializable {
+public class Question implements Parcelable {
     String id;
     /**
      * Text to be displayed as question
@@ -70,4 +72,44 @@ public class Question implements Serializable {
     public void addAnswer(Answer answer) {
         this.answers.add(answer);
     }
+
+    /**
+     * compute the number of answers display in the survey
+     * @return nbAnswer (int)
+     */
+    public int nbAnswer() {
+        int nbAnswer = answers.size();
+        return nbAnswer;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.textQuestion);
+        dest.writeList(this.answers);
+    }
+
+    protected Question(Parcel in) {
+        this.id = in.readString();
+        this.textQuestion = in.readString();
+        this.answers = new ArrayList<Answer>();
+        in.readList(this.answers, Answer.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
+        @Override
+        public Question createFromParcel(Parcel source) {
+            return new Question(source);
+        }
+
+        @Override
+        public Question[] newArray(int size) {
+            return new Question[size];
+        }
+    };
 }
