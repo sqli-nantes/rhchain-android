@@ -45,13 +45,13 @@ public class ResultsFragment extends Fragment {
         mockResultSurveyDemo();
     }
 
-                     /**
-                      * For demo only
-                      *
-                      */
+    /**
+     * For demo only
+     *
+     */
 
     private void mockResultSurveyDemo() {
-       ArrayList<Integer> colors = new ArrayList<Integer>();
+        ArrayList<Integer> colors = new ArrayList<Integer>();
 
 //Résultat pour les 3 questions du sondage.
 
