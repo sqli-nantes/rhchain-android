@@ -59,11 +59,10 @@ public class ResultsFragment extends Fragment {
         nbVoteForQuestion1.addAll(Arrays.asList(3,4,6));
 
         ArrayList<Integer> nbVoteForQuestion2 = new ArrayList<Integer>();
-        nbVoteForQuestion2.addAll(Arrays.asList(3,4,6));
+        nbVoteForQuestion2.addAll(Arrays.asList(1,1,2));
 
         ArrayList<Integer> nbVoteForQuestion3 =new ArrayList<Integer>();
         nbVoteForQuestion3.addAll(Arrays.asList(2,6,7));
-
 
         BarData barData = new BarData();
 
@@ -134,13 +133,13 @@ public class ResultsFragment extends Fragment {
         List<BarEntry> entries = new ArrayList<BarEntry>();
 
         float[] valuesFloat = convertIntToFloat(values);
-        entries.add(new BarEntry(2f, valuesFloat));
-        entries.add(new BarEntry(2f, valuesFloat));
-        entries.add(new BarEntry(5f, valuesFloat));
+        entries.add(new BarEntry(0f, valuesFloat));
+        entries.add(new BarEntry(0f, valuesFloat));
+        entries.add(new BarEntry(0f, valuesFloat));
 
-        BarDataSet dataSet = new BarDataSet(entries, "y'a quelque chose qui passe?");
+        BarDataSet dataSet = new BarDataSet(entries, " ");
 
-        for (int i = 0; i < colors.size(); i++) {
+        for (int i = 5; i < colors.size(); i++) {
             dataSet.addColor(colors.get(i));
         }
 
