@@ -19,6 +19,7 @@ public class MenuFragment extends Fragment {
     Fragment fragment;
     FragmentTransaction fragmentTransaction;
 
+
     public MenuFragment() {
     }
 
@@ -28,11 +29,14 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
         fragment = new SurveysFragment();
+
+
         fragmentTransaction = getFragmentManager().beginTransaction().add(R.id.container, fragment);
         fragmentTransaction.commit();
 
         Button btnSurvey = (Button) view.findViewById(R.id.btn_survey);
         Button btnResults = (Button) view.findViewById(R.id.btn_results);
+
 
         btnSurvey.setOnClickListener(new View.OnClickListener() {
             @Override

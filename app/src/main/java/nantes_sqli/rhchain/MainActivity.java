@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ArrayList<Question> questions = new ArrayList<>();
         question1.setId("1");
+//        question1.setTextQuestion(getResources().getString(R.string.txt_question1));
         question1.setTextQuestion(getResources().getString(R.string.txt_question1));
         question1.setAnswers(answers);
 

@@ -10,11 +10,13 @@ import java.util.List;
 /**
  * Created by alb on 15/11/16.
  * <p>
- * Manage survey Composante of a single survey
+ * Manage survey component of a single survey
  * <p>
- * Same survey could be replay at different time (format: Date), use timeStamp to differenciate. Survey belong to one
- * owner (format: User) -> the admin could display has many question as necessary
- *
+ * Same survey could be replay at different time (format: Date), use timeStamp to differentiate. Survey belong to one
+ * owner (format: User)
+ * <p>
+ * The survey is set to have 3 questions could be answer by unsatisfied, neutral or satisfied
+ * <p>
  * parameters : Identifier of survey (String); Label (String); Starting and ending date (Date);
  * Questions (Question) => specific class to set question's label and available answer
  */

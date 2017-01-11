@@ -22,21 +22,31 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
     private Button btn_submButton;
     private View viewRoot;
     private Dialog prog;
-    private int contentView;
     private Survey survey;
-    private TextView textEssai;
+
+    private TextView question1;
+    private TextView question2;
+    private TextView question3;
 
 
     public SurveysFragment() {
     }
 
+    public void onCreate(Bundle bundle){
+        super.onCreate(bundle);
+
+        SurveyActivity surveyActivity = (SurveyActivity) getActivity();
+        survey = surveyActivity.getSurvey();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         setCancelable(false);
         viewRoot = inflater.inflate(R.layout.fragment_survey, container, false);
 
 //        setContentView(R.layout.fragment_survey);
+        surveyImport();
 
         btn_submButton = (Button) viewRoot.findViewById(R.id.btn_submit_survey);
 
@@ -47,9 +57,6 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
             }
         });
 
-        survey = savedInstanceState.getParcelable("survey");
-        textEssai = (TextView) viewRoot.findViewById(R.id.txtQ1);
-        textEssai.setText(survey.getQuestion(1).getTextQuestion());
 
         return viewRoot;
     }
@@ -114,5 +121,16 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
 //        textQuestion.setText(survey.getQuestion(1).getTextQuestion());
 //
 //    }
+
+    private void surveyImport() {
+        question1 = (TextView) viewRoot.findViewById(R.id.txtQ1);
+        question1.setText(survey.getQuestion(0).getTextQuestion());
+
+        question2 = (TextView) viewRoot.findViewById(R.id.txtQ2);
+        question2.setText(survey.getQuestion(1).getTextQuestion());
+
+        question3 = (TextView) viewRoot.findViewById(R.id.txtQ3);
+        question3.setText(survey.getQuestion(2).getTextQuestion());
+    }
 }
 
