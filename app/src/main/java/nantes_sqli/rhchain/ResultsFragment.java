@@ -1,8 +1,11 @@
 package nantes_sqli.rhchain;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -109,11 +112,13 @@ public class ResultsFragment extends Fragment {
 //            entries.add(new BarEntry(values.get(i) ,i+1  ));
 //        }
 
+
         BarDataSet dataSet = new BarDataSet(entries, "");
 
         for (int i = 0; i < colors.size(); i++) {
             dataSet.addColor(colors.get(i));
         }
+
 
         BarData barData = new BarData(dataSet);
 

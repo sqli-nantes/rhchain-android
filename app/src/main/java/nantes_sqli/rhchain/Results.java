@@ -25,7 +25,7 @@ public class Results implements Parcelable {
      * survey from which the results are display
      */
     Survey survey;
-    Question questionId;
+
     Boolean isCompleted = Boolean.FALSE;
 
     public Results(ArrayList<Vote> votes) {
@@ -80,7 +80,6 @@ public class Results implements Parcelable {
         dest.writeSerializable(this.user);
         dest.writeList(this.votes);
         dest.writeParcelable(this.survey, flags);
-        dest.writeParcelable(this.questionId, flags);
         dest.writeValue(this.isCompleted);
     }
 
@@ -89,7 +88,6 @@ public class Results implements Parcelable {
         this.votes = new ArrayList<Vote>();
         in.readList(this.votes, Vote.class.getClassLoader());
         this.survey = in.readParcelable(Survey.class.getClassLoader());
-        this.questionId = in.readParcelable(Question.class.getClassLoader());
         this.isCompleted = (Boolean) in.readValue(Boolean.class.getClassLoader());
     }
 

@@ -7,30 +7,28 @@ import java.util.ArrayList;
  */
 public class CountVote {
     String questionId ;
-    ArrayList<Integer> AnswersCount;
-    int SumAnswers;
+    ArrayList<Integer> answersCount;
+    int sumAnswers;
 
     public CountVote() {
     }
 
-    public String getQuestionId() {
+    public String getQuestionId(String label) {
         return questionId;
     }
 
     public ArrayList<Integer> getAnswersCount() {
-        return AnswersCount;
+        return answersCount;
     }
 
     public int getSumAnswers() {
-        SumAnswers = sum(AnswersCount);
-        return SumAnswers;
+        sumAnswers = sum(answersCount);
+        return sumAnswers;
     }
 
     private int sum(ArrayList<Integer> list){
         int sum = 0;
-//        for (int i = 0; i<3; i++ ){
-//            sum = sum + list.get(i);
-//        }
+
         for (int nb : list) {
             sum = sum + nb;
         }

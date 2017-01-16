@@ -12,12 +12,13 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 /**
  * Created by alb on 21/11/16. Classe pour gérer les changements de bouton lorsque l'utilisateur les
- * sélectionne Non utilisé, ni teste!
+ * sélectionne Non utilisé, ni testé!
  */
 public class ButtonAdapter extends BaseAdapter {
 //
@@ -93,7 +94,7 @@ public class ButtonAdapter extends BaseAdapter {
             super.onCreate(savedInstanceState);
             super.setContentView(R.layout.activity_survey);
 
-            List fragments = new Vector();
+            List<Fragment> fragments = new ArrayList<Fragment>();
 
             fragments.add(Fragment.instantiate(this, ResultsFragment.class.getName()));
             fragments.add(Fragment.instantiate(this, SurveyActivity.class.getName()));
