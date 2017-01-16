@@ -48,11 +48,11 @@
             android:id="@+id/btnDsQ1"
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:visibility="visible"
             android:contentDescription="@string/descr_btn_unsatisfied"
             android:textAlignment="center"
             android:src="@drawable/ic_dissatisfied_neutral"
-            android:minWidth="@dimen/btnWidth" />
+            android:minWidth="@dimen/btnWidth"
+            android:contextClickable="true" />
 
         <!-- à rajouter la méthode android:onClick="onClick (laméthodeàécrire)"  pour enregistrer la valeur sélectionnés      -->
 
