@@ -1,22 +1,7 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/resultFragment"
-    android:layout_width="match_parent"
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-
-    tools:context=".ButtonAdapter$ResultsFragment">
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <LinearLayout
         android:orientation="vertical"
@@ -36,33 +21,11 @@
             android:contentDescription="@string/txt_question1"
             style="@style/txt_question"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/chartQ1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_dissatisfied_clicked"
-                android:id="@+id/ResultQ1"
-                android:layout_weight="1"
-                tools:ignore="ContentDescription"
-                android:contentDescription="@string/descr_btn_unsatisfied"/>
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/chartQ1"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_action_pie_chart"
-                android:id="@+id/pie1"
-                android:contentDescription="@string/descr_pie_chart"/>
-        </LinearLayout>
 
         <TextView
             android:text="@string/txt_question2"
@@ -73,35 +36,11 @@
             android:contentDescription="@string/txt_question2"
             style="@style/txt_question"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/chartQ2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_neutral_clicked"
-                android:id="@+id/ResultQ2"
-                android:layout_weight="1"
-                tools:ignore="ContentDescription"
-                android:contentDescription="@string/descr_btn_neutral"/>
-
-            <com.github.mikephil.charting.charts.HorizontalBarChart
-                android:id="@+id/chartQ2"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"/>
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_action_pie_chart"
-                android:id="@+id/pie2"
-                android:contentDescription="@string/descr_pie_chart"/>
-
-        </LinearLayout>
 
         <TextView
             android:text="@string/txt_question3"
@@ -112,31 +51,11 @@
             android:contentDescription="@string/txt_question3"
             style="@style/txt_question"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/chartQ3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_satisfied_clicked"
-                android:id="@+id/ResultQ3"
-                android:layout_weight="1"
-                tools:ignore="ContentDescription"
-                android:contentDescription="@string/descr_btn_satisfied"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_action_pie_chart"
-                android:id="@+id/pie3"
-                android:contentDescription="@string/descr_pie_chart"/>
-
-        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
-    </ScrollView>
 
-</LinearLayout>
+</ScrollView>
