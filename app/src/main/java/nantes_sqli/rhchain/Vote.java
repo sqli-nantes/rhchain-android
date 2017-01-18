@@ -9,7 +9,8 @@ package nantes_sqli.rhchain;
  * chosen answer (answer.value)
  */
 
-public class Vote {
+public class
+Vote {
 
     String questionId;
     int value;

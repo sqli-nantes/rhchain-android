@@ -2,6 +2,7 @@ package nantes_sqli.rhchain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class Results implements Parcelable {
     /**
      * list of votes providing the identifiers of questions and answers
      */
-    ArrayList<Vote> votes;
+//    Vote[] votes;
     /**
      * survey from which the results are display
      */
@@ -28,12 +29,12 @@ public class Results implements Parcelable {
 
     Boolean isCompleted = Boolean.FALSE;
 
-    public Results(ArrayList<Vote> votes) {
-        this.votes = votes;
-    }
+//    public Results(Vote[] votes) {
+//        this.votes = votes;
+//    }
 
     public Results() {
-        this.votes = new ArrayList<Vote>();
+//        this.votes = new Vote[];
     }
 
     public User getUser() {
@@ -48,27 +49,33 @@ public class Results implements Parcelable {
         this.user = User.getUserById("demo");
     }
 
-    public ArrayList<Vote> getVotes() {
-        return votes;
-    }
+//    public Vote[] getVotes() {
+//        return votes;
+//    }
+//
+//    public void setVotes(Vote[] votes) {
+//        this.votes = votes;
+//    }
 
-    public void setVotes(ArrayList<Vote> votes) {
-        this.votes = votes;
-    }
 
+//    public boolean nbVote() {
+//// En construction!
+//        for (Vote singleton : votes){
+////            singleton.getValue() != -1;
+//            Log.d("Classe java Results", "nbVote: " + singleton.getValue());
+//        }
+//
+//        return true;
+//    }
 
-    public int nbVote() {
-        int number = votes.size();
-        return number;
-    }
+//    public Boolean isCompleted(){
+//        if (nbVote() == survey.nbQuestion()) {
+//            isCompleted = Boolean.TRUE;
+//            return isCompleted;
+//        }
+//        return isCompleted;
+//    }
 
-    public Boolean isCompleted(){
-        if (nbVote() == survey.nbQuestion()) {
-            isCompleted = Boolean.TRUE;
-            return isCompleted;
-        }
-        return isCompleted;
-    }
 
     @Override
     public int describeContents() {
@@ -78,20 +85,19 @@ public class Results implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeSerializable(this.user);
-        dest.writeList(this.votes);
+//        dest.writeParcelable(this.votes, flags);
         dest.writeParcelable(this.survey, flags);
         dest.writeValue(this.isCompleted);
     }
 
     protected Results(Parcel in) {
         this.user = (User) in.readSerializable();
-        this.votes = new ArrayList<Vote>();
-        in.readList(this.votes, Vote.class.getClassLoader());
+//        this.votes = in.readParcelable(Vote[].class.getClassLoader());
         this.survey = in.readParcelable(Survey.class.getClassLoader());
         this.isCompleted = (Boolean) in.readValue(Boolean.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Results> CREATOR = new Parcelable.Creator<Results>() {
+    public static final Creator<Results> CREATOR = new Creator<Results>() {
         @Override
         public Results createFromParcel(Parcel source) {
             return new Results(source);

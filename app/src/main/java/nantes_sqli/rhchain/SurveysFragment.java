@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 
 /**
@@ -26,9 +28,21 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
     private ImageButton btnDsQ1, btnNeQ1, btnSaQ1, btnDsQ2, btnNeQ2, btnSaQ2, btnDsQ3, btnNeQ3, btnSaQ3;
     private View viewRoot;
     private Dialog prog;
+    private Vote vote = new Vote();
+    private Results results = new Results();
+    private Survey survey;
+    private TextView question1, question2, question3;
+    private int questionAnsweredId;
 
     public SurveysFragment() {
 
+    }
+
+    public void onCreate(Bundle bundle){
+        super.onCreate(bundle);
+
+        SurveyActivity surveyActivity = (SurveyActivity) getActivity();
+        survey = surveyActivity.getSurvey();
     }
 
     @Override
@@ -36,6 +50,8 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setCancelable(false);
         viewRoot = inflater.inflate(R.layout.fragment_survey, container, false);
+
+        surveyImport();
 
         btn_submButton = (Button) viewRoot.findViewById(R.id.btn_submit_survey);
                                     /*
@@ -60,11 +76,14 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
             }
         });
 
+//        Gestion de l'affichage des icônes réponse.
         btnDsQ1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                disablebtn();
+                disablebtnQ1();
                 btnDsQ1.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_dissatisfied_clicked));
+
+                setVote(0);
 
             }
         });
@@ -72,8 +91,10 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         btnNeQ1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                disablebtn();
+                disablebtnQ1();
                 btnNeQ1.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_neutral_clicked));
+
+                setVote(1);
 
             }
         });
@@ -81,8 +102,12 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         btnSaQ1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                disablebtn();
+                disablebtnQ1();
                 btnSaQ1.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_satisfied_clicked));
+
+                setVote(2);
+
+                Log.d("SurveysFragment _ vote", "onClick: " + vote.getValue() + " / " + vote.getQuestionId());
 
             }
         });
@@ -95,6 +120,8 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
                 disablebtnQ2();
                 btnDsQ2.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_dissatisfied_clicked));
 
+                setVote(0);
+
             }
         });
 
@@ -104,6 +131,8 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
                 disablebtnQ2();
                 btnNeQ2.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_neutral_clicked));
 
+                setVote(1);
+
             }
         });
 
@@ -112,6 +141,8 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
             public void onClick(View v) {
                 disablebtnQ2();
                 btnSaQ2.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_satisfied_clicked));
+
+                setVote(2);
 
             }
         });
@@ -126,6 +157,8 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
                 disablebtnQ3();
                 btnDsQ3.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_dissatisfied_clicked));
 
+                setVote(0);
+
             }
         });
 
@@ -135,6 +168,8 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
                 disablebtnQ3();
                 btnNeQ3.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_neutral_clicked));
 
+                setVote(1);
+
             }
         });
 
@@ -143,6 +178,8 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
             public void onClick(View v) {
                 disablebtnQ3();
                 btnSaQ3.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_satisfied_clicked));
+
+                setVote(2);
 
             }
         });
@@ -179,23 +216,39 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         );
         ad.show();
     }
-    public void disablebtn() {
+    public void disablebtnQ1() {
+        questionAnsweredId = 0;
         btnDsQ1.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_dissatisfied));
         btnNeQ1.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_neutral));
         btnSaQ1.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_satisfied));
     }
 
     public void disablebtnQ2() {
+        questionAnsweredId = 1;
         btnDsQ2.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_dissatisfied));
         btnNeQ2.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_neutral));
         btnSaQ2.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_satisfied));
     }
 
     public void disablebtnQ3() {
+        questionAnsweredId = 2;
         btnDsQ3.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_dissatisfied));
         btnNeQ3.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_neutral));
         btnSaQ3.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_satisfied));
     }
+
+    public void checkCompleted(){
+
+    }
+
+    public void setVote(int idValue){
+        vote.setQuestionId(survey.getQuestion(questionAnsweredId).getId());
+        vote.setValue(survey.getQuestion(questionAnsweredId).getAnswer(idValue).getValue());
+
+//     Verifier si le table est null
+
+    }
+
     public void launchIntent(final Dialog prog) {
         Runnable progressRunnable = new Runnable() {
 
@@ -219,4 +272,15 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         dialog.setCancelable(false);
         return dialog;
     }
+
+    private void surveyImport() {
+        question1 = (TextView) viewRoot.findViewById(R.id.txtQ1);
+        question1.setText(survey.getQuestion(0).getTextQuestion());
+
+        question2 = (TextView) viewRoot.findViewById(R.id.txtQ2);
+        question2.setText(survey.getQuestion(1).getTextQuestion());
+
+        question3 = (TextView) viewRoot.findViewById(R.id.txtQ3);
+        question3.setText(survey.getQuestion(2).getTextQuestion());
+        }
 }

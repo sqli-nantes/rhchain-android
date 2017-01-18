@@ -107,15 +107,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         unsatisfied.setId("1");
         unsatisfied.setDescription(getResources().getString(R.string.descr_btn_unsatisfied));
-        unsatisfied.setValue(1);
+        unsatisfied.setValue(0);
         unsatisfied.setNameImage(String.valueOf(R.drawable.ic_sentiment_dissatisfied_black_24dp));
         satisfied.setId("2");
         satisfied.setDescription(getResources().getString(R.string.descr_btn_neutral));
-        satisfied.setValue(2);
+        satisfied.setValue(1);
         satisfied.setNameImage(String.valueOf(R.drawable.ic_sentiment_neutral_black_24dp));
         verySatisfied.setId("3");
         verySatisfied.setDescription(getResources().getString(R.string.descr_btn_satisfied));
-        verySatisfied.setValue(1);
+        verySatisfied.setValue(2);
         verySatisfied.setNameImage(String.valueOf(R.drawable.ic_sentiment_satisfied_black_48dp));
 
         answers.add(unsatisfied);

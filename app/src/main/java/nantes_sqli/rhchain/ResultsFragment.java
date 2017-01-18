@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -21,6 +22,8 @@ public class ResultsFragment extends Fragment {
     private BarChart chartQ1;
     private BarChart chartQ2;
     private BarChart chartQ3;
+    private Description vide = new Description() ;
+
 
     public ResultsFragment() {
     }
@@ -28,6 +31,7 @@ public class ResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_results, viewGroup, false);
+        vide.setText("");
         return view;
 
         //TODO put something
@@ -59,68 +63,32 @@ public class ResultsFragment extends Fragment {
         //Résultat pour les 3 questions du sondage.
 
         ArrayList<Integer> nbVoteForQuestion1 = new ArrayList<Integer>();
-        nbVoteForQuestion1.addAll(Arrays.asList(1,1,2));
+        nbVoteForQuestion1.addAll(Arrays.asList(3,1,7));
 
         ArrayList<Integer> nbVoteForQuestion2 = new ArrayList<Integer>();
-        nbVoteForQuestion2.addAll(Arrays.asList(1,2,3));
+        nbVoteForQuestion2.addAll(Arrays.asList(5,2,4));
 
         ArrayList<Integer> nbVoteForQuestion3 =new ArrayList<Integer>();
-        nbVoteForQuestion3.addAll(Arrays.asList(2,6,7));
+        nbVoteForQuestion3.addAll(Arrays.asList(2,6,3));
 
         BarData barData = new BarData();
 
 
-//La fonction de récupération des pourcentage est à créer
-
-//       List<BarEntry> entries = new ArrayList<BarEntry>();
-
-//       colors.add(R.color.unsatisfied);
-//       colors.add(R.color.neutral);
-//       colors.add(R.color.satisfied);
-
         barData = createBarChartObjectStacked(nbVoteForQuestion1, colors);
         chartQ1.setData(barData);
+        setBarChart(chartQ1);
 
-//        barData = createBarChartObject(nbVoteForQuestion1, colors);
-//        chartQ1.setData(barData);
+
 
         barData = createBarChartObjectStacked(nbVoteForQuestion2, colors);
         chartQ2.setData(barData);
+        setBarChart(chartQ2);
 
         barData = createBarChartObjectStacked(nbVoteForQuestion3, colors);
         chartQ3.setData(barData);
+        setBarChart(chartQ3);
 
     }
-
-    /**
-     * creation of the dataset use by barchart
-     *
-     * @param values ArrayList<integer> values to be display on the barchart
-     * @param colors ArrayList<integer> of identifier of the colors to be displayed. The color must
-     *               been declare in @color
-     * @return objet type bardata setted to be display by BarChart object
-     */
-
-//Prepare date for classic BarChart
-//    private BarData createBarChartObject(ArrayList<Integer> values, ArrayList<Integer> colors) {
-//
-//        List<BarEntry> entries = new ArrayList<BarEntry>();
-//
-//        for (int i = 0; i < values.size(); i++) {
-//            entries.add(new BarEntry(((float) i), (float) values.get(i)));
-//
-//
-//        }
-//
-//        BarDataSet dataSet = new BarDataSet(entries, "");
-//        dataSet.setColors(new int[] {R.color.unsatisfied, R.color.neutral, R.color.satisfied}, getContext());
-//
-//
-//        BarData barData = new BarData(dataSet);
-//
-//        return barData;
-//    }
-
 
     /**
      * creation of the dataset use by barchart stacked
@@ -130,7 +98,6 @@ public class ResultsFragment extends Fragment {
      *               been declare in @color
      * @return objet type bardata setted to be display by stacked BarChart object
      */
-
 
 
 //For Stacked BarChart
@@ -154,6 +121,9 @@ public class ResultsFragment extends Fragment {
         BarData barData = new BarData(dataSet);
         dataSet.setColors(new int[] {R.color.unsatisfied, R.color.neutral, R.color.satisfied}, getContext());
 
+        barData.setValueTextSize(10f);
+
+
         return barData;
     }
 
@@ -173,6 +143,25 @@ public class ResultsFragment extends Fragment {
         return arrResult;
     }
 
+    /**
+     * display a nacked barchar
+     *
+     * @param myObject barChart object
+     * @return barChart object
+     */
+    public BarChart setBarChart (BarChart myObject) {
+
+
+        myObject.setDescription(vide);
+
+        myObject.getAxisLeft().setDrawLabels(false);
+       chartQ1.getAxisRight().setDrawLabels(false);
+        myObject.getXAxis().setDrawLabels(false);
+
+        myObject.getLegend().setEnabled(false);
+
+        return myObject;
+    }
 
 //
 // TODO Import des Results
