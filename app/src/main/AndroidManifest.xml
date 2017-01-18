@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="nantes_sqli.rhchain"
-    >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="nantes_sqli.rhchain">
+
     <uses-sdk
+        android:maxSdkVersion="24"
         android:minSdkVersion="21"
-        android:targetSdkVersion="24"
-        android:maxSdkVersion="24" />
+        android:targetSdkVersion="24" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -35,6 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UserRegistration"></activity>
     </application>
 
 </manifest>

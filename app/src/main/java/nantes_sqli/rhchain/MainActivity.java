@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         user.setIdentity("toto");
 
 
-/*      Utilisable lors de la mise en prod de la fonction reaction compte
+//      Utilisable lors de la mise en prod de la fonction reaction compte
         btn_account = (Button) findViewById(R.id.btn_account);
         btn_account.setOnClickListener(this);
-*/
+
 
     }
 
@@ -63,13 +63,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             }
-/*            case R.id.btn_account: {
+            case R.id.btn_account: {
                 Log.v("étape","choix de la création");
-                Intent intent = new Intent(this, CreateUserActivity.class);
+                Intent intent = new Intent(this, UserRegistration.class);
                 startActivity(intent);
                 break;
             }
- */
+
             default:
                 break;
 
