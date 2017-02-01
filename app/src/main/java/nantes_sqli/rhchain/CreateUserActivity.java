@@ -18,6 +18,8 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
 
     EditText userId;
     User user = new User();
+    Bouchonnage demoBouchon = new Bouchonnage();
+    Survey survey = new Survey();
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
@@ -34,6 +36,8 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         SetUser();
         Intent intent = new Intent(this, SurveyActivity.class);
         intent.putExtra("User", user);
+        survey = demoBouchon.setDemoSurvey();
+        intent.putExtra("survey", survey);
         startActivity(intent);
     }
 
