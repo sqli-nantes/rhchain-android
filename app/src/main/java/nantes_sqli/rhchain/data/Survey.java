@@ -1,4 +1,4 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import nantes_sqli.rhchain.Question;
 
 /**
  * Created by alb on 15/11/16.

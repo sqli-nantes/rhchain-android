@@ -1,4 +1,4 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,10 +13,29 @@ import android.os.Parcelable;
  */
 
 public class Answer implements Parcelable {
-    String id;
-    String description;
-    int value;
-    String nameImage;
+
+    private String id;
+    private String description;
+    private int value;
+
+    private String nameImage;
+    private String nameImageSelected;
+
+    // Constructeurs
+    public Answer(String id, String description, int value, int nameImage,int nameImageSelected) {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+        this.nameImage = String.valueOf(nameImage);
+        this.nameImageSelected = String.valueOf(nameImageSelected);
+    }
+
+    protected Answer(Parcel in) {
+        this.id = in.readString();
+        this.description = in.readString();
+        this.value = in.readInt();
+        this.nameImage = in.readString();
+    }
 
     public String getId() {
         return id;
@@ -63,15 +82,7 @@ public class Answer implements Parcelable {
         dest.writeString(this.nameImage);
     }
 
-    public Answer() {
-    }
 
-    protected Answer(Parcel in) {
-        this.id = in.readString();
-        this.description = in.readString();
-        this.value = in.readInt();
-        this.nameImage = in.readString();
-    }
 
     public static final Parcelable.Creator<Answer> CREATOR = new Parcelable.Creator<Answer>() {
         @Override

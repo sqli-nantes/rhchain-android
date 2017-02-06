@@ -1,4 +1,4 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.data;
 
 /**
  * Created by alb on 22/11/16.
@@ -9,8 +9,7 @@ package nantes_sqli.rhchain;
  * chosen answer (answer.value)
  */
 
-public class
-Vote {
+public class Vote {
 
     String questionId;
     int value;
