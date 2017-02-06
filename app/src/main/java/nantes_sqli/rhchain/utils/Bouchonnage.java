@@ -5,13 +5,11 @@ import java.util.List;
 
 import android.support.v7.app.AppCompatActivity;
 
-import nantes_sqli.rhchain.BallotBox;
-import nantes_sqli.rhchain.Question;
+import nantes_sqli.rhchain.data.BallotBox;
+import nantes_sqli.rhchain.data.Question;
 import nantes_sqli.rhchain.data.Answer;
 import nantes_sqli.rhchain.data.Survey;
 import nantes_sqli.rhchain.data.User;
-import nantes_sqli.rhchain.utils.AnswersFactory;
-import nantes_sqli.rhchain.utils.AnswersType;
 
 /**
  * Created by alb on 19/01/17.

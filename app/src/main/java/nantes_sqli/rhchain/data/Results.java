@@ -1,10 +1,7 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import nantes_sqli.rhchain.data.Survey;
-import nantes_sqli.rhchain.data.User;
 
 /**
  * Created by alb on 22/11/16. Votes for a specific survey

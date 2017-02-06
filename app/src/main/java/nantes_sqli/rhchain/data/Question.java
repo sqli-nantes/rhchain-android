@@ -1,12 +1,10 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import nantes_sqli.rhchain.data.Answer;
 
 /**
  * Created by alb on 15/11/16.

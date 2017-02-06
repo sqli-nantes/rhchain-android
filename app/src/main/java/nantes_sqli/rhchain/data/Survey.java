@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import nantes_sqli.rhchain.Question;
-
 /**
  * Created by alb on 15/11/16.
  * <p>

@@ -1,6 +1,8 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.data;
 
 import java.util.ArrayList;
+
+import nantes_sqli.rhchain.utils.CountVote;
 
 /**
  * Created by alb on 10/01/17.
@@ -41,7 +43,7 @@ public class BallotBox {
     public boolean isValid() {
         isValid = false;
         for (CountVote count : countVotes){
-            int sumVote = count.sumAnswers;
+            int sumVote = count.getSumAnswers();
             if (sumVote == nbVoters) {
                 isValid = true;
             }
