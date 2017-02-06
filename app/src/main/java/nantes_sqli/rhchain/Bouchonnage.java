@@ -30,7 +30,6 @@ public class Bouchonnage extends AppCompatActivity {
 
     public static Survey setDemoSurvey() {
         Survey survey = new Survey();
-        Log.v("méthode", "importation du survey");
         survey.setId("Questionnaire_RH_demo");
 
         //Construction du type de reponse 3 choix
@@ -40,7 +39,7 @@ public class Bouchonnage extends AppCompatActivity {
         ArrayList<Question> questions = new ArrayList<>();
 
         // Construction des questions
-        for(int i=0;i<questions.size();i++) {
+        for(int i=0; i<questionsStr.length; i++) {
             Question question = new Question(String.valueOf(i), questionsStr[i], threeChoicesAnswers);
             questions.add(question);
 
