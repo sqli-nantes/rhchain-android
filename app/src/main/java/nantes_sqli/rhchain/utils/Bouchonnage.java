@@ -1,15 +1,17 @@
-package nantes_sqli.rhchain;
-
-import android.util.Log;
+package nantes_sqli.rhchain.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v7.app.AppCompatActivity;
 
+import nantes_sqli.rhchain.BallotBox;
+import nantes_sqli.rhchain.Question;
 import nantes_sqli.rhchain.data.Answer;
 import nantes_sqli.rhchain.data.Survey;
 import nantes_sqli.rhchain.data.User;
+import nantes_sqli.rhchain.utils.AnswersFactory;
+import nantes_sqli.rhchain.utils.AnswersType;
 
 /**
  * Created by alb on 19/01/17.
