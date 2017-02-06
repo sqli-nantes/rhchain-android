@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class UserRegistration extends AppCompatActivity implements View.OnClickListener {
+import nantes_sqli.rhchain.data.Survey;
+import nantes_sqli.rhchain.utils.Bouchonnage;
+
+public class UserRegistrationActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_to_surveyfrag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +26,15 @@ public class UserRegistration extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v){
         if( v == btn_to_surveyfrag ) {
-            Intent nextpage = new Intent(this, SurveyActivity.class);
-            startActivity(nextpage);
+            Survey survey = Bouchonnage.setDemoSurvey();
+            Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
+            intent.putExtra("survey",survey);
+            startActivity(intent);
+
         }
 
     }
+
 
 
 }

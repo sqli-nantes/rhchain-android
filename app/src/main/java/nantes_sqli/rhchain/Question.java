@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import nantes_sqli.rhchain.data.Answer;
 
 /**
  * Created by alb on 15/11/16.
@@ -23,15 +26,21 @@ public class Question implements Parcelable {
     /**
      * List of available Answer for the present question
      */
-    ArrayList<Answer> answers;
+    List<Answer> answers;
 
-    public Question(ArrayList<Answer> answers) {
+    public Question(List<Answer> answers) {
         this.answers = answers;
     }
 
     public Question() {
         this.answers = new ArrayList<Answer>();
 
+    }
+
+    public Question(String id, String textQuestion, List<Answer> answers) {
+        this.answers = answers;
+        this.textQuestion= textQuestion;
+        this.id = id;
     }
 
 
@@ -51,7 +60,7 @@ public class Question implements Parcelable {
         this.textQuestion = textQuestion;
     }
 
-    public ArrayList<Answer> getAnswers() {
+    public List<Answer> getAnswers() {
         return this.answers;
     }
 

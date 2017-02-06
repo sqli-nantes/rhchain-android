@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import nantes_sqli.rhchain.data.Survey;
+import nantes_sqli.rhchain.data.User;
+import nantes_sqli.rhchain.utils.Bouchonnage;
+
 /**
  * Created by alb on 14/11/16. User's account creation Use for demo mode not use, not tested
  */
@@ -16,10 +20,9 @@ import android.widget.EditText;
 public class CreateUserActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_valid;
 
-    EditText userId;
-    User user = new User();
-    Bouchonnage demoBouchon = new Bouchonnage();
-    Survey survey = new Survey();
+    private EditText userId;
+    private User user;
+    private Survey survey = new Survey();
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
@@ -33,18 +36,21 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        SetUser();
+        this.user = initUser();
+        this.survey = Bouchonnage.setDemoSurvey();
+
         Intent intent = new Intent(this, SurveyActivity.class);
         intent.putExtra("User", user);
-        survey = demoBouchon.setDemoSurvey();
         intent.putExtra("survey", survey);
         startActivity(intent);
     }
 
-    public void SetUser() {
+    public User initUser() {
+        User user = new User();
 //        user.setIdentity(String.valueOf(Log.v(String.valueOf(R.string.txt_userId), userId.getText().toString())));
         user.setIdentity(String.valueOf(userId.getText().toString()));
         user.setPassword(String.valueOf(Log.v(String.valueOf(R.string.txt_pwd), userId.getText().toString())));
+        return user;
     }
 
 }

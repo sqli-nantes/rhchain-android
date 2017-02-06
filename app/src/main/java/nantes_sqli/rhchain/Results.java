@@ -2,9 +2,9 @@ package nantes_sqli.rhchain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
-import java.util.ArrayList;
+import nantes_sqli.rhchain.data.Survey;
+import nantes_sqli.rhchain.data.User;
 
 /**
  * Created by alb on 22/11/16. Votes for a specific survey

@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.ArrayList;
+import nantes_sqli.rhchain.data.Survey;
+import nantes_sqli.rhchain.data.User;
+import nantes_sqli.rhchain.utils.Bouchonnage;
 
 /**
  * Display 2 possibilities: answer survey or create a user's account At btn_connect get the survey
@@ -17,9 +19,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_connect, btn_account;
-    Survey survey = new Survey();
-    User user = new User();
-    Bouchonnage demoBouchon = new Bouchonnage();
+    Survey survey;
+    User user ;
+
 
     Bundle savedInstanceState;
 
@@ -29,27 +31,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.savedInstanceState =savedInstanceState;
         setContentView(R.layout.activity_main);
 
+        // Chargement questionnaire Bouchonné
+        survey = Bouchonnage.setDemoSurvey();
+        user = Bouchonnage.setDemoUser();
+        //user.setIdentity("toto");
 
+        // Initialisation bouton de connection
         btn_connect = (Button) findViewById(R.id.btn_connect);
-//        setSurvey(survey);
-        survey = demoBouchon.setDemoSurvey();
-        user = demoBouchon.setDemoUser();
-
         btn_connect.setOnClickListener(this);
 
-//        user.setIdentity("toto");
 
-
-//      Utilisable lors de la mise en prod de la fonction reaction compte
+        // Initialisation du bouton  de creation de compte
         btn_account = (Button) findViewById(R.id.btn_account);
         btn_account.setOnClickListener(this);
 
 
     }
 
-//           todo récupérer les informations users
-//                startActivity(intent);
-
+    /**
+     * Gestion des actions de clic sur un bouton
+     * @param v la vue cliquée
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             case R.id.btn_account: {
                 Log.v("étape","choix de la création");
-                Intent intent = new Intent(this, UserRegistration.class);
+                Intent intent = new Intent(this, UserRegistrationActivity.class);
                 startActivity(intent);
                 break;
             }
