@@ -1,8 +1,9 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.data.Answer;
 
 /**
