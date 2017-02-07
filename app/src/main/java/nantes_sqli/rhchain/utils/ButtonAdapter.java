@@ -1,4 +1,4 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.utils;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +14,9 @@ import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
+
+import nantes_sqli.rhchain.R;
+import nantes_sqli.rhchain.activities.SurveyActivity;
 
 /**
  * Created by alb on 21/11/16. Classe pour gérer les changements de bouton lorsque l'utilisateur les

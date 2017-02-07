@@ -1,9 +1,10 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.data.Survey;
 
 /**

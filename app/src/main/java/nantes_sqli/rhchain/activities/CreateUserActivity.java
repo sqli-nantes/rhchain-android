@@ -1,4 +1,4 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.data.Survey;
 import nantes_sqli.rhchain.data.User;
 import nantes_sqli.rhchain.utils.Bouchonnage;

@@ -1,4 +1,4 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +16,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import nantes_sqli.rhchain.R;
 
 public class ResultsFragment extends Fragment {
 

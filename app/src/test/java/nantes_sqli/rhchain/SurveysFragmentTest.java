@@ -1,17 +1,12 @@
 package nantes_sqli.rhchain;
 
-import android.support.annotation.NonNull;
-
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-
+import nantes_sqli.rhchain.activities.SurveysFragment;
 import nantes_sqli.rhchain.data.Results;
 import nantes_sqli.rhchain.utils.Bouchonnage;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by mcame on 07/02/17.

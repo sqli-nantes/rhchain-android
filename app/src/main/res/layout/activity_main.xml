@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="nantes_sqli.rhchain.MainActivity"
+    tools:context="nantes_sqli.rhchain.activities.MainActivity"
     android:clickable="true"
     android:textAlignment="center"
     android:touchscreenBlocksFocus="false">

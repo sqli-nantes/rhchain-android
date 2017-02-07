@@ -1,4 +1,4 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.data.Answer;
 import nantes_sqli.rhchain.data.Question;
 import nantes_sqli.rhchain.data.Results;
