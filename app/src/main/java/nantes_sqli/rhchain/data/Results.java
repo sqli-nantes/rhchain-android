@@ -14,64 +14,21 @@ public class Results implements Parcelable {
     /**
      * the user who have answered
      */
-    User user;
+    private User user;
     /**
      * list of votes providing the identifiers of questions and answers
      */
-//    Vote[] votes;
+    private Answer[] reponseSelectionnees;
     /**
      * survey from which the results are display
      */
-    Survey survey;
+    private Survey survey;
 
-    Boolean isCompleted = Boolean.FALSE;
-
-//    public Results(Vote[] votes) {
-//        this.votes = votes;
-//    }
-
-    public Results() {
-//        this.votes = new Vote[];
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
+    public Results(Survey survey, User user) {
+        this.reponseSelectionnees = new Answer[survey.getQuestions().size()];
+        this.survey = survey;
         this.user = user;
     }
-
-    public void setUserById(String userId) {
-        this.user = User.getUserById("demo");
-    }
-
-//    public Vote[] getVotes() {
-//        return votes;
-//    }
-//
-//    public void setVotes(Vote[] votes) {
-//        this.votes = votes;
-//    }
-
-
-//    public boolean nbVote() {
-//// En construction!
-//        for (Vote singleton : votes){
-////            singleton.getValue() != -1;
-//            Log.d("Classe java Results", "nbVote: " + singleton.getValue());
-//        }
-//
-//        return true;
-//    }
-
-//    public Boolean isCompleted(){
-//        if (nbVote() == survey.nbQuestion()) {
-//            isCompleted = Boolean.TRUE;
-//            return isCompleted;
-//        }
-//        return isCompleted;
-//    }
 
 
     @Override
@@ -81,17 +38,16 @@ public class Results implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedArray(this.reponseSelectionnees, 0);
         dest.writeSerializable(this.user);
-//        dest.writeParcelable(this.votes, flags);
         dest.writeParcelable(this.survey, flags);
-        dest.writeValue(this.isCompleted);
-    }
 
+    }
     protected Results(Parcel in) {
-        this.user = (User) in.readSerializable();
-//        this.votes = in.readParcelable(Vote[].class.getClassLoader());
-        this.survey = in.readParcelable(Survey.class.getClassLoader());
-        this.isCompleted = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.user                   = (User) in.readSerializable();
+        this.reponseSelectionnees   = in.createTypedArray(Answer.CREATOR);
+        this.survey                 = in.readParcelable(Survey.class.getClassLoader());
+
     }
 
     public static final Creator<Results> CREATOR = new Creator<Results>() {
@@ -105,4 +61,29 @@ public class Results implements Parcelable {
             return new Results[size];
         }
     };
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Answer[]  getReponseSelectionnees() {
+        return reponseSelectionnees;
+    }
+
+    public void setReponseSelectionnees(Answer[]  reponseSelectionnees) {
+        this.reponseSelectionnees = reponseSelectionnees;
+    }
+
+    public Survey getSurvey() {
+        return survey;
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
 }
