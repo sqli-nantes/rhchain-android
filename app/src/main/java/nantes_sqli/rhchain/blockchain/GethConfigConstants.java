@@ -13,11 +13,11 @@ public abstract class GethConfigConstants {
     public static final String APP_ID = "RHChain_APP";
 
     public static final String ACCOUNT_PASSWORD = "ETH_TEST";
-    public static final String CONTRACT_ADDRESS_TEST = "0x4ee6648f4154b818bd013d4ab9ea887fe9e5fa57";
+    public static final String CONTRACT_ADDRESS = "0x9712cda1aef31bc4ebc81391c77a637d1be4268c";
     public static final BigInteger GAS = new BigInteger("300000");
 
     public static final String[] PEERS = new String[]{
-        "enode://1dcd97293b36e31afff9a42f81b88ad85dd3f74d63592116c8b74ceb51d9dbe077b4cb509e38ede1b8bb0c4353ad314d259a016a0b900b112f05690a9548d187@10.0.2.2:30303"
+        "enode://9c59616498d7be4823aed4145496d2bc4a8426263cc0b65cbb278d5637f5c5420dfcb4e5d947b6a16f0c1df3dea3d92cc477a25e7239beda5585fb52d987df14@10.33.44.57:30303"
 
     };
 

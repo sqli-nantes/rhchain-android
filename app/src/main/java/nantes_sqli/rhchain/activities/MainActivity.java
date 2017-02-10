@@ -1,6 +1,5 @@
 package nantes_sqli.rhchain.activities;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -17,17 +16,13 @@ import com.sqli.blockchain.android_geth.EthereumService;
 import java.util.List;
 
 import ethereumjava.EthereumJava;
-import ethereumjava.exception.EthereumJavaException;
-import ethereumjava.module.objects.Peer;
-import ethereumjava.net.provider.AndroidIpcProvider;
 import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.RhchainApplication;
 import nantes_sqli.rhchain.blockchain.GethManager;
 import nantes_sqli.rhchain.data.Survey;
 import nantes_sqli.rhchain.data.User;
 import nantes_sqli.rhchain.utils.Bouchonnage;
-
-import static nantes_sqli.rhchain.blockchain.GethConfigConstants.ACCOUNT_PASSWORD;
+import nantes_sqli.rhchain.utils.ButtonUtils;
 
 /**
  * Display 2 possibilities: answer survey or create a user's account At btn_connect get the survey
@@ -35,10 +30,10 @@ import static nantes_sqli.rhchain.blockchain.GethConfigConstants.ACCOUNT_PASSWOR
  */
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener , EthereumService.EthereumServiceInterface{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, EthereumService.EthereumServiceInterface {
     Button btn_connect, btn_account;
     Survey survey;
-    User user ;
+    User user;
     public EthereumJava ethereumjava;
 
     Bundle savedInstanceState;
@@ -50,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RhchainApplication application = (RhchainApplication) getApplication();
         application.registerGethReady(this);
 
-        this.savedInstanceState =savedInstanceState;
+        this.savedInstanceState = savedInstanceState;
         setContentView(R.layout.activity_main);
 
         // Chargement questionnaire Bouchonné
@@ -60,21 +55,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Initialisation bouton de connection
         btn_connect = (Button) findViewById(R.id.btn_connect);
-        modifierEtatBouton(R.id.btn_connect, false);
         btn_connect.setOnClickListener(this);
 
 
         // Initialisation du bouton  de creation de compte
         btn_account = (Button) findViewById(R.id.btn_account);
         btn_account.setOnClickListener(this);
-        modifierEtatBouton(R.id.btn_account, false);
 
-
-
+        ButtonUtils.modifierEtatBouton(this,findViewById(R.id.btn_connect), false);
+        ButtonUtils.modifierEtatBouton(this, findViewById(R.id.btn_account), false);
     }
 
     /**
      * Gestion des actions de clic sur un bouton
+     *
      * @param v la vue cliquée
      */
     @Override
@@ -87,14 +81,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Tentative de débloquage du compte
                 String password = passwordView.getText().toString();
                 boolean isSucess = gethManager.unlockDefaultAccountSession(password);
-                if(! isSucess){
+                if (!isSucess) {
                     // deblocage KO -> affichage message d'erreur
                     Toast.makeText(getApplicationContext(), "Ce n'est pas le bon mot de passe", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     // le déblocage du compte a réussit -> transition vers
                     Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
-                    intent.putExtra("survey",survey);
+                    intent.putExtra("survey", survey);
                     startActivity(intent);
                 }
 
@@ -102,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.btn_account: {
-                Log.v("étape","choix de la création");
+                Log.v("étape", "choix de la création");
                 Intent intent = new Intent(this, UserRegistrationActivity.class);
                 startActivity(intent);
                 break;
@@ -114,51 +107,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void modifierEtatBouton(int buttonId, boolean enabled){
-
-        Button btn_submButton = (Button) findViewById(buttonId);
-
-        int color = ContextCompat.getColor(this, R.color.lessdarkgrey);
-        if (enabled) {
-            color = ContextCompat.getColor(this, R.color.colorSqli);
-        }
-
-        // MOdification du fond du bouton http://www.41post.com/5094/programming/android-change-color-of-the-standard-button-inside-activity
-        btn_submButton.getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
-
-        btn_submButton.setEnabled(enabled);
-        btn_submButton.invalidate();
+    private void modifierEtatBoutons(boolean state) {
+        ButtonUtils.modifierEtatBouton(this, findViewById(R.id.btn_connect), state);
+        ButtonUtils.modifierEtatBouton(this, findViewById(R.id.btn_account), !state);
     }
 
     @Override
     public void onEthereumServiceReady() {
-        Log.d("Main activity","etherum service started");
-        EthereumJava eth = ((RhchainApplication)getApplication()).gethManager.getEthereumJava();
+        Log.d("Main activity", "etherum service started");
+        EthereumJava eth = ((RhchainApplication) getApplication()).gethManager.getEthereumJava();
         List<String> comptes = eth.personal.listAccounts();
         //creation de compte
-        if(comptes.isEmpty()){
+        if (comptes.isEmpty()) {
 
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    modifierEtatBouton(R.id.btn_connect, false);
-                    modifierEtatBouton(R.id.btn_account,true);
+                    modifierEtatBoutons(false);
+
                 }
+
+
             });
-        }
-        else{
-            Log.d("MainActivity","connection avec le compte "+ comptes.get(0));
+        } else {
+            Log.d("MainActivity", "connection avec le compte " + comptes.get(0));
 
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    modifierEtatBouton(R.id.btn_account,false);
-                    modifierEtatBouton(R.id.btn_connect,true);
+                    modifierEtatBoutons(true);
+
                 }
             });
         }
     }
-
 
 
 }

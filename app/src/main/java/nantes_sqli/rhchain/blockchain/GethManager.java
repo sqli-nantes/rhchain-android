@@ -59,12 +59,23 @@ public class GethManager {
         }
     }
 
+    /**
+     * Permet de creer le compte utilisateur
+     * @param password
+     * @return
+     * @throws RuntimeException
+     */
     public String createDefaultAccount(String password) throws RuntimeException {
         defaultAccount = ethereumJava.personal.newAccount(password);
         Log.d(APP_ID,"Account Created "+defaultAccount);
         return defaultAccount;
     }
 
+    /**
+     * Permet de récuperer le compte utilisateur
+     * @return
+     * @throws RuntimeException
+     */
     public String getDefaultAccount() throws RuntimeException {
         List<String> accounts = ethereumJava.personal.listAccounts();
         if( accounts == null || accounts.size() == 0 ){
@@ -74,6 +85,12 @@ public class GethManager {
         }
     }
 
+    /**
+     * Permet de débloquer le compte utilisateur par default avec le mot de passe passé en paramètre
+     * @param password le mot de passe du compte par default
+     * @return
+     * @throws RuntimeException
+     */
     public boolean unlockDefaultAccountSession(String password) throws RuntimeException  {
 
         EthereumJava eth = getEthereumJava();
@@ -96,5 +113,11 @@ public class GethManager {
         return ethereumJava;
     }
 
+
+    public boolean sendVotes(int[] reponsesVote){
+
+
+        return true;
+    }
 
 }

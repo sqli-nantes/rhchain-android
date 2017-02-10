@@ -2,8 +2,6 @@ package nantes_sqli.rhchain.activities;
 
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,12 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import ethereumjava.EthereumJava;
 import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.RhchainApplication;
 import nantes_sqli.rhchain.blockchain.GethManager;
-import nantes_sqli.rhchain.data.Survey;
-import nantes_sqli.rhchain.utils.Bouchonnage;
+import nantes_sqli.rhchain.utils.ButtonUtils;
 
 public class UserRegistrationActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     Button btn_to_surveyfrag;
@@ -33,7 +29,7 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
         btn_to_surveyfrag = (Button) findViewById(R.id.btn_to_surveyfrag);
         btn_to_surveyfrag.setOnClickListener(this);
 
-        modifierEtatBouton(R.id.btn_to_surveyfrag, false);
+        ButtonUtils.modifierEtatBouton(this, btn_to_surveyfrag, false);
 
         EditText password1 = (EditText) findViewById(ID_PASSWORD_1);
         EditText password2 = (EditText) findViewById(ID_PASSWORD_2);
@@ -78,21 +74,6 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
         startActivity(intent);
     }
 
-    private void modifierEtatBouton(int buttonId, boolean enabled) {
-
-        Button btn_submButton = (Button) findViewById(buttonId);
-
-        int color = ContextCompat.getColor(this, R.color.lessdarkgrey);
-        if (enabled) {
-            color = ContextCompat.getColor(this, R.color.colorSqli);
-        }
-
-        // MOdification du fond du bouton http://www.41post.com/5094/programming/android-change-color-of-the-standard-button-inside-activity
-        btn_submButton.getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
-
-        btn_submButton.setEnabled(enabled);
-        btn_submButton.invalidate();
-    }
 
 
     @Override
@@ -107,15 +88,16 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
 
     @Override
     public void afterTextChanged(Editable editable) {
+
+        View btn_submButton = findViewById(R.id.btn_to_surveyfrag);
         EditText password1 = (EditText) findViewById(ID_PASSWORD_1);
         EditText password2 = (EditText) findViewById(ID_PASSWORD_2);
         if (!password1.getText().toString().isEmpty() &&
             !password2.getText().toString().isEmpty()) {
-
-            modifierEtatBouton(R.id.btn_to_surveyfrag, true);
+            ButtonUtils.modifierEtatBouton(this, btn_submButton, true);
         }
         else{
-            modifierEtatBouton(R.id.btn_to_surveyfrag, false);
+            ButtonUtils.modifierEtatBouton(this, btn_submButton, false);
         }
     }
 }
