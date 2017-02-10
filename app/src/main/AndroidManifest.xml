@@ -25,21 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SurveyActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activities.CreateUserActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activities.UserRegistrationActivity"></activity>
+        <activity android:name=".activities.SurveyActivity"/>
+        <activity android:name=".activities.CreateUserActivity"/>
+        <activity android:name=".activities.UserRegistrationActivity"/>
     </application>
 
 </manifest>

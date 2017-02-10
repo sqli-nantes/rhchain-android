@@ -32,9 +32,9 @@ public class AnswersFactory {
     private static List<Answer> threeAnswersBuild(){
         ArrayList<Answer> answers = new ArrayList<>();
 
-        Answer unsatisfied      = new Answer("1", "insatisfait",    0,  R.drawable.ic_sentiment_dissatisfied_black_24dp,R.drawable.ic_dissatisfied_clicked);
+        Answer unsatisfied      = new Answer("1", "insatisfait",    2,  R.drawable.ic_sentiment_dissatisfied_black_24dp,R.drawable.ic_dissatisfied_clicked);
         Answer satisfied        = new Answer("2", "satisfait",      1,  R.drawable.ic_sentiment_neutral_black_24dp,     R.drawable.ic_neutral_clicked);
-        Answer verySatisfied    = new Answer("3", "très satisfait", 2,  R.drawable.ic_sentiment_satisfied_black_48dp,   R.drawable.ic_satisfied_clicked);
+        Answer verySatisfied    = new Answer("3", "très satisfait", 0,  R.drawable.ic_sentiment_satisfied_black_48dp,   R.drawable.ic_satisfied_clicked);
 
         answers.add(unsatisfied);
         answers.add(satisfied);

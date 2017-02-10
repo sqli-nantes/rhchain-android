@@ -45,11 +45,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Bundle savedInstanceState;
 
+    RhchainApplication application;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        RhchainApplication application = (RhchainApplication) getApplication();
+        application = (RhchainApplication) getApplication();
         application.registerGethReady(this);
 
         this.savedInstanceState = savedInstanceState;
@@ -71,6 +73,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ButtonUtils.modifierEtatBouton(this,findViewById(R.id.btn_connect), false);
         ButtonUtils.modifierEtatBouton(this, findViewById(R.id.btn_account), false);
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if( application.gethManager != null ) {
+            checkAccounts();
+        }
+
+    }
+
+    private void checkAccounts(){
+        Log.d("Main activity", "etherum service started");
+        EthereumJava eth = application.gethManager.getEthereumJava();
+        List<String> comptes = eth.personal.listAccounts();
+
+        //creation de compte
+        if (comptes.isEmpty()) {
+
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    modifierEtatBoutons(false);
+
+                }
+
+
+            });
+        } else {
+            Log.d("MainActivity", "connection avec le compte " + comptes.get(0));
+
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    modifierEtatBoutons(true);
+
+                }
+            });
+        }
+
     }
 
     /**
@@ -121,33 +166,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onEthereumServiceReady() {
-        Log.d("Main activity", "etherum service started");
-        EthereumJava eth = ((RhchainApplication) getApplication()).gethManager.getEthereumJava();
-        List<String> comptes = eth.personal.listAccounts();
 
-        //creation de compte
-        if (comptes.isEmpty()) {
-
-            this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    modifierEtatBoutons(false);
-
-                }
-
-
-            });
-        } else {
-            Log.d("MainActivity", "connection avec le compte " + comptes.get(0));
-
-            this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    modifierEtatBoutons(true);
-
-                }
-            });
-        }
+        checkAccounts();
 
     }
 
