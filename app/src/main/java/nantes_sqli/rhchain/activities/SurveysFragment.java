@@ -16,11 +16,18 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import ethereumjava.module.objects.Transaction;
 import nantes_sqli.rhchain.R;
+import nantes_sqli.rhchain.RhchainApplication;
 import nantes_sqli.rhchain.data.Answer;
 import nantes_sqli.rhchain.data.Question;
 import nantes_sqli.rhchain.data.Results;
 import nantes_sqli.rhchain.data.Survey;
+import nantes_sqli.rhchain.utils.ButtonUtils;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 
 /**
@@ -40,26 +47,25 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
     private TextView question1, question2, question3;
     private int questionAnsweredId;
 
-    private  static int[] intitulesQuestion ={R.id.txtQ1,R.id.txtQ2,R.id.txtQ3};
-    private  static int[] boutonsQuestion1 = {R.id.btnDsQ1, R.id.btnNeQ1, R.id.btnSaQ1};
-    private  static int[] boutonsQuestion2 = {R.id.btnDsQ2, R.id.btnNeQ2, R.id.btnSaQ2};
-    private  static int[] boutonsQuestion3 = {R.id.btnDsQ3, R.id.btnNeQ3, R.id.btnSaQ3};
-    private static int[][] tableauQuestions = { boutonsQuestion1, boutonsQuestion2, boutonsQuestion3 };
-    private static int[] selectedImageQuestions ={R.drawable.ic_dissatisfied_clicked,R.drawable.ic_neutral_clicked, R.drawable.ic_satisfied_clicked};
-    private static int[] disabledImageQuestions ={R.drawable.ic_dissatisfied,R.drawable.ic_neutral, R.drawable.ic_satisfied};
+    private static int[] intitulesQuestion = {R.id.txtQ1, R.id.txtQ2, R.id.txtQ3};
+    private static int[] boutonsQuestion1 = {R.id.btnDsQ1, R.id.btnNeQ1, R.id.btnSaQ1};
+    private static int[] boutonsQuestion2 = {R.id.btnDsQ2, R.id.btnNeQ2, R.id.btnSaQ2};
+    private static int[] boutonsQuestion3 = {R.id.btnDsQ3, R.id.btnNeQ3, R.id.btnSaQ3};
+    private static int[][] tableauQuestions = {boutonsQuestion1, boutonsQuestion2, boutonsQuestion3};
+    private static int[] selectedImageQuestions = {R.drawable.ic_dissatisfied_clicked, R.drawable.ic_neutral_clicked, R.drawable.ic_satisfied_clicked};
+    private static int[] disabledImageQuestions = {R.drawable.ic_dissatisfied, R.drawable.ic_neutral, R.drawable.ic_satisfied};
 
     public SurveysFragment() {
 
     }
 
-    public void onCreate(Bundle bundle){
+    public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         SurveyActivity surveyActivity = (SurveyActivity) getActivity();
         this.survey = surveyActivity.getSurvey();
         // todo : user = null
         this.results = new Results(survey, null);
     }
-
 
 
     @Override
@@ -75,16 +81,7 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         initialisationGestionClicReponses();
 
         // Bouton soummettre désactivé par default
-        gestionBoutonSoumission(false);
-
-        btn_submButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog(savedInstanceState);
-            }
-        });
-
-
+        gestionBoutonSoumission(false, savedInstanceState);
 
 
         return viewRoot;
@@ -125,7 +122,8 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
                         setVote(finalIndexQuestion, finalIndexBouton);
 
                         // Verification soumission possible en fonction des reponses donnés
-                        gestionBoutonSoumission(isSurveyCompleted());
+                        btn_submButton = (Button) viewRoot.findViewById(R.id.btn_submit_survey);
+                        ButtonUtils.modifierEtatBouton(getContext(),btn_submButton,isSurveyCompleted());
                     }
                 });
             }
@@ -136,22 +134,37 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
 
     /**
      * Permet de d'activer ou désactiver le clic sur le bouton de soumission + la couleur de celui-ci
-     * @param enabled flag true si actif
+     *
+     * @param enabled            flag true si actif
+     * @param savedInstanceState
      */
-    private void gestionBoutonSoumission(boolean enabled) {
+    private void gestionBoutonSoumission(boolean enabled, final Bundle savedInstanceState) {
 
+        //Gestion affichage du bouton
         btn_submButton = (Button) viewRoot.findViewById(R.id.btn_submit_survey);
+        ButtonUtils.modifierEtatBouton(getContext(),btn_submButton,enabled);
 
-        int color = ContextCompat.getColor(getContext(), R.color.lessdarkgrey);
-        if(enabled) {
-            color = ContextCompat.getColor(getContext(), R.color.colorSqli);
-        }
+        //Gestion clic sur le bouton soumettre
+        btn_submButton.setOnClickListener(new View.OnClickListener() {
 
-        // MOdification du fond du bouton http://www.41post.com/5094/programming/android-change-color-of-the-standard-button-inside-activity
-        btn_submButton.getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+            @Override
+            public void onClick(View v) {
+                RhchainApplication app = (RhchainApplication) getActivity().getApplication();
 
-        btn_submButton.setEnabled(enabled);
-        btn_submButton.invalidate();
+                Observable<Transaction> o = app.gethManager.sendVotes(getResults());
+
+                o.subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<Transaction>() {
+                        @Override
+                        public void call(Transaction transaction) {
+                            AlertDialog(savedInstanceState);
+                        }
+                    });
+
+
+            }
+        });
     }
 
 
@@ -181,6 +194,7 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
 
     /**
      * Permet de déselectionner les boutons d'une question
+     *
      * @param boutons la listes des id des boutons a désactiver
      */
     private void deselectionBoutonsReponse(int[] boutons) {
@@ -201,11 +215,11 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         }
     }
 
-    public void setVote(int question, int idValue){
+    public void setVote(int question, int idValue) {
         Question questionCourante = survey.getQuestion(question);
 
         // Recuperation de la valeur de la reponse
-        Answer reponse  = questionCourante.getAnswer(idValue);
+        Answer reponse = questionCourante.getAnswer(idValue);
 
         //enregistrement du resultat courant
         Answer[] reponsesSelectionnees = this.results.getReponseSelectionnees();
@@ -213,13 +227,13 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
 
     }
 
-    public boolean isSurveyCompleted(){
+    public boolean isSurveyCompleted() {
         Answer[] reponsesSelectionnees = this.results.getReponseSelectionnees();
         int nbreponses = 0;
         int nbQuestions = this.survey.getQuestions().size();
-        for(int i =0; i < nbQuestions; i++){
+        for (int i = 0; i < nbQuestions; i++) {
             // Si une reponse n'est pas renseignée
-            if(null == reponsesSelectionnees[i]){
+            if (null == reponsesSelectionnees[i]) {
                 return false;
             }
         }
@@ -250,7 +264,6 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         dialog.setCancelable(false);
         return dialog;
     }
-
 
 
     public Results getResults() {
