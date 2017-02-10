@@ -34,9 +34,8 @@ dependencies {
     compile 'com.sqli:ethereum-android:0.1.20170125@aar'
     compile 'com.sqli:android-geth:0.1.20170125@aar'
     compile 'com.sqli:ethereum-java-core:0.1.20170209'
-
     compile 'ethereumandroid:geth:1.5.0-unstable'
-
+    compile 'io.reactivex:rxandroid:1.2.1'
 }
 
 

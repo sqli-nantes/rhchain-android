@@ -9,12 +9,20 @@ import ethereumjava.EthereumJava;
 import ethereumjava.exception.EthereumJavaException;
 import ethereumjava.module.objects.Block;
 import ethereumjava.module.objects.Peer;
+import ethereumjava.module.objects.Transaction;
 import ethereumjava.net.provider.AndroidIpcProvider;
+import ethereumjava.solidity.types.SArray;
+import ethereumjava.solidity.types.SInt;
+import ethereumjava.solidity.types.SUInt;
+import rx.Observable;
 import rx.Subscription;
+import rx.schedulers.Schedulers;
 
 
 import static nantes_sqli.rhchain.blockchain.GethConfigConstants.ACCOUNT_PASSWORD;
 import static nantes_sqli.rhchain.blockchain.GethConfigConstants.APP_ID;
+import static nantes_sqli.rhchain.blockchain.GethConfigConstants.CONTRACT_ADDRESS_TEST;
+import static nantes_sqli.rhchain.blockchain.GethConfigConstants.GAS;
 import static nantes_sqli.rhchain.blockchain.GethConfigConstants.PEERS;
 
 /**
@@ -114,10 +122,19 @@ public class GethManager {
     }
 
 
-    public boolean sendVotes(int[] reponsesVote){
+    public Observable<Transaction> sendVotes(int[] reponsesVote){
 
+        VotesContract contract = ethereumJava.contract.withAbi(VotesContract.class).at(CONTRACT_ADDRESS_TEST);
 
-        return true;
+        SUInt.SUInt8[] votesSolidity = new SUInt.SUInt8[reponsesVote.length];
+
+        for(int i=0;i<reponsesVote.length;i++){
+            votesSolidity[i] = SUInt.SUInt8.fromShort((short) reponsesVote[i]);
+        }
+
+        String from = getDefaultAccount();
+
+        return contract.submit(SArray.fromArray(votesSolidity)).sendTransactionAndGetMined(from,GAS);
     }
 
 }

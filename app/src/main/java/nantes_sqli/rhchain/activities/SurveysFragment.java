@@ -16,11 +16,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import ethereumjava.module.objects.Transaction;
 import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.data.Answer;
 import nantes_sqli.rhchain.data.Question;
 import nantes_sqli.rhchain.data.Results;
 import nantes_sqli.rhchain.data.Survey;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 
 /**
@@ -80,7 +85,18 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         btn_submButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog(savedInstanceState);
+                /*Observable<Transaction> o;
+
+                o.subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<Transaction>() {
+                        @Override
+                        public void call(Transaction transaction) {
+                            //TODO arreter chargement
+                        }
+                    });
+
+                AlertDialog(savedInstanceState);*/
             }
         });
 
