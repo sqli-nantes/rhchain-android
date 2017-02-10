@@ -13,9 +13,16 @@ import android.widget.Toast;
 
 import com.sqli.blockchain.android_geth.EthereumService;
 
+import org.w3c.dom.Node;
+
+import java.math.BigInteger;
 import java.util.List;
 
 import ethereumjava.EthereumJava;
+import ethereumjava.module.objects.Block;
+import ethereumjava.module.objects.Hash;
+import ethereumjava.module.objects.NodeInfo;
+import ethereumjava.module.objects.Peer;
 import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.RhchainApplication;
 import nantes_sqli.rhchain.blockchain.GethManager;
@@ -117,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("Main activity", "etherum service started");
         EthereumJava eth = ((RhchainApplication) getApplication()).gethManager.getEthereumJava();
         List<String> comptes = eth.personal.listAccounts();
+
         //creation de compte
         if (comptes.isEmpty()) {
 
@@ -140,7 +148,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
         }
+
     }
+
+
 
 
 }

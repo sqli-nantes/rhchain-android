@@ -3,11 +3,13 @@ package nantes_sqli.rhchain.blockchain;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import ethereumjava.EthereumJava;
 import ethereumjava.exception.EthereumJavaException;
 import ethereumjava.module.objects.Block;
+import ethereumjava.module.objects.Hash;
 import ethereumjava.module.objects.Peer;
 import ethereumjava.module.objects.Transaction;
 import ethereumjava.net.provider.AndroidIpcProvider;
