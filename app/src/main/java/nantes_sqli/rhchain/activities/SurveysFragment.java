@@ -149,20 +149,7 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
 
             @Override
             public void onClick(View v) {
-                RhchainApplication app = (RhchainApplication) getActivity().getApplication();
-
-                Observable<Transaction> o = app.gethManager.sendVotes(getResults());
-
-                o.subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Action1<Transaction>() {
-                        @Override
-                        public void call(Transaction transaction) {
-                            AlertDialog(savedInstanceState);
-                        }
-                    });
-
-
+                AlertDialog(savedInstanceState);
             }
         });
     }
@@ -175,9 +162,23 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         ad.setPositiveButton("OUI",
             new android.content.DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg1) {
+                    RhchainApplication app = (RhchainApplication) getActivity().getApplication();
+
+                    Observable<Transaction> o = app.gethManager.sendVotes(getResults());
+
+                    o.subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<Transaction>() {
+                            @Override
+                            public void call(Transaction transaction) {
+                                prog.cancel();
+                                btn_submButton.setEnabled(false);
+                            }
+                        });
+
+
                     prog = onCreateDialog(savedInstanceState);
                     prog.show();
-                    launchIntent(prog);
                 }
             }
         );
@@ -239,19 +240,6 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         }
         return true;
 
-    }
-
-    public void launchIntent(final Dialog prog) {
-        Runnable progressRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-                prog.cancel();
-            }
-        };
-
-        Handler pdCanceller = new Handler();
-        pdCanceller.postDelayed(progressRunnable, 5000);
     }
 
     @Override
