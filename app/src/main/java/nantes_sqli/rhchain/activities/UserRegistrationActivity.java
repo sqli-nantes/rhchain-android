@@ -13,11 +13,17 @@ import android.widget.Toast;
 
 import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.RhchainApplication;
+import nantes_sqli.rhchain.blockchain.ApiRetrofit;
 import nantes_sqli.rhchain.blockchain.GethManager;
+import nantes_sqli.rhchain.blockchain.User;
 import nantes_sqli.rhchain.utils.ButtonUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserRegistrationActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     Button btn_to_surveyfrag;
+    private static int ID_MAIL = R.id.editText4;
     private static int ID_PASSWORD_1 = R.id.editText9;
     private static int ID_PASSWORD_2 = R.id.editText10;
 
@@ -43,17 +49,25 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         if (v == btn_to_surveyfrag) {
             // Verification egalité des mot de passe
+            EditText mail = (EditText) findViewById(ID_MAIL);
             EditText password1 = (EditText) findViewById(ID_PASSWORD_1);
             EditText password2 = (EditText) findViewById(ID_PASSWORD_2);
+
             // Verification du remplissage du mot de passe
             if (password1.getText().toString().isEmpty()) {
                 // enregistrement KO -> affichage message d'erreur
                 Toast.makeText(getApplicationContext(), "Merci de renseigner un mot de passe.", Toast.LENGTH_SHORT).show();
             }
 
+            //verification du mail
+            if (mail.getText().toString().isEmpty()) {
+                // enregistrement KO -> affichage message d'erreur
+                Toast.makeText(getApplicationContext(), "Merci de renseigner votre adresse mail.", Toast.LENGTH_SHORT).show();
+            }
+
             // Confirmation du mot de passe
             if (password1.getText().toString().equals(password2.getText().toString())) {
-                creationCompte(password1);
+                creationCompte(mail, password1);
                 navigationToSurvey();
             }else{
                 // enregistrement KO -> affichage message d'erreur
@@ -62,15 +76,66 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
         }
     }
 
-    private void creationCompte(EditText password1) {
+    private void creationCompte(EditText mail, EditText password1) {
         GethManager gethManager = ((RhchainApplication) getApplication()).gethManager;
-        gethManager.createDefaultAccount(password1.getText().toString());
+        String newAccountAdress = gethManager.createDefaultAccount(password1.getText().toString());
+
+        // Transmission du compte au serveur HTTP
+        final User user = new User();
+        user.setMail(mail.getText().toString());
+        user.setAdress(newAccountAdress);
+
+        final ApiRetrofit apiRetrofit = new ApiRetrofit();
+
+        // APPEL asychrone de l'enregistrement de l'utilisateur
+        creationUtilisateur(user, apiRetrofit);
+
+
+
+    }
+
+    private void creationUtilisateur(final User user, final ApiRetrofit apiRetrofit) {
+        final Call<User> createUserCall = apiRetrofit.getUsersService().getUser(user.getMail());
+        createUserCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), " L'utilisateur est existant", Toast.LENGTH_SHORT).show();
+                } else if(response.code() == 404){
+                    final Call<User> createUserCall = apiRetrofit.getUsersService().createUser(user);
+                    createUserCall.enqueue(getCreationUserCallback());
+                }
+                else{
+
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private Callback<User> getCreationUserCallback() {
+        return new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), " Enregistrement de l'utilisateur OK", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), " Erreur lors de l'enregistrement de l'utilisateur", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), " Erreur lors de l'enregistrement de l'utilisateur", Toast.LENGTH_SHORT).show();
+            }
+        };
     }
 
     private void navigationToSurvey() {
-//        Survey survey = Bouchonnage.setDemoSurvey();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//        intent.putExtra("survey", survey);
         startActivity(intent);
     }
 

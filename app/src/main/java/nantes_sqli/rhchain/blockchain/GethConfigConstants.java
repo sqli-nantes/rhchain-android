@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class GethConfigConstants {
 
 
+    public static final String USERS_SERVER ="localhost:8000";
     public static final String APP_ID = "RHChain_APP";
 
     public static final String ACCOUNT_PASSWORD = "ETH_TEST";

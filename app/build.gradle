@@ -36,6 +36,8 @@ dependencies {
     compile 'com.sqli:ethereum-java-core:0.1.20170209'
     compile 'ethereumandroid:geth:1.5.0-unstable'
     compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 
 }
 

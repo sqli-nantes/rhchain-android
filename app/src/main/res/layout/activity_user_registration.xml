@@ -55,5 +55,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="57dp" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Mail"
+        android:textColorHint="@color/colorSqli"
+        android:ems="10"
+        android:id="@+id/editText4"
+        android:layout_marginBottom="43dp"
+        android:inputType="textEmailAddress"
+        android:layout_above="@+id/editText10"
+        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>
