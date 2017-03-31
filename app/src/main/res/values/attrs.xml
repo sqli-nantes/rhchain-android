@@ -5,4 +5,11 @@
 
 
     </declare-styleable>
+    <declare-styleable name="stylable_bargraph">
+        <attr name="result_red" format="integer" />
+        <attr name="result_orange" format="integer" />
+        <attr name="result_green" format="integer" />
+    </declare-styleable>
+
+
 </resources>

@@ -4,13 +4,8 @@ import android.util.Log;
 
 import com.sqli.blockchain.android_geth.EthereumApplication;
 
-import ethereumjava.EthereumJava;
-import ethereumjava.net.provider.AndroidIpcProvider;
 import nantes_sqli.rhchain.blockchain.GethManager;
 
-/**
- * Created by mcame on 07/02/17.
- */
 
 public class RhchainApplication extends EthereumApplication {
     public GethManager gethManager;
