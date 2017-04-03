@@ -24,7 +24,7 @@
         <activity android:name=".activities.CreateUserActivity" />
         <activity android:name=".activities.UserRegistrationActivity" />
 
-        <activity android:name=".ResultatsActivity">
+        <activity android:name=".activities.ResultatsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

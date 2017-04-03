@@ -6,7 +6,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".ResultatsActivity">
+    tools:context=".activities.ResultatsActivity">
 
     <LinearLayout
         android:id="@+id/BarChart"

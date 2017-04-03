@@ -1,4 +1,4 @@
-package nantes_sqli.rhchain;
+package nantes_sqli.rhchain.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.data.QuestionResultat;
 import nantes_sqli.rhchain.data.Survey;
 import nantes_sqli.rhchain.utils.Bouchonnage;
