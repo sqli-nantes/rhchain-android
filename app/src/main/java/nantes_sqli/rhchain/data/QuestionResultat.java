@@ -10,6 +10,8 @@ public class QuestionResultat {
     private String question;
     private Integer[] resultats;
 
+    public QuestionResultat() {
+    }
 
     public QuestionResultat(String question, Integer[] resultats) {
         this.question = question;

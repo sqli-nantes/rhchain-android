@@ -14,12 +14,12 @@ public abstract class GethConfigConstants {
     public static final String APP_ID = "RHChain_APP";
 
     public static final String ACCOUNT_PASSWORD = "ETH_TEST";
-    public static final String CONTRACT_ADDRESS = "0xa1fa141192e14bbc87112b51e20438040d4bba74";
+    public static final String CONTRACT_ADDRESS = "0x8b2a6ed09f033f3c0bb9293570d7ea2aa0b3e07a";
     public static final BigInteger GAS = new BigInteger("300000");
 
     public static final String[] PEERS = new String[]{
-        "enode://9c59616498d7be4823aed4145496d2bc4a8426263cc0b65cbb278d5637f5c5420dfcb4e5d947b6a16f0c1df3dea3d92cc477a25e7239beda5585fb52d987df14@10.33.44.57:30303",
-        "enode://ec7b3836fe49b86d1f87589b594cc1a797911829b239339f84894ec3ab1c1cead7b8b83a90f1de28c5e39c93c23dd78b4bbbeba47a3cb7e6726766315a216043@10.33.44.57:30304"
+        "enode://001eb425dd0c5b5ef60762d2b2c567268eb5d7ed573e4ddd6b036d2089a9412613fe3545a18bfc8d756e60e58caf16b673e1deb1f720d5958c67530e155580c1@127.0.0.1:30303",
+        "enode://bcd8b7df18688e8cc985f63f50c4c64e797e7a1193fb4f98b1e0fcd0a3ca33c839969b165e2ff64bb05f86caec6c9733d37341624249130a7b4c1516211851e1@127.0.0.1:30304"
     };
 
 }

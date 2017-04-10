@@ -1,27 +1,23 @@
 package nantes_sqli.rhchain.blockchain;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import ethereumjava.EthereumJava;
 import ethereumjava.exception.EthereumJavaException;
-import ethereumjava.module.objects.Block;
-import ethereumjava.module.objects.Hash;
-import ethereumjava.module.objects.Peer;
 import ethereumjava.module.objects.Transaction;
-import ethereumjava.module.objects.TransactionRequest;
 import ethereumjava.net.provider.AndroidIpcProvider;
-import ethereumjava.solidity.SolidityUtils;
 import ethereumjava.solidity.types.SArray;
 import ethereumjava.solidity.types.SUInt;
 import nantes_sqli.rhchain.data.Answer;
+import nantes_sqli.rhchain.data.QuestionResultat;
 import nantes_sqli.rhchain.data.Results;
+import nantes_sqli.rhchain.data.Survey;
 import rx.Observable;
 import rx.Subscription;
-
 
 import static nantes_sqli.rhchain.blockchain.GethConfigConstants.ACCOUNT_PASSWORD;
 import static nantes_sqli.rhchain.blockchain.GethConfigConstants.APP_ID;
@@ -111,6 +107,7 @@ public class GethManager {
         boolean isSucess = false;
         try {
             isSucess = eth.personal.unlockAccount(getDefaultAccount(), password, 0);
+            final BigInteger balance = eth.eth.balance("0x3172dfb9d63d3e150e1d00a0dfe895c439cb897c", null);
 
         } catch (EthereumJavaException e) {
             isSucess = false;
@@ -128,6 +125,11 @@ public class GethManager {
     }
 
 
+    /**
+     * Permet la transmission des reponses saisies au vote
+     * @param reponses la liste des reponses soumises
+     * @return Observable<Transaction>
+     */
     public Observable<Transaction> sendVotes(Results reponses) {
 
         //reponses.getSurvey().getContratAdresse
@@ -141,7 +143,39 @@ public class GethManager {
 
         String from = getDefaultAccount();
 
-        return contract.submit(SArray.fromArray(votesSolidity)).sendTransactionAndGetMined(from, GAS);
+
+        Observable<Transaction> transactionObservable = contract.submit(SArray.fromArray(votesSolidity)).sendTransactionAndGetMined(from, GAS);
+
+        return transactionObservable;
     }
+
+    public ArrayList<QuestionResultat> getResults(Survey survey, Results reponses) {
+
+        //Retrieve the smart contract interface
+        VotesContract contract = ethereumJava.contract.withAbi(VotesContract.class).at(CONTRACT_ADDRESS);
+
+        //mapping results
+        ArrayList<QuestionResultat> questionResultats = new ArrayList<>();
+
+        //Calling the service for retrieve results of the survey
+        SArray<SArray<SUInt.SUInt8>> results = contract.getResults().call();
+        for (int i = 0; i < results.get().length; i++) {
+            //retrieve question in original survey
+            final String question = survey.getQuestion(i).getTextQuestion();
+
+            // Creating instance of results
+            ArrayList<Integer> resultats = new ArrayList<Integer>();
+
+            // Mapping resultat to integer
+            SUInt.SUInt8[] resultstArray = results.get()[i].get();
+            for (int j = 0; j < resultstArray.length; j++) {
+                resultats.add(Integer.valueOf(resultstArray[j].get()));
+            }
+            questionResultats.add(new QuestionResultat(question, (Integer[]) resultats.toArray()));
+
+        }
+        return questionResultats;
+    }
+
 
 }

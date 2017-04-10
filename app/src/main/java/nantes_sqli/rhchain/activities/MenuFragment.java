@@ -1,5 +1,6 @@
 package nantes_sqli.rhchain.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -44,7 +45,8 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 fragment = new SurveysFragment();
-                fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container, fragment);
+                fragmentTransaction = getFragmentManager().beginTransaction()
+                    .replace(R.id.container, fragment);
                 fragmentTransaction.commit();
 
             }
@@ -53,9 +55,13 @@ public class MenuFragment extends Fragment {
         btnResults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragment = new ResultsFragment();
-                fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.container, fragment);
-                fragmentTransaction.commit();
+//                ResultatsActivity activity = new ResultatsActivity();
+//                fragmentTransaction = getFragmentManager().beginTransaction();
+//                fragmentTransaction.add(R.id.)
+//                fragmentTransaction.commit();
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), ResultatsActivity.class);
+                startActivity(intent);
 
             }
         });
