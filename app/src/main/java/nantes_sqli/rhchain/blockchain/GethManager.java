@@ -107,8 +107,6 @@ public class GethManager {
         boolean isSucess = false;
         try {
             isSucess = eth.personal.unlockAccount(getDefaultAccount(), password, 0);
-            final BigInteger balance = eth.eth.balance("0x3172dfb9d63d3e150e1d00a0dfe895c439cb897c", null);
-
         } catch (EthereumJavaException e) {
             isSucess = false;
         }
@@ -124,6 +122,11 @@ public class GethManager {
         return ethereumJava;
     }
 
+    public Observable<BigInteger> currentBalance() {
+        String from = getDefaultAccount();
+        final Observable<BigInteger> observable = ethereumJava.eth.getBalance(from, null);
+        return observable;
+    }
 
     /**
      * Permet la transmission des reponses saisies au vote
@@ -145,8 +148,8 @@ public class GethManager {
 
 
         Observable<Transaction> transactionObservable = contract.submit(SArray.fromArray(votesSolidity)).sendTransactionAndGetMined(from, GAS);
-
         return transactionObservable;
+
     }
 
     public ArrayList<QuestionResultat> getResults(Survey survey, Results reponses) {

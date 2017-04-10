@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.math.BigInteger;
+
 import ethereumjava.module.objects.Transaction;
 import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.RhchainApplication;
@@ -63,6 +65,21 @@ public class SurveysFragment extends DialogFragment implements View.OnClickListe
         this.survey = surveyActivity.getSurvey();
         // todo : user = null
         this.results = new Results(survey, null);
+
+        //Recuperation du solde
+        RhchainApplication app = (RhchainApplication) getActivity().getApplication();
+        Observable<BigInteger> o =  app.gethManager.currentBalance();
+        o.subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Action1<BigInteger>() {
+                @Override
+                public void call(BigInteger balance) {
+                    TextView txtSolde = (TextView) viewRoot.findViewById(R.id.soldeText);
+                    txtSolde.setText("Solde : "+balance.toString());
+                }
+            });
+
+
     }
 
 
