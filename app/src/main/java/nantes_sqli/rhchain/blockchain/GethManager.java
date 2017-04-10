@@ -1,5 +1,6 @@
 package nantes_sqli.rhchain.blockchain;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.math.BigInteger;
@@ -10,6 +11,7 @@ import ethereumjava.EthereumJava;
 import ethereumjava.exception.EthereumJavaException;
 import ethereumjava.module.objects.Transaction;
 import ethereumjava.net.provider.AndroidIpcProvider;
+import ethereumjava.solidity.element.returns.SingleReturn;
 import ethereumjava.solidity.types.SArray;
 import ethereumjava.solidity.types.SUInt;
 import nantes_sqli.rhchain.data.Answer;
@@ -146,35 +148,45 @@ public class GethManager {
 
         String from = getDefaultAccount();
 
+        BigInteger solde =  ethereumJava.eth.balance(from,null);
+        Log.d(from, "solde avant Soumission : " + solde.toString());
 
         Observable<Transaction> transactionObservable = contract.submit(SArray.fromArray(votesSolidity)).sendTransactionAndGetMined(from, GAS);
         return transactionObservable;
 
     }
 
-    public ArrayList<QuestionResultat> getResults(Survey survey, Results reponses) {
+    public ArrayList<QuestionResultat> getResults(@Nullable  Survey survey) {
 
         //Retrieve the smart contract interface
         VotesContract contract = ethereumJava.contract.withAbi(VotesContract.class).at(CONTRACT_ADDRESS);
 
+        //Calling the service for retrieve results of the survey
+//        SArray<SArray<SUInt.SUInt8>> results =
+
+        final SingleReturn<SArray<SArray<SUInt.SUInt8>>> singleReturn = contract.getResults().call();
+        final SArray<SArray<SUInt.SUInt8>> results = singleReturn.getElement1();
+
+
         //mapping results
         ArrayList<QuestionResultat> questionResultats = new ArrayList<>();
-
-        //Calling the service for retrieve results of the survey
-        SArray<SArray<SUInt.SUInt8>> results = contract.getResults().call();
         for (int i = 0; i < results.get().length; i++) {
-            //retrieve question in original survey
-            final String question = survey.getQuestion(i).getTextQuestion();
+            QuestionResultat questionResultat = new QuestionResultat();
 
-            // Creating instance of results
+            // Mapping Question
+            if(survey != null) {
+                questionResultat.setQuestion(survey.getQuestion(i).getTextQuestion());
+            }
+
+            // Mapping Results
             ArrayList<Integer> resultats = new ArrayList<Integer>();
-
-            // Mapping resultat to integer
             SUInt.SUInt8[] resultstArray = results.get()[i].get();
             for (int j = 0; j < resultstArray.length; j++) {
                 resultats.add(Integer.valueOf(resultstArray[j].get()));
             }
-            questionResultats.add(new QuestionResultat(question, (Integer[]) resultats.toArray()));
+            questionResultat.setResultats((Integer[]) resultats.toArray());
+
+            questionResultats.add(questionResultat);
 
         }
         return questionResultats;

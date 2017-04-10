@@ -1,9 +1,7 @@
 package nantes_sqli.rhchain.activities;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,16 +11,9 @@ import android.widget.Toast;
 
 import com.sqli.blockchain.android_geth.EthereumService;
 
-import org.w3c.dom.Node;
-
-import java.math.BigInteger;
 import java.util.List;
 
 import ethereumjava.EthereumJava;
-import ethereumjava.module.objects.Block;
-import ethereumjava.module.objects.Hash;
-import ethereumjava.module.objects.NodeInfo;
-import ethereumjava.module.objects.Peer;
 import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.RhchainApplication;
 import nantes_sqli.rhchain.blockchain.GethManager;
@@ -142,8 +133,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra("survey", survey);
                     startActivity(intent);
                 }
-
-
                 break;
             }
             case R.id.btn_account: {
