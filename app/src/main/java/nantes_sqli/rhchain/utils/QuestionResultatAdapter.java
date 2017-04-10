@@ -64,9 +64,9 @@ public class QuestionResultatAdapter extends ArrayAdapter<QuestionResultat> {
         }
 
         List<View> listeColonnes = new ArrayList<>();
-        listeColonnes.add((View) barChartView.findViewById(R.id.Redlayout));
-        listeColonnes.add((View) barChartView.findViewById(R.id.OrangeLayout));
         listeColonnes.add((View) barChartView.findViewById(R.id.GreenLayout));
+        listeColonnes.add((View) barChartView.findViewById(R.id.OrangeLayout));
+        listeColonnes.add((View) barChartView.findViewById(R.id.Redlayout));
 
         Integer widthAvailable = calculateAvailableWidth(barChartView);
 

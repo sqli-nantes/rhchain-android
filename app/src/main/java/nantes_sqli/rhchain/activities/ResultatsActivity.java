@@ -42,12 +42,12 @@ public class ResultatsActivity extends AppCompatActivity implements EthereumServ
 //        initResultats(listeQuestions, listeResultats);
     }
 
-    private void initResultats(String[] listeQuestions, Integer[][] resultsSurvey) {
+    private void initResultats(List listeQuestions, List<Integer[]> resultsValues) {
         mlistView = (ListView) findViewById(R.id.listequestionResultats);
         //generer les modele de questionsResultat
         final List<QuestionResultat> allQuestionResponses = new ArrayList<>();
-        for (int i = 0; i < listeQuestions.length; i++) {
-            allQuestionResponses.add(new QuestionResultat(listeQuestions[i], resultsSurvey[i]));
+        for (int i = 0; i < listeQuestions.size() && i <resultsValues.size(); i++) {
+            allQuestionResponses.add(new QuestionResultat((String) listeQuestions.get(i), resultsValues.get(i)));
         }
         QuestionResultatAdapter adapter = new QuestionResultatAdapter(ResultatsActivity.this, allQuestionResponses);
         mlistView.setAdapter(adapter);
@@ -73,13 +73,8 @@ public class ResultatsActivity extends AppCompatActivity implements EthereumServ
     private void loadResults() {
 
         //Retrieve results from Blockchain API
-        ArrayList<QuestionResultat> results = application.gethManager.getResults(null);
-        List<Integer[]> resultsList = new ArrayList<>();
+        ArrayList<Integer[]> resultsList = application.gethManager.getResults(null);
 
-        // Mapping resultats
-        for (QuestionResultat result : results) {
-            resultsList.add(result.getResultats());
-        }
 
         // TODO Récuperer libellés des questions sur la blockchain
         // Aliementation des libellés des questions
@@ -89,7 +84,7 @@ public class ResultatsActivity extends AppCompatActivity implements EthereumServ
         }
 
         //Show results
-        initResultats((String[]) libellesQuestionList.toArray(), (Integer[][]) resultsList.toArray());
+        initResultats(libellesQuestionList, resultsList);
     }
 
     private class MockedResults {

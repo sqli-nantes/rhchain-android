@@ -1,7 +1,5 @@
 package nantes_sqli.rhchain.data;
 
-import java.util.List;
-
 /**
  * Created by mcame on 31/03/17.
  */

@@ -1,5 +1,6 @@
 package nantes_sqli.rhchain.blockchain;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -11,11 +12,13 @@ import ethereumjava.EthereumJava;
 import ethereumjava.exception.EthereumJavaException;
 import ethereumjava.module.objects.Transaction;
 import ethereumjava.net.provider.AndroidIpcProvider;
-import ethereumjava.solidity.element.returns.SingleReturn;
+import ethereumjava.solidity.element.returns.PairReturn;
 import ethereumjava.solidity.types.SArray;
+import ethereumjava.solidity.types.SBool;
+import ethereumjava.solidity.types.SInt.SInt256;
+import ethereumjava.solidity.types.SType;
 import ethereumjava.solidity.types.SUInt;
 import nantes_sqli.rhchain.data.Answer;
-import nantes_sqli.rhchain.data.QuestionResultat;
 import nantes_sqli.rhchain.data.Results;
 import nantes_sqli.rhchain.data.Survey;
 import rx.Observable;
@@ -137,7 +140,6 @@ public class GethManager {
      */
     public Observable<Transaction> sendVotes(Results reponses) {
 
-        //reponses.getSurvey().getContratAdresse
         final Answer[] reponsesSelectionnees = reponses.getReponseSelectionnees();
         VotesContract contract = ethereumJava.contract.withAbi(VotesContract.class).at(CONTRACT_ADDRESS);
         SUInt.SUInt8[] votesSolidity = new SUInt.SUInt8[reponsesSelectionnees.length];
@@ -156,40 +158,43 @@ public class GethManager {
 
     }
 
-    public ArrayList<QuestionResultat> getResults(@Nullable  Survey survey) {
+    public ArrayList<Integer[]> getResults(@Nullable  Survey survey) {
 
         //Retrieve the smart contract interface
         VotesContract contract = ethereumJava.contract.withAbi(VotesContract.class).at(CONTRACT_ADDRESS);
 
         //Calling the service for retrieve results of the survey
-//        SArray<SArray<SUInt.SUInt8>> results =
+        final PairReturn<SBool, SArray<SArray<SInt256>>> singleReturn = contract.getResults().call();
+        final SBool bool = singleReturn.getElement1();
+        final SArray<SArray<SInt256>> resultmatrix = singleReturn.getElement2();
 
-        final SingleReturn<SArray<SArray<SUInt.SUInt8>>> singleReturn = contract.getResults().call();
-        final SArray<SArray<SUInt.SUInt8>> results = singleReturn.getElement1();
 
+        //mapping results POur chaque questions
+        ArrayList<Integer[]> questionResultats = new ArrayList<>();
 
-        //mapping results
-        ArrayList<QuestionResultat> questionResultats = new ArrayList<>();
-        for (int i = 0; i < results.get().length; i++) {
-            QuestionResultat questionResultat = new QuestionResultat();
-
-            // Mapping Question
-            if(survey != null) {
-                questionResultat.setQuestion(survey.getQuestion(i).getTextQuestion());
-            }
-
-            // Mapping Results
-            ArrayList<Integer> resultats = new ArrayList<Integer>();
-            SUInt.SUInt8[] resultstArray = results.get()[i].get();
-            for (int j = 0; j < resultstArray.length; j++) {
-                resultats.add(Integer.valueOf(resultstArray[j].get()));
-            }
-            questionResultat.setResultats((Integer[]) resultats.toArray());
-
-            questionResultats.add(questionResultat);
+        final SType[] resultsType = resultmatrix.get();
+        for (int i = 0; i < resultsType.length; i++) {
+            final SArray<SInt256> resultsLine = (SArray<SInt256>) resultsType[i];
+            questionResultats.add(mappingResultsLine(resultsLine));
 
         }
         return questionResultats;
+    }
+
+    @NonNull
+    private Integer[] mappingResultsLine(SArray<SInt256> resultsLine) {
+        ArrayList<Integer> resultats = new ArrayList<>();
+        if(resultsLine != null ) {
+
+            final SType[] resultsType = resultsLine.get();
+            for (int j = 0; j < resultsType.length; j++) {
+                SInt256 resultValue = (SInt256) resultsType[j];
+                BigInteger bigintValue = (BigInteger) resultValue.get();
+                resultats.add(Integer.valueOf(bigintValue.intValue()));
+            }
+        }
+        return resultats.toArray(new Integer[resultats.size()]);
+
     }
 
 
