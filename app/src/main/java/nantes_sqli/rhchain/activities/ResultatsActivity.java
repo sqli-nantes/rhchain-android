@@ -1,7 +1,6 @@
 package nantes_sqli.rhchain.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
@@ -11,42 +10,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ethereumjava.EthereumJava;
-import ethereumjava.module.objects.Transaction;
 import nantes_sqli.rhchain.R;
 import nantes_sqli.rhchain.RhchainApplication;
-import nantes_sqli.rhchain.blockchain.GethManager;
+import nantes_sqli.rhchain.data.Question;
 import nantes_sqli.rhchain.data.QuestionResultat;
 import nantes_sqli.rhchain.data.Survey;
 import nantes_sqli.rhchain.utils.Bouchonnage;
 import nantes_sqli.rhchain.utils.QuestionResultatAdapter;
-import rx.Observable;
 
-public class ResultatsActivity extends AppCompatActivity implements  EthereumService.EthereumServiceInterface
-{
+public class ResultatsActivity extends AppCompatActivity implements EthereumService.EthereumServiceInterface {
     public static final int LARGEUR_MINIMALE = 50;
 
     private ListView mlistView;
+    public EthereumJava ethereumjava;
+    RhchainApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultats);
 
-        RhchainApplication application = (RhchainApplication) getApplication();
+        application = (RhchainApplication) getApplication();
         application.registerGethReady(this);
 
-        GethManager gethManager =application.gethManager;
-        EthereumJava eth = gethManager.getEthereumJava();
-        List<String> comptes = eth.personal.listAccounts();
-
-
         //MOck results
-        GetmockedResults getmockedResults = new GetmockedResults().invoke();
-        String[] listeQuestions = getmockedResults.getListeQuestions();
-        Integer[][] listeResultats = getmockedResults.getListeResultats();
-
-        //Show results
-        initResultats(listeQuestions,listeResultats);
+//        MockedResults mockedResults = new MockedResults().invoke();
+//        String[] listeQuestions = mockedResults.getListeQuestions();
+//        Integer[][] listeResultats = mockedResults.getListeResultats();
+//
+//        //Show results
+//        initResultats(listeQuestions, listeResultats);
     }
 
     private void initResultats(String[] listeQuestions, Integer[][] resultsSurvey) {
@@ -61,12 +54,45 @@ public class ResultatsActivity extends AppCompatActivity implements  EthereumSer
     }
 
     @Override
-    public void onEthereumServiceReady() {
+    protected void onResume() {
+        super.onResume();
 
+        if (application.gethManager != null) {
+            loadResults();
+        }
 
     }
 
-    private class GetmockedResults {
+    @Override
+    public void onEthereumServiceReady() {
+
+        loadResults();
+
+    }
+
+    private void loadResults() {
+
+        //Retrieve results from Blockchain API
+        ArrayList<QuestionResultat> results = application.gethManager.getResults(null);
+        List<Integer[]> resultsList = new ArrayList<>();
+
+        // Mapping resultats
+        for (QuestionResultat result : results) {
+            resultsList.add(result.getResultats());
+        }
+
+        // TODO Récuperer libellés des questions sur la blockchain
+        // Aliementation des libellés des questions
+        List<String> libellesQuestionList = new ArrayList<>();
+        for (Question question : Bouchonnage.setDemoSurvey().getQuestions()) {
+            libellesQuestionList.add(question.getTextQuestion());
+        }
+
+        //Show results
+        initResultats((String[]) libellesQuestionList.toArray(), (Integer[][]) resultsList.toArray());
+    }
+
+    private class MockedResults {
         private Integer[][] listeResultats;
         private String[] listeQuestions;
 
@@ -78,7 +104,7 @@ public class ResultatsActivity extends AppCompatActivity implements  EthereumSer
             return listeQuestions;
         }
 
-        public GetmockedResults invoke() {
+        public MockedResults invoke() {
             Integer[] listeResultatsQ1 = new Integer[]{1, 400, 30};
             Integer[] listeResultatsQ2 = new Integer[]{40, 30, 20};
             Integer[] listeResultatsQ3 = new Integer[]{10, 10, 10};
