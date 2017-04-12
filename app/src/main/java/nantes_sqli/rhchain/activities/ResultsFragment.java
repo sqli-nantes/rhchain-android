@@ -46,9 +46,7 @@ public class ResultsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         chartQ1 = (HorizontalBarChart) view.findViewById(R.id.chartQ1);
-
         chartQ2 = (HorizontalBarChart) view.findViewById(R.id.chartQ2);
-
         chartQ3 = (HorizontalBarChart) view.findViewById(R.id.chartQ3);
 
         mockResultSurveyDemo();

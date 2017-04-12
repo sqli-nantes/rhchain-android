@@ -13,9 +13,10 @@ import ethereumjava.exception.EthereumJavaException;
 import ethereumjava.module.objects.Transaction;
 import ethereumjava.net.provider.AndroidIpcProvider;
 import ethereumjava.solidity.element.returns.PairReturn;
+import ethereumjava.solidity.element.returns.SingleReturn;
 import ethereumjava.solidity.types.SArray;
 import ethereumjava.solidity.types.SBool;
-import ethereumjava.solidity.types.SInt.SInt256;
+import ethereumjava.solidity.types.SInt;
 import ethereumjava.solidity.types.SType;
 import ethereumjava.solidity.types.SUInt;
 import nantes_sqli.rhchain.data.Answer;
@@ -23,6 +24,7 @@ import nantes_sqli.rhchain.data.Results;
 import nantes_sqli.rhchain.data.Survey;
 import rx.Observable;
 import rx.Subscription;
+import rx.functions.Action1;
 
 import static nantes_sqli.rhchain.blockchain.GethConfigConstants.ACCOUNT_PASSWORD;
 import static nantes_sqli.rhchain.blockchain.GethConfigConstants.APP_ID;
@@ -38,10 +40,10 @@ public class GethManager {
 
 
     private EthereumJava ethereumJava;
-
     private String defaultAccount;
-
     private Subscription alertSubscription;
+    private VotesContract contract;
+    private Observable<SingleReturn<SArray<SArray<SInt.SInt256>>>> overEvent;
 
     public GethManager(String ipcFilePath) {
 
@@ -53,6 +55,18 @@ public class GethManager {
 
         addPeers();
         Log.d(APP_ID, "PEERS ADDED");
+
+        contract = ethereumJava.contract.withAbi(VotesContract.class).at(CONTRACT_ADDRESS);
+        overEvent = contract.over().watch();
+        overEvent.subscribe(new Action1<SingleReturn<SArray<SArray<SInt.SInt256>>>>() {
+            @Override
+            public void call(SingleReturn<SArray<SArray<SInt.SInt256>>> event) {
+                SArray<SInt.SInt256>[] questionsResults = event.getElement1().get();
+                for(SArray<SInt.SInt256> questionResults : questionsResults){
+                    SInt.SInt256[] questionResult = questionResults.get();
+                }
+            }
+        });
     }
 
 
@@ -141,7 +155,7 @@ public class GethManager {
     public Observable<Transaction> sendVotes(Results reponses) {
 
         final Answer[] reponsesSelectionnees = reponses.getReponseSelectionnees();
-        VotesContract contract = ethereumJava.contract.withAbi(VotesContract.class).at(CONTRACT_ADDRESS);
+
         SUInt.SUInt8[] votesSolidity = new SUInt.SUInt8[reponsesSelectionnees.length];
 
         for (int i = 0; i < reponsesSelectionnees.length; i++) {
@@ -164,9 +178,9 @@ public class GethManager {
         VotesContract contract = ethereumJava.contract.withAbi(VotesContract.class).at(CONTRACT_ADDRESS);
 
         //Calling the service for retrieve results of the survey
-        final PairReturn<SBool, SArray<SArray<SInt256>>> singleReturn = contract.getResults().call();
+        final PairReturn<SBool, SArray<SArray<SInt.SInt256>>> singleReturn = contract.getResults().call();
         final SBool bool = singleReturn.getElement1();
-        final SArray<SArray<SInt256>> resultmatrix = singleReturn.getElement2();
+        final SArray<SArray<SInt.SInt256>> resultmatrix = singleReturn.getElement2();
 
 
         //mapping results POur chaque questions
@@ -174,7 +188,7 @@ public class GethManager {
 
         final SType[] resultsType = resultmatrix.get();
         for (int i = 0; i < resultsType.length; i++) {
-            final SArray<SInt256> resultsLine = (SArray<SInt256>) resultsType[i];
+            final SArray<SInt.SInt256> resultsLine = (SArray<SInt.SInt256>) resultsType[i];
             questionResultats.add(mappingResultsLine(resultsLine));
 
         }
@@ -182,13 +196,13 @@ public class GethManager {
     }
 
     @NonNull
-    private Integer[] mappingResultsLine(SArray<SInt256> resultsLine) {
+    private Integer[] mappingResultsLine(SArray<SInt.SInt256> resultsLine) {
         ArrayList<Integer> resultats = new ArrayList<>();
         if(resultsLine != null ) {
 
             final SType[] resultsType = resultsLine.get();
             for (int j = 0; j < resultsType.length; j++) {
-                SInt256 resultValue = (SInt256) resultsType[j];
+                SInt.SInt256 resultValue = (SInt.SInt256) resultsType[j];
                 BigInteger bigintValue = (BigInteger) resultValue.get();
                 resultats.add(Integer.valueOf(bigintValue.intValue()));
             }
