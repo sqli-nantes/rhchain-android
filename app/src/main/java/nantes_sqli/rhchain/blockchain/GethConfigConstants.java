@@ -9,17 +9,21 @@ import java.math.BigInteger;
 public abstract class GethConfigConstants {
 
 
-    public static final String USERS_SERVER ="localhost:8000";
     public static final String APP_ID = "RHChain_APP";
 
     public static final String ACCOUNT_PASSWORD = "ETH_TEST";
-    public static final String CONTRACT_ADDRESS = "0x8b2a6ed09f033f3c0bb9293570d7ea2aa0b3e07a";
+    public static final String CONTRACT_ADDRESS = "0x165b58ca15a310bff38ef5402f6faee296282d4c";
     public static final BigInteger GAS = new BigInteger("300000");
 
-    public static final String IP_ADMIN = "10.33.44.217";
+
+    public static final String IP_ADMIN = "172.17.0.2";
+    public static final String ENODE_ADMIN = "345e582054c5e379de058af8280076aa87ea82bf5dcc5de6c21d3b34e9773fb339eeeddeb3496d83b10dcd16ef1b5df5695fc2bcdedc1c3c375109743b2ad36a";
+    public static final String ENODE_NODE2 = "fe5a32ef39e9fd2bc78e26a57a3e8ce356571b1765ce447aeb3a0181657b99dafe4a263ee7a58721b8488bd20980c794942ca5799324c6c59708dd4bdfbcce24";
+
 
     public static final String[] PEERS = new String[]{
-        "enode://001eb425dd0c5b5ef60762d2b2c567268eb5d7ed573e4ddd6b036d2089a9412613fe3545a18bfc8d756e60e58caf16b673e1deb1f720d5958c67530e155580c1@172.17.0.2:30303"
+        "enode://"+ENODE_ADMIN+"@"+IP_ADMIN+":30303",
+        "enode://"+ENODE_NODE2+"@"+IP_ADMIN+":40303"
     };
 
 }
