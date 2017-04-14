@@ -57,16 +57,7 @@ public class GethManager {
         Log.d(APP_ID, "PEERS ADDED");
 
         contract = ethereumJava.contract.withAbi(VotesContract.class).at(CONTRACT_ADDRESS);
-        overEvent = contract.over().watch();
-        overEvent.subscribe(new Action1<SingleReturn<SArray<SArray<SInt.SInt256>>>>() {
-            @Override
-            public void call(SingleReturn<SArray<SArray<SInt.SInt256>>> event) {
-                SArray<SInt.SInt256>[] questionsResults = event.getElement1().get();
-                for(SArray<SInt.SInt256> questionResults : questionsResults){
-                    SInt.SInt256[] questionResult = questionResults.get();
-                }
-            }
-        });
+
     }
 
 
@@ -209,6 +200,10 @@ public class GethManager {
         }
         return resultats.toArray(new Integer[resultats.size()]);
 
+    }
+
+    public boolean isVoteClosed(){
+        return contract.closed().call().getElement1().get();
     }
 
 

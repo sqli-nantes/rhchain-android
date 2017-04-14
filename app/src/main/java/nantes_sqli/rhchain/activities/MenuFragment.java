@@ -9,15 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import javax.xml.datatype.Duration;
 
 import nantes_sqli.rhchain.R;
+import nantes_sqli.rhchain.RhchainApplication;
 
 /**
  * Created by alb on 28/11/16.
  */
 
 public class MenuFragment extends Fragment {
-//public class MenuFragment extends AppCompatActivity {
 
     Fragment fragment;
     FragmentTransaction fragmentTransaction;
@@ -55,13 +58,15 @@ public class MenuFragment extends Fragment {
         btnResults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ResultatsActivity activity = new ResultatsActivity();
-//                fragmentTransaction = getFragmentManager().beginTransaction();
-//                fragmentTransaction.add(R.id.)
-//                fragmentTransaction.commit();
 
-                Intent intent = new Intent(getActivity().getApplicationContext(), ResultatsActivity.class);
-                startActivity(intent);
+                RhchainApplication app = (RhchainApplication) getActivity().getApplication();
+                boolean closed = app.gethManager.isVoteClosed();
+                if( closed ) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), ResultatsActivity.class);
+                    startActivity(intent);
+                } else{
+                    Toast.makeText(getContext(),"VOTE NOT CLOSED", Toast.LENGTH_LONG).show();
+                }
 
             }
         });

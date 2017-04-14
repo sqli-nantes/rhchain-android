@@ -10,6 +10,7 @@ import ethereumjava.solidity.types.SUInt;
 
 public interface VotesContract extends ContractType {
 
+    SolidityFunction<SBool> closed();
 
     SolidityFunction<SBool> submit(@SArray.Size({3}) SArray<SUInt.SUInt8> votes);
 
