@@ -22,7 +22,7 @@
             android:id="@+id/Redlayout"
             android:layout_width="118dp"
             android:layout_height="match_parent"
-            android:background="@color/colorAccent"
+            android:background="#ef5350"
             android:minWidth="34dp"
             android:padding="2dp">
 
@@ -56,7 +56,7 @@
             android:id="@+id/OrangeLayout"
             android:layout_width="102dp"
             android:layout_height="match_parent"
-            android:background="@color/colorSqli"
+            android:background="#9E9E9E"
             android:minWidth="34dp"
             android:padding="2dp">
 
@@ -89,7 +89,7 @@
             android:id="@+id/GreenLayout"
             android:layout_width="162dp"
             android:layout_height="match_parent"
-            android:background="@color/greencomplementarygold"
+            android:background="#9CCC65"
             android:minWidth="34dp"
             android:padding="2dp">
 
