@@ -13,3 +13,7 @@ Configuration
 -----------------------
 develop for SdK 24.
 Test using Android 5.1 and Android 7.0
+
+## DEMO
+
+See on rhchain-desktop [readme.md](https://github.com/sqli-nantes/rhchain-desktop#demo)
