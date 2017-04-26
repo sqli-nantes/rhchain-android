@@ -1,84 +1,11 @@
 <resources>
 
-    <style name="SQLITheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="actionBarTheme">@style/Sqli.ActionBar</item>
-        <item name="android:theme">@style/Sqli.theme</item>
-        <item name="android:alertDialogTheme">@style/Sqli.AlertDialogTheme</item>
-        <item name="android:textAppearance">@style/Sqli.TextAppearance</item>
-
-        <item name="android:background">@color/darkgrey</item>
-        <item name="colorAccent">@color/colorSqli</item>
-        <item name="android:colorBackground">@color/darkgrey</item>
-        <item name="android:actionMenuTextColor">@color/goldentext</item>
-        <item name="android:textColor">@color/text_color</item>
-    </style>
-
-    <style name="Sqli.theme">
-        <item name="android:textAppearance">@style/txt_question</item>
-        <item name="android:buttonStyle">@style/btn</item>
-    </style>
-
-    <style name="txt_question">
-        <item name="android:textSize">@dimen/txt_question</item>
-        <item name="android:textColor">@color/text_color</item>
-        <item name="android:layout_margin">@dimen/space_question</item>
-        <item name="android:padding">@dimen/space_question</item>
-    </style>
-
-    <style name="btn" parent="Widget.AppCompat.Button">
-        <item name="android:padding">@dimen/space_btn</item>
-        <item name="android:textColor">@color/text_choice_color</item>
-        <item name="android:backgroundTint">@color/colorSqli</item>
-    </style>
-
-    <style name="Sqli.ActionBar" parent="@android:style/Widget.Holo.ActionBar">
-        <item name="android:background">@color/black</item>
-        <item name="android:textColorPrimary">@color/goldentext</item>
-        <item name="android:textSize">@dimen/txt_title</item>
-    </style>
-
-    <!-- Format des popup -->
-
-    <style name="Sqli.AlertDialogTheme">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
-        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
-        <item name="android:windowTitleStyle">@style/Sqli.WindowTitleStyle</item>
-        <item name="android:textColorPrimary">@color/text_color</item>
-        <item name="android:textAppearanceMedium">@style/Sqli.TextAppearance</item>
-        <!--<item name="android:textSize">@dimen/txt_question</item>-->
-    </style>
-    <!-- Pour changer la couleur des boutons? -->
-    <!--<item name="android:colorAccent">@color/greencomplementarygold</item>-->
-
-    <style name="Sqli">Sqli</style>
-
-    <style name="Sqli.WindowTitleStyle">
-        <item name="android:textSize">@dimen/txt_question</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/text_color</item>
-    </style>
-
-    <style name="Sqli.TextAppearance">
-        <item name="android:textSize">@dimen/txt_question</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/text_choice_color</item>
-    </style>
-
-    <style name="ThemeOverlay.Sqli.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:background">@color/black</item>
-        <!-- title text color -->
-        <item name="android:textColorPrimary">@color/goldentext</item>
-        <!-- subtitle text color -->
-        <item name="android:textColorSecondary">@color/middlegrey</item>
-        <!-- action menu item text color -->
-        <!--<item name="actionMenuTextColor">@color/satisfied</item>-->
-        <!-- action menu item icon color -->
-        <!--<item name="colorControlNormal">@color/colorAccent</item>-->
-        <item name="colorAccent">@color/colorSqli</item>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

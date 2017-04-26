@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="nantes_sqli.rhchain">
+    package="com.sqli.blockchain.rhchain">
 
-    <uses-sdk
-        android:maxSdkVersion="24"
-        android:minSdkVersion="21"
-        android:targetSdkVersion="24" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".RhchainApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/launcher_rhchain"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/SQLITheme">
-        <activity android:name=".activities.MainActivity">
+        android:theme="@style/AppTheme"
+        android:name=".RHChainApplication">
+
+        <activity
+            android:name=".splash.Splashscreen"
+            android:label=""
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SurveyActivity" />
-        <activity android:name=".activities.CreateUserActivity" />
-        <activity android:name=".activities.UserRegistrationActivity" />
-        <activity android:name=".activities.ResultatsActivity" />
+
+        <activity
+            android:name=".login.LoginActivity"
+            android:label="">
+        </activity>
+
+        <activity
+            android:name=".survey.SurveyActivity"
+            android:label="RH Chain"/>
+        <activity
+            android:name=".results.ResultActivity"
+            android:label="RH Chain"/>
+        <activity
+            android:name=".error.NothingActivity"
+            android:label="RH Chain"/>
     </application>
 
 </manifest>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/result_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Êtes-vous satisfait(e) de votre mission actuelle ?"
+        android:textSize="15sp"
+        android:textColor="@android:color/black"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:background="@color/grey_background">
+
+        <com.sqli.blockchain.rhchain.results.ResultSatisfactionView
+            android:id="@+id/result_item_unsatisfied"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:icon="@drawable/ic_unsatisfied"
+            android:layout_marginBottom="5dp"/>
+
+        <com.sqli.blockchain.rhchain.results.ResultSatisfactionView
+            android:id="@+id/result_item_neutral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:icon="@drawable/ic_neutral"
+            android:layout_marginBottom="5dp"/>
+
+        <com.sqli.blockchain.rhchain.results.ResultSatisfactionView
+            android:id="@+id/result_item_satisfied"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:icon="@drawable/ic_satisfied"/>
+
+    </LinearLayout>
+
+</LinearLayout>
