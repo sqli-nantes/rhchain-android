@@ -30,7 +30,7 @@ public abstract class Utils {
         new AlertDialog.Builder(context)
                 .setTitle("Attention")
                 .setMessage(message)
-                .setNeutralButton("OK",((dialog, which) -> dialog.dismiss()))
+                .setNeutralButton("OK",(dialog, which) -> dialog.dismiss())
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
