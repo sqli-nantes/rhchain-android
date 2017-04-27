@@ -14,6 +14,10 @@ import com.sqli.blockchain.rhchain.model.Question;
 
 import java.util.List;
 
+import static com.sqli.blockchain.rhchain.Constants.NEUTRAL_ID;
+import static com.sqli.blockchain.rhchain.Constants.SATISFIED_ID;
+import static com.sqli.blockchain.rhchain.Constants.UNSATISFIED_ID;
+
 /**
  * Created by gunicolas on 19/04/17.
  */
@@ -52,10 +56,6 @@ class SurveyAdapter extends BaseAdapter  {
 
         private static final float DEFAULT_SCALE = 0.5f;
         private static final float CLICKED_SCALE = 1f;
-
-        static final int SATISFIED_ID = 0;
-        static final int NEUTRAL_ID = 1;
-        static final int UNSATISFIED_ID = 2;
 
         TextView questionView;
         ImageView unsatisfiedView;
@@ -113,15 +113,15 @@ class SurveyAdapter extends BaseAdapter  {
         holder.questionView.setText(getItem(position).libelle);
         holder.satisfiedView.setOnClickListener(v -> {
             Log.d("RHCHAIN","satisfied clicked : "+position);
-            holder.setClicked(Holder.SATISFIED_ID,position);
+            holder.setClicked(SATISFIED_ID,position);
         });
         holder.neutralView.setOnClickListener(v -> {
             Log.d("RHCHAIN","neutral clicked : "+position);
-            holder.setClicked(Holder.NEUTRAL_ID,position);
+            holder.setClicked(NEUTRAL_ID,position);
         });
         holder.unsatisfiedView.setOnClickListener(v -> {
             Log.d("RHCHAIN","unsatisfied clicked : "+position);
-            holder.setClicked(Holder.UNSATISFIED_ID,position);
+            holder.setClicked(UNSATISFIED_ID,position);
         });
 
         holder.setClicked(submission[position], position);

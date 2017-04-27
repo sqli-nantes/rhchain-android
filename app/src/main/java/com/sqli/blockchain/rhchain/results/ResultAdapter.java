@@ -13,6 +13,10 @@ import com.sqli.blockchain.rhchain.model.Results;
 
 import java.util.List;
 
+import static com.sqli.blockchain.rhchain.Constants.NEUTRAL_ID;
+import static com.sqli.blockchain.rhchain.Constants.SATISFIED_ID;
+import static com.sqli.blockchain.rhchain.Constants.UNSATISFIED_ID;
+
 /**
  * Created by gunicolas on 20/04/17.
  */
@@ -73,9 +77,9 @@ public class ResultAdapter extends BaseAdapter {
         final Holder holder = new Holder(view);
 
         int nbAnswers = results.getNbAnswers();
-        int nbUnsatisfied = results.getResultsAt(position)[0];
-        int nbNeutral = results.getResultsAt(position)[1];
-        int nbSatisfied = results.getResultsAt(position)[2];
+        int nbUnsatisfied = results.getResultsAt(position)[UNSATISFIED_ID];
+        int nbNeutral = results.getResultsAt(position)[NEUTRAL_ID];
+        int nbSatisfied = results.getResultsAt(position)[SATISFIED_ID];
         int percentageUnsatisfied = (int) (((double) nbUnsatisfied / (double) nbAnswers)*100);
         int percentageNeutral = (int) (((double) nbNeutral / (double) nbAnswers)*100);
         int percentageSatisfied = (int) (((double) nbSatisfied / (double) nbAnswers)*100);
