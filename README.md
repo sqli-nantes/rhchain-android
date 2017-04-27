@@ -11,8 +11,7 @@ Use
 
 Configuration
 -----------------------
-develop for SdK 24.
-Test using Android 5.1 and Android 7.0
+Works on Android Lollipop and next
 
 ## DEMO
 
