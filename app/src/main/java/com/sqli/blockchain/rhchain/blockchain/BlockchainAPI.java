@@ -13,6 +13,7 @@ import java.util.List;
 import ethereumjava.EthereumJava;
 import ethereumjava.exception.EthereumJavaException;
 import ethereumjava.exception.SmartContractException;
+import ethereumjava.module.objects.Block;
 import ethereumjava.module.objects.Transaction;
 import ethereumjava.net.provider.AndroidIpcProvider;
 import ethereumjava.solidity.element.returns.PairReturn;
@@ -158,6 +159,10 @@ public class BlockchainAPI {
             }
         }
         return new Results(ret);
+    }
+
+    public boolean hasMoney(){
+        return ethereumJava.eth.balance(accountId,Block.BlockParameter.LATEST).compareTo(BigInteger.ZERO) > 0;
     }
 
 }
