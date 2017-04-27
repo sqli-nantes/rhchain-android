@@ -21,4 +21,12 @@ public abstract class RHChainAbstractActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         application = (RHChainApplication) getApplication();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        application.setCurrentActivity(this);
+    }
+
 }

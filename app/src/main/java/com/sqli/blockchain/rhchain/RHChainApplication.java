@@ -29,6 +29,8 @@ public class RHChainApplication extends EthereumApplication {
     public BlockchainAPI blockchainAPI;
     public Server server;
 
+    RHChainAbstractActivity currentActivity;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -43,8 +45,8 @@ public class RHChainApplication extends EthereumApplication {
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext(q -> Log.d(APP_ID,showQuestions(q)))
             .subscribe( questions -> RHChainApplication.this.questions = questions,
-                        error -> Utils.showAlertDialog(RHChainApplication.this,error.getMessage()),
-                        () -> startActivity(new Intent(this, LoginActivity.class)));
+                        error -> Utils.showAlertDialog(currentActivity,error.getMessage()),
+                        () -> currentActivity.startActivity(new Intent(currentActivity, LoginActivity.class)));
 
         super.onEthereumServiceReady();
     }
@@ -57,4 +59,7 @@ public class RHChainApplication extends EthereumApplication {
         return stringBuilder.toString();
     }
 
+    public void setCurrentActivity(RHChainAbstractActivity currentActivity) {
+        this.currentActivity = currentActivity;
+    }
 }
