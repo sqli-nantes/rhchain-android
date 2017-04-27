@@ -77,7 +77,7 @@ public class BlockchainAPI {
     public boolean hasAccount(){
         return accountId != null;
     }
-    public String getAccount(){
+    private String getAccount(){
         List<String> accounts = ethereumJava.personal.listAccounts();
         return accounts.size() > 0 ? accounts.get(0) : null;
     }

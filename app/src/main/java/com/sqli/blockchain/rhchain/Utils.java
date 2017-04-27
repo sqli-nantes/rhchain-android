@@ -7,15 +7,12 @@ import android.support.v7.app.AlertDialog;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
 import ethereumjava.solidity.types.SArray;
 import ethereumjava.solidity.types.SInt;
-import ethereumjava.solidity.types.SType;
-import ethereumjava.solidity.types.SUInt;
 
 /**
  * Created by gunicolas on 24/04/17.
