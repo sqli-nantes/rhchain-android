@@ -1,0 +1,33 @@
+package com.sqli.blockchain.rhchain.server;
+
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.sqli.blockchain.rhchain.Constants.IP_ADMIN;
+
+/**
+ * Created by mcame on 17/02/17.
+ * //http://square.github.io/retrofit/
+ */
+
+
+public class Server {
+
+    private final String baseUrl = "http://"+ IP_ADMIN +":8000/api/";
+    public UsersService registrationService;
+    public QuestionsService questionsService;
+
+    public Server() {
+        Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .build();
+
+        this.registrationService = retrofit.create(UsersService.class);
+        this.questionsService = retrofit.create(QuestionsService.class);
+
+    }
+
+}
