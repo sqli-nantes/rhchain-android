@@ -93,12 +93,12 @@ public class SurveyActivity extends RHChainAbstractActivity implements View.OnCl
             application.blockchainAPI.submit(submission)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe( tx -> {
-                                progressDialog.dismiss();
-                                setCanSubmit(false);
+                                SurveyActivity.this.progressDialog.dismiss();
+                                SurveyActivity.this.setCanSubmit(false);
                             },
                             error -> {
-                                progressDialog.dismiss();
-                                Utils.showAlertDialog(this,error.getMessage());
+                                SurveyActivity.this.progressDialog.dismiss();
+                                Utils.showAlertDialog(SurveyActivity.this,error.getMessage());
                             });
         }
     }
