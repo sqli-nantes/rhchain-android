@@ -1,8 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.sqli.blockchain.rhchain"
         minSdkVersion 21
@@ -10,9 +12,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        jackOptions {
-            enabled true
-        }
     }
     buildTypes {
         release {
@@ -23,6 +22,10 @@ android {
     lintOptions {
         lintConfig rootProject.file('gradle/lint.xml')
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
@@ -31,23 +34,21 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.sqli:ethereum-android:+@aar'
-    compile 'com.sqli:android-geth:+@aar'
-    compile 'com.sqli:ethereum-java-core:+'
-    compile 'ethereumandroid:geth:1.5.0-unstable'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
+    compile 'org.ethereum:geth:1.6.5'
+    compile 'io.ethmobile:ethdroid:2.0.0-m3-SNAPSHOT'
 }
 
 
 repositories {
-    maven { url "http://dl.bintray.com/sqli-nantes/ethereum-android" }
-    maven { url "http://dl.bintray.com/androidgeth/Geth"}
     maven { url "https://jitpack.io" }
+    maven { url "https://oss.jfrog.org/artifactory/oss-snapshot-local" }
 
 }
+

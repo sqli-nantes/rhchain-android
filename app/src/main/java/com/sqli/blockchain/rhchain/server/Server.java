@@ -5,6 +5,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.sqli.blockchain.rhchain.Constants.IP_ADMIN;
+import static com.sqli.blockchain.rhchain.Constants.PORT_ADMIN;
 
 /**
  * Created by mcame on 17/02/17.
@@ -14,7 +15,7 @@ import static com.sqli.blockchain.rhchain.Constants.IP_ADMIN;
 
 public class Server {
 
-    private final String baseUrl = "http://"+ IP_ADMIN +":8000/api/";
+    private final String baseUrl = "http://"+ IP_ADMIN +":"+PORT_ADMIN+"/api/";
     public UsersService registrationService;
     public QuestionsService questionsService;
 

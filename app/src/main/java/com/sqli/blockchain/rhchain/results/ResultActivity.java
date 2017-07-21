@@ -1,5 +1,6 @@
 package com.sqli.blockchain.rhchain.results;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ListView;
@@ -7,11 +8,16 @@ import android.widget.TextView;
 
 import com.sqli.blockchain.rhchain.R;
 import com.sqli.blockchain.rhchain.RHChainAbstractActivity;
+import com.sqli.blockchain.rhchain.error.NothingActivity;
 import com.sqli.blockchain.rhchain.model.Results;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 /**
  * Created by gunicolas on 19/04/17.
@@ -22,6 +28,8 @@ public class ResultActivity extends RHChainAbstractActivity {
     ListView resultListview;
     TextView resultTotalTextview;
     TextView resultDateTextview;
+
+    Subscription closedSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,5 +54,20 @@ public class ResultActivity extends RHChainAbstractActivity {
         resultDateTextview.setText("Sondage du "+dateString);
 
 
+        closedSubscription = application.blockchainAPI.registerClosedEvent()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(o -> showNothingActivity());
+
+    }
+
+    private void showNothingActivity() {
+        Intent intent = new Intent(this, NothingActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onStop() {
+        closedSubscription.unsubscribe();
+        super.onStop();
     }
 }

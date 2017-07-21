@@ -2,14 +2,13 @@ package com.sqli.blockchain.rhchain.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.sqli.blockchain.android_geth.EthereumService;
 import com.sqli.blockchain.rhchain.Utils;
 import com.sqli.blockchain.rhchain.error.NothingActivity;
 import com.sqli.blockchain.rhchain.R;
@@ -22,7 +21,12 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class LoginActivity extends RHChainAbstractActivity implements View.OnClickListener{
+import static com.sqli.blockchain.rhchain.Constants.APP_ID;
+import static com.sqli.blockchain.rhchain.Constants.SURVEY_CLOSED;
+import static com.sqli.blockchain.rhchain.Constants.SURVEY_OPENED;
+import static com.sqli.blockchain.rhchain.Constants.SURVEY_PUBLISHED;
+
+public class LoginActivity extends RHChainAbstractActivity implements View.OnClickListener {
 
     TextView loginAddressTextView;
     EditText loginAddressEdittext;
@@ -60,44 +64,57 @@ public class LoginActivity extends RHChainAbstractActivity implements View.OnCli
 
     }
 
-    boolean updateViewState(boolean loginMode){
+    boolean updateViewState(boolean loginMode) {
         loginAddressTextView.setVisibility(loginMode ? View.VISIBLE : View.GONE);
         loginAddressEdittext.setVisibility(loginMode ? View.GONE : View.VISIBLE);
         loginConfirmPasswordEdittext.setVisibility(loginMode ? View.GONE : View.VISIBLE);
         return true;
     }
 
-    boolean setLoadingView(boolean loading){
+    boolean setLoadingView(boolean loading) {
         mainview.setVisibility(loading ? View.INVISIBLE : View.VISIBLE);
         loginProgressbar.setVisibility(loading ? View.VISIBLE : View.INVISIBLE);
         return true;
     }
 
-    void nextActivity(){
+    void nextActivity() {
 
         Class<? extends RHChainAbstractActivity> nextActivity;
 
-        if( application.blockchainAPI.surveyExists() ){
-            if( application.blockchainAPI.isSurveyOver() ){
-                nextActivity = ResultActivity.class;
-            } else{
+        short state = -1000;
+        try {
+            state = application.blockchainAPI.getSurveyState();
+        } catch (Exception e) {
+            Log.e(APP_ID, e.getMessage());
+
+        }
+        switch (state) {
+            case SURVEY_OPENED:
                 nextActivity = SurveyActivity.class;
-            }
-        } else{
-            nextActivity = NothingActivity.class;
+                break;
+            case SURVEY_PUBLISHED:
+                nextActivity = ResultActivity.class;
+                break;
+            case SURVEY_CLOSED:
+                nextActivity = NothingActivity.class;
+                break;
+            default:
+                nextActivity = NothingActivity.class;
+                Log.d(APP_ID, "error in switch case loginActivity - default : " + state);
+                break;
         }
 
-        Intent intent = new Intent(this,nextActivity);
+        Intent intent = new Intent(this, nextActivity);
         startActivity(intent);
     }
 
-    void manageAccount(){
+    void manageAccount() {
 
         String password = loginPasswordEdittext.getText().toString();
         boolean validPassword = password.length() > 0;
 
 
-        if( !loginMode ){
+        if (!loginMode) {
 
 
             String passwordConfirm = loginConfirmPasswordEdittext.getText().toString();
@@ -106,8 +123,8 @@ public class LoginActivity extends RHChainAbstractActivity implements View.OnCli
             boolean validEmail = Utils.isAddressValid(emailAddress);
 
             validPassword = validPassword
-                                && passwordConfirm.length() > 0
-                                && password.equals(passwordConfirm);
+                && passwordConfirm.length() > 0
+                && password.equals(passwordConfirm);
 
             String emailValidityText = !validEmail ? "Format email invalide" : null;
             loginAddressEdittext.setError(emailValidityText);
@@ -116,34 +133,34 @@ public class LoginActivity extends RHChainAbstractActivity implements View.OnCli
             loginPasswordEdittext.setError(passwordValidityText);
             loginConfirmPasswordEdittext.setError(passwordValidityText);
 
-            if( validEmail && validPassword ) {
+            if (validEmail && validPassword) {
 
                 Observable.just(true)
                     .map(v -> setLoadingView(true))
                     .observeOn(Schedulers.newThread())
                     .map(v -> application.blockchainAPI.createAccountAndUnlock(password))
-                    .map(address -> new User(emailAddress, address) )
+                    .map(address -> new User(emailAddress, address))
                     .flatMap(user -> application.server.registrationService.createUser(user))
                     .observeOn(AndroidSchedulers.mainThread())
                     .map(user -> setLoadingView(false))
-                    .subscribe( ok -> nextActivity(),
-                                error -> {
-                                    Utils.showAlertDialog(LoginActivity.this,error.getMessage());
-                                    setLoadingView(false);
-                                });
+                    .subscribe(ok -> nextActivity(),
+                        error -> {
+                            Utils.showAlertDialog(LoginActivity.this, error.getMessage());
+                            setLoadingView(false);
+                        });
             }
-        } else{
+        } else {
             boolean unlocked = application.blockchainAPI.unlockAccount(loginPasswordEdittext.getText().toString());
             String passwordText = unlocked ? null : "Mot de passe erroné";
 
             loginPasswordEdittext.setError(passwordText);
-            if( unlocked ) nextActivity();
+            if (unlocked) nextActivity();
         }
     }
 
     @Override
     public void onClick(View v) {
-        if( v.equals(loginButton) ){
+        if (v.equals(loginButton)) {
             manageAccount();
         }
     }

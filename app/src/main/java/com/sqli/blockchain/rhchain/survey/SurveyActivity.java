@@ -1,10 +1,10 @@
 package com.sqli.blockchain.rhchain.survey;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,12 +15,12 @@ import com.sqli.blockchain.rhchain.Utils;
 import com.sqli.blockchain.rhchain.model.Question;
 import com.sqli.blockchain.rhchain.results.ResultActivity;
 
-import java.util.Arrays;
 import java.util.List;
 
-import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+
+import static com.sqli.blockchain.rhchain.Constants.APP_ID;
 
 /**
  * Created by gunicolas on 19/04/17.
@@ -35,7 +35,7 @@ public class SurveyActivity extends RHChainAbstractActivity implements View.OnCl
     SurveyAdapter adapter;
     boolean canSubmit;
 
-    Subscription overSubscription;
+    Subscription publishedSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class SurveyActivity extends RHChainAbstractActivity implements View.OnCl
         progressDialog.setProgressNumberFormat(null);
         progressDialog.setProgressPercentFormat(null);
 
-        overSubscription = application.blockchainAPI.registerOverEvent()
+        publishedSubscription = application.blockchainAPI.registerPublishedEvent()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(results -> showResultsActivity());
     }
@@ -90,22 +90,26 @@ public class SurveyActivity extends RHChainAbstractActivity implements View.OnCl
         if( v.equals(surveyButton) ){
             progressDialog.show();
             int[] submission = adapter.submission;
-            application.blockchainAPI.submit(submission)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( tx -> {
-                                SurveyActivity.this.progressDialog.dismiss();
-                                SurveyActivity.this.setCanSubmit(false);
-                            },
-                            error -> {
-                                SurveyActivity.this.progressDialog.dismiss();
-                                Utils.showAlertDialog(SurveyActivity.this,error.getMessage());
-                            });
+            try {
+                application.blockchainAPI.submit(submission)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe( tx -> {
+                                    SurveyActivity.this.progressDialog.dismiss();
+                                    SurveyActivity.this.setCanSubmit(false);
+                                },
+                                error -> {
+                                    SurveyActivity.this.progressDialog.dismiss();
+                                    Utils.showAlertDialog(SurveyActivity.this,error.getMessage());
+                                });
+            } catch (Exception e) {
+                Log.e(APP_ID,e.getMessage());
+            }
         }
     }
 
     @Override
     protected void onStop() {
-        overSubscription.unsubscribe();
+        publishedSubscription.unsubscribe();
         super.onStop();
     }
 }

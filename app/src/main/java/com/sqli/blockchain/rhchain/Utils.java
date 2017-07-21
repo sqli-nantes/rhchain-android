@@ -5,14 +5,15 @@ import android.content.Context;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 
+import java.io.File;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import ethereumjava.solidity.types.SArray;
-import ethereumjava.solidity.types.SInt;
+import io.ethmobile.ethdroid.solidity.types.SArray;
+import io.ethmobile.ethdroid.solidity.types.SInt;
 
 /**
  * Created by gunicolas on 24/04/17.
@@ -60,6 +61,14 @@ public abstract class Utils {
             //noinspection deprecation
             return context.getResources().getConfiguration().locale;
         }
+    }
+
+    public static void deleteDirIfExists(File dir){
+        if (dir.isDirectory())
+            for (File child : dir.listFiles())
+                deleteDirIfExists(child);
+
+        dir.delete();
     }
 
 

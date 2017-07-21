@@ -4,31 +4,34 @@ import android.util.Log;
 
 import com.sqli.blockchain.rhchain.model.Results;
 
-import java.lang.reflect.Array;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.ethereum.geth.Account;
+import org.ethereum.geth.Block;
+import org.ethereum.geth.Geth;
 
-import ethereumjava.EthereumJava;
-import ethereumjava.exception.EthereumJavaException;
-import ethereumjava.exception.SmartContractException;
-import ethereumjava.module.objects.Block;
-import ethereumjava.module.objects.Transaction;
-import ethereumjava.net.provider.AndroidIpcProvider;
-import ethereumjava.solidity.element.returns.PairReturn;
-import ethereumjava.solidity.element.returns.SingleReturn;
-import ethereumjava.solidity.types.SArray;
-import ethereumjava.solidity.types.SBool;
-import ethereumjava.solidity.types.SInt;
-import ethereumjava.solidity.types.SType;
-import ethereumjava.solidity.types.SUInt;
+import java.io.File;
+import java.math.BigInteger;
+import java.util.Arrays;
+
+import io.ethmobile.ethdroid.ChainConfig;
+import io.ethmobile.ethdroid.EthDroid;
+import io.ethmobile.ethdroid.KeyManager;
+import io.ethmobile.ethdroid.Utils;
+import io.ethmobile.ethdroid.exception.SmartContractException;
+import io.ethmobile.ethdroid.solidity.element.returns.PairReturn;
+import io.ethmobile.ethdroid.solidity.element.returns.SingleReturn;
+import io.ethmobile.ethdroid.solidity.types.SArray;
+import io.ethmobile.ethdroid.solidity.types.SBool;
+import io.ethmobile.ethdroid.solidity.types.SInt;
+import io.ethmobile.ethdroid.solidity.types.SType;
+import io.ethmobile.ethdroid.solidity.types.SUInt;
 import rx.Observable;
 
 import static com.sqli.blockchain.rhchain.Constants.APP_ID;
+import static com.sqli.blockchain.rhchain.Constants.GETH_VERBOSITY;
+import static com.sqli.blockchain.rhchain.Constants.URL_BOOTNODE;
 import static com.sqli.blockchain.rhchain.Constants.CONTRACT_ADDRESS;
-import static com.sqli.blockchain.rhchain.Constants.GAS;
-import static com.sqli.blockchain.rhchain.Constants.PEERS;
+import static com.sqli.blockchain.rhchain.Constants.GENESIS;
+import static com.sqli.blockchain.rhchain.Constants.NETWORK_ID;
 
 /**
  * Created by gunicolas on 20/04/17.
@@ -38,85 +41,129 @@ public class BlockchainAPI {
 
     private static final int NOT_SUBMITTED_VALUE = -1;
 
-    private EthereumJava ethereumJava;
     private VotesContract contract;
-    private String accountId;
+    private Account account;
+    private EthDroid ethdroid;
+    private KeyManager keyManager;
 
+    public BlockchainAPI(String datadir) {
 
-    public BlockchainAPI(String ipcFilePath) {
+        //Utils.deleteDirIfExists(new File(datadir + "/GethDroid"));
+        //Utils.deleteDirIfExists(new File(datadir + "/keystore"));
 
-        startEthereumJava(ipcFilePath);
-        addPeers();
+        createKeyManager(datadir);
+        startEthdroid(datadir);
         initContract();
-
-        this.accountId = getAccount();
-
+        this.account = getAccount();
     }
 
-    public Observable<SingleReturn<SArray<SArray<SInt.SInt256>>>> registerOverEvent() {
-        return contract.over().watch();
+    private void createKeyManager(String datadir) {
+        this.keyManager = KeyManager.newKeyManager(datadir);
     }
 
-    private void startEthereumJava(String ipcFilePath){
-        ethereumJava = new EthereumJava.Builder()
-                .provider(new AndroidIpcProvider(ipcFilePath))
+    private void startEthdroid(String datadir) {
+        try {
+
+            Geth.setVerbosity(GETH_VERBOSITY);
+
+            ethdroid = new EthDroid.Builder(datadir)
+                .withChainConfig(new ChainConfig.Builder(NETWORK_ID, GENESIS, URL_BOOTNODE).build())
+                .withKeyManager(this.keyManager)
                 .build();
-        Log.d(APP_ID, "ETHEREUM-JAVA STARTED");
-    }
-    private void addPeers() {
-        for (String peer : PEERS) {
-            ethereumJava.admin.addPeer(peer);
+
+            ethdroid.start();
+
+            Log.d(APP_ID, "ETHDROID STARTED");
+
+        } catch (Exception e) {
+            Log.e(APP_ID, e.getMessage() + "\n");
+            e.printStackTrace();
         }
-        Log.d(APP_ID, "PEERS ADDED");
     }
-    private void initContract(){
-        contract = ethereumJava.contract.withAbi(VotesContract.class).at(CONTRACT_ADDRESS);
+
+    private void initContract() {
+        contract = ethdroid.getContractInstance(VotesContract.class, CONTRACT_ADDRESS);
         Log.d(APP_ID, "CONTRACT INITIALIZED");
     }
 
+    private Account getAccount() {
+        return ethdroid.getMainAccount();
+    }
 
-    public boolean hasAccount(){
-        return accountId != null;
-    }
-    private String getAccount(){
-        List<String> accounts = ethereumJava.personal.listAccounts();
-        return accounts.size() > 0 ? accounts.get(0) : null;
-    }
-    public String createAccountAndUnlock(String password){
-        this.accountId = ethereumJava.personal.newAccount(password);
-        ethereumJava.personal.unlockAccount(this.accountId,password,0);
-        Log.d(APP_ID,"ACCOUNT : "+this.accountId);
-        return this.accountId;
-    }
-    public boolean unlockAccount(String password){
-        boolean unlocked;
-        try{
-            unlocked = ethereumJava.personal.unlockAccount(this.accountId,password,0);
-        } catch(EthereumJavaException e){
-            unlocked = false;
+    public Observable<SingleReturn<SArray<SArray<SInt.SInt256>>>> registerPublishedEvent() {
+        try {
+            return contract.published().listen();
+        } catch (Exception e) {
+            Log.e(APP_ID, e.getLocalizedMessage());
         }
-        Log.d(APP_ID,"UNLOCKED : "+unlocked);
+        return null;
+    }
+
+    public Observable registerClosedEvent() {
+        try {
+            return contract.closed().listen();
+        } catch (Exception e) {
+            Log.e(APP_ID, e.getLocalizedMessage());
+        }
+        return null;
+    }
+
+    public Observable registerOpenedEvent() {
+        try {
+            return contract.opened().listen();
+        } catch (Exception e) {
+            Log.e(APP_ID, e.getLocalizedMessage());
+        }
+        return null;
+    }
+
+    public boolean hasAccount() {
+        return account != null;
+    }
+
+    public String createAccountAndUnlock(String password) {
+        try {
+            this.account = keyManager.newUnlockedAccount(password);
+            ethdroid.setMainAccount(this.account);
+        } catch (Exception e) {
+            Log.e(APP_ID, e.getMessage());
+        }
+        Log.d(APP_ID, "ACCOUNT : " + this.account.getAddress().getHex());
+        return this.account.getAddress().getHex();
+    }
+
+    public boolean unlockAccount(String password) {
+        boolean unlocked;
+        try {
+            keyManager.unlockAccount(account, password);
+            unlocked = true;
+        } catch (Exception e) {
+            unlocked = false;
+            Log.e(APP_ID, e.getMessage());
+        }
+        Log.d(APP_ID, "UNLOCKED : " + unlocked);
         return unlocked;
     }
 
-    public boolean isSurveyOver(){
-        return contract.closed().call().getElement1().get();
+    public short getSurveyState() throws Exception {
+        return contract.state().call().getElement1().get();
     }
-    public boolean surveyExists(){
+
+    public boolean surveyExists() {
         return true;
     }
 
     /* get submitted survey if submitted, otherwise array filled with -1 if nothing submitted  */
-    public int[] getSubmission(int nbQuestions){
+    public int[] getSubmission(int nbQuestions) {
         int[] submissionRet = new int[nbQuestions];
-        Arrays.fill(submissionRet,NOT_SUBMITTED_VALUE);
+        Arrays.fill(submissionRet, NOT_SUBMITTED_VALUE);
 
         try {
             PairReturn<SBool, SArray<SUInt.SUInt8>> submissionReturn = contract.mySubmission().call();
 
             boolean hasSubmitted = submissionReturn.getElement1().get();
 
-            if( hasSubmitted ) {
+            if (hasSubmitted) {
                 SArray<SUInt.SUInt8> submission = submissionReturn.getElement2();
 
                 SUInt.SUInt8[] submissionArray = submission.get();
@@ -125,44 +172,61 @@ public class BlockchainAPI {
                 }
             }
 
-        } catch(SmartContractException ignored){}
+        } catch (SmartContractException ignored) {
+            Log.e(APP_ID, ignored.getMessage());
+        } catch (Exception e) {
+            Log.e(APP_ID, e.getMessage());
+        }
         return submissionRet;
     }
+
     public boolean canSubmit(int[] submission) {
         return submission != null && submission.length >= 1 && submission[0] == NOT_SUBMITTED_VALUE;
     }
-    public Observable<Transaction> submit(int[] submission){
+
+    public Observable<Block> submit(int[] submission) throws Exception {
 
         int submissionLength = submission.length;
         SUInt.SUInt8[] suint8Array = new SUInt.SUInt8[submission.length];
 
-        for(int i=0;i<submissionLength;i++){
+        for (int i = 0; i < submissionLength; i++) {
             suint8Array[i] = SUInt.SUInt8.fromShort((short) submission[i]);
         }
 
-        return contract.submit(SArray.fromArray(suint8Array)).sendTransactionAndGetMined(accountId,GAS);
+        return contract.submit(SArray.fromArray(suint8Array)).sendWithNotification();
     }
 
-    public Results getResults(int nbQuestions,int nbAnswers){
+    public Results getResults(int nbQuestions, int nbAnswers) {
 
-        PairReturn<SBool, SArray<SArray<SInt.SInt256>>> response = contract.getResults().call();
-        SArray<SArray<SInt.SInt256>> results = response.getElement2();
+        try {
+            PairReturn<SBool, SArray<SArray<SInt.SInt256>>> response = contract.getResults().call();
 
-        SType[] questionArray = results.get();
-        int[][] ret = new int[nbQuestions][nbAnswers];
+            SArray<SArray<SInt.SInt256>> results = response.getElement2();
 
-        for(int i=0;i<nbQuestions;i++){
-            SType[] questionAnswers = ((SArray<SInt.SInt256>)questionArray[i]).get();
-            for(int j=0;j<nbAnswers;j++){
-                int questionAnswerResult = ((BigInteger)questionAnswers[j].get()).intValue();
-                ret[i][j] = questionAnswerResult;
+            SType[] questionArray = results.get();
+            int[][] ret = new int[nbQuestions][nbAnswers];
+
+            for (int i = 0; i < nbQuestions; i++) {
+                SType[] questionAnswers = ((SArray<SInt.SInt256>) questionArray[i]).get();
+                for (int j = 0; j < nbAnswers; j++) {
+                    int questionAnswerResult = ((BigInteger) questionAnswers[j].get()).intValue();
+                    ret[i][j] = questionAnswerResult;
+                }
             }
+            return new Results(ret);
+        } catch (Exception e) {
+            Log.e(APP_ID, e.getMessage());
+            return null;
         }
-        return new Results(ret);
     }
 
-    public boolean hasMoney(){
-        return ethereumJava.eth.balance(accountId,Block.BlockParameter.LATEST).compareTo(BigInteger.ZERO) > 0;
+    public boolean hasMoney() {
+        try {
+            return ethdroid.getBalanceOf(account).inWei() > 0;
+        } catch (Exception e) {
+            Log.e(APP_ID, e.getMessage());
+            return false;
+        }
     }
 
 }
