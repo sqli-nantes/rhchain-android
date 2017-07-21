@@ -8,8 +8,8 @@ import com.sqli.blockchain.rhchain.R;
 import com.sqli.blockchain.rhchain.RHChainAbstractActivity;
 import com.sqli.blockchain.rhchain.survey.SurveyActivity;
 
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by gunicolas on 19/04/17.
@@ -18,7 +18,7 @@ import rx.android.schedulers.AndroidSchedulers;
 public class NothingActivity extends RHChainAbstractActivity {
 
 
-    Subscription openedSubscription;
+    Disposable openedSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class NothingActivity extends RHChainAbstractActivity {
 
     @Override
     protected void onStop() {
-        openedSubscription.unsubscribe();
+        openedSubscription.dispose();
         super.onStop();
     }
 }

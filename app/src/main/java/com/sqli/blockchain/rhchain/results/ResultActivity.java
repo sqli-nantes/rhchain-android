@@ -15,9 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by gunicolas on 19/04/17.
@@ -29,7 +28,7 @@ public class ResultActivity extends RHChainAbstractActivity {
     TextView resultTotalTextview;
     TextView resultDateTextview;
 
-    Subscription closedSubscription;
+    Disposable closedSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,20 +37,20 @@ public class ResultActivity extends RHChainAbstractActivity {
 
         resultListview = (ListView) findViewById(R.id.result_listview);
         int size = application.questions.size();
-        Results results = application.blockchainAPI.getResults(size,size); //TODO temporary answer size
-        resultListview.setAdapter(new ResultAdapter(this,application.questions,results));
+        Results results = application.blockchainAPI.getResults(size, size); //TODO temporary answer size
+        resultListview.setAdapter(new ResultAdapter(this, application.questions, results));
 
         resultTotalTextview = (TextView) findViewById(R.id.result_total_textview);
-        resultTotalTextview.setText(String.valueOf(results.getNbAnswers())+" Réponses");
+        resultTotalTextview.setText(String.valueOf(results.getNbAnswers()) + " Réponses");
 
         resultDateTextview = (TextView) findViewById(R.id.result_date_textview);
 
         //Utils.getCurrentLocale(this);
-        SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy",Locale.FRANCE );
+        SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy", Locale.FRANCE);
         String dateString = df.format(Calendar.getInstance().getTime());
 
 
-        resultDateTextview.setText("Sondage du "+dateString);
+        resultDateTextview.setText("Sondage du " + dateString);
 
 
         closedSubscription = application.blockchainAPI.registerClosedEvent()
@@ -67,7 +66,7 @@ public class ResultActivity extends RHChainAbstractActivity {
 
     @Override
     protected void onStop() {
-        closedSubscription.unsubscribe();
+        closedSubscription.dispose();
         super.onStop();
     }
 }

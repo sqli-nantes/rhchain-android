@@ -17,9 +17,9 @@ import com.sqli.blockchain.rhchain.model.User;
 import com.sqli.blockchain.rhchain.results.ResultActivity;
 import com.sqli.blockchain.rhchain.survey.SurveyActivity;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.sqli.blockchain.rhchain.Constants.APP_ID;
 import static com.sqli.blockchain.rhchain.Constants.SURVEY_CLOSED;

@@ -17,8 +17,8 @@ import com.sqli.blockchain.rhchain.results.ResultActivity;
 
 import java.util.List;
 
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 
 import static com.sqli.blockchain.rhchain.Constants.APP_ID;
 
@@ -35,7 +35,7 @@ public class SurveyActivity extends RHChainAbstractActivity implements View.OnCl
     SurveyAdapter adapter;
     boolean canSubmit;
 
-    Subscription publishedSubscription;
+    Disposable publishedSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class SurveyActivity extends RHChainAbstractActivity implements View.OnCl
 
         surveyListView = (ListView) findViewById(R.id.survey_listview);
         surveyButton = (Button) findViewById(R.id.survey_button);
-        adapter = new SurveyAdapter(this,questions,submission);
+        adapter = new SurveyAdapter(this, questions, submission);
 
         setCanSubmit(application.blockchainAPI.canSubmit(submission));
 
@@ -75,8 +75,8 @@ public class SurveyActivity extends RHChainAbstractActivity implements View.OnCl
         startActivity(intent);
     }
 
-    void updateView(){
-        surveyButton.setVisibility( canSubmit ? View.VISIBLE : View.GONE);
+    void updateView() {
+        surveyButton.setVisibility(canSubmit ? View.VISIBLE : View.GONE);
         adapter.lockUpdate(!canSubmit);
     }
 
@@ -87,29 +87,29 @@ public class SurveyActivity extends RHChainAbstractActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        if( v.equals(surveyButton) ){
+        if (v.equals(surveyButton)) {
             progressDialog.show();
             int[] submission = adapter.submission;
             try {
                 application.blockchainAPI.submit(submission)
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe( tx -> {
-                                    SurveyActivity.this.progressDialog.dismiss();
-                                    SurveyActivity.this.setCanSubmit(false);
-                                },
-                                error -> {
-                                    SurveyActivity.this.progressDialog.dismiss();
-                                    Utils.showAlertDialog(SurveyActivity.this,error.getMessage());
-                                });
+                    .subscribe(tx -> {
+                            SurveyActivity.this.progressDialog.dismiss();
+                            SurveyActivity.this.setCanSubmit(false);
+                        },
+                        error -> {
+                            SurveyActivity.this.progressDialog.dismiss();
+                            Utils.showAlertDialog(SurveyActivity.this, error.getMessage());
+                        });
             } catch (Exception e) {
-                Log.e(APP_ID,e.getMessage());
+                Log.e(APP_ID, e.getMessage());
             }
         }
     }
 
     @Override
     protected void onStop() {
-        publishedSubscription.unsubscribe();
+        publishedSubscription.dispose();
         super.onStop();
     }
 }

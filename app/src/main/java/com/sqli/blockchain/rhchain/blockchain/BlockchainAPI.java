@@ -24,7 +24,7 @@ import io.ethmobile.ethdroid.solidity.types.SBool;
 import io.ethmobile.ethdroid.solidity.types.SInt;
 import io.ethmobile.ethdroid.solidity.types.SType;
 import io.ethmobile.ethdroid.solidity.types.SUInt;
-import rx.Observable;
+import io.reactivex.Observable;
 
 import static com.sqli.blockchain.rhchain.Constants.APP_ID;
 import static com.sqli.blockchain.rhchain.Constants.GETH_VERBOSITY;
