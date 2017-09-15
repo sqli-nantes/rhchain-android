@@ -5,6 +5,7 @@ import android.util.Log;
 import com.sqli.blockchain.rhchain.model.Results;
 
 import org.ethereum.geth.Account;
+import org.ethereum.geth.BigInt;
 import org.ethereum.geth.Block;
 import org.ethereum.geth.Geth;
 
@@ -193,7 +194,10 @@ public class BlockchainAPI {
             suint8Array[i] = SUInt.SUInt8.fromShort((short) submission[i]);
         }
 
-        return contract.submit(SArray.fromArray(suint8Array)).sendWithNotification();
+        return contract.submit(SArray.fromArray(suint8Array))
+            .getTransaction()
+            .gasAmount(new BigInt(400000))
+            .sendWithNotification();
     }
 
     public Results getResults(int nbQuestions, int nbAnswers) {
