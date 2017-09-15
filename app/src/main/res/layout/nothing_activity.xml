@@ -12,11 +12,11 @@
         android:layout_marginBottom="30dp"/>
 
     <TextView
+        android:id="@+id/error_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
-        android:text="Oups, ceci n'est pas une erreur mais il semble qu'il n'y ait pas de sondage en ce moment..."
         android:textSize="20sp"
         android:textAlignment="center"/>
 
