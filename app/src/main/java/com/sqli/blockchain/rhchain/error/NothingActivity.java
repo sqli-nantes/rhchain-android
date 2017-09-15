@@ -3,6 +3,7 @@ package com.sqli.blockchain.rhchain.error;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 
 import com.sqli.blockchain.rhchain.R;
 import com.sqli.blockchain.rhchain.RHChainAbstractActivity;
@@ -17,7 +18,9 @@ import io.reactivex.disposables.Disposable;
 
 public class NothingActivity extends RHChainAbstractActivity {
 
+    private static final String ERROR_MSG = "Oups, ceci n'est pas une erreur mais il semble qu'il n'y ait pas de sondage en ce moment...";
 
+    TextView errorTextview;
     Disposable openedSubscription;
 
     @Override
@@ -25,6 +28,8 @@ public class NothingActivity extends RHChainAbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nothing_activity);
 
+        errorTextview = (TextView) findViewById(R.id.error_textview);
+        errorTextview.setText(ERROR_MSG);
 
         openedSubscription = application.blockchainAPI.registerOpenedEvent()
             .observeOn(AndroidSchedulers.mainThread())
