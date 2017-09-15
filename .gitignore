@@ -34,3 +34,6 @@ Thumbs.db
 \.idea/codeStyleSettings\.xml
 
 \.idea/
+
+.project
+.settings
